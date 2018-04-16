@@ -18,7 +18,7 @@
 \tableofcontents
 
 \section*{Introduction}
-The archetypical example of a \emph{cohomology theory} arises in differential topology: The \emph{de Rham cohomology}. Given a smooth manifold $M$, we define $\Omega^n(M) := \Gamma(\Lambda^n T^\vee M)$ for each $n \in \omega$, the space of \emph{smooth differential $n$-forms on $M$}. Moreover, is a sequence of mappings $\del[1]{d^n : \Omega^n(M) \to \Omega^{n + 1}(M)}_{n \in \omega}$, called \emph{exterior differentiation operators}, which roughly speaking generalize the notion of a differential of a function. They do satisfy the relation $d^n \circ d^{n - 1} = 0$ and thus we can define the \emph{$n$-th de Rham cohomology group} to be the quotient space
+The archetypal example of a \emph{cohomology theory} arises in differential topology: The \emph{de Rham cohomology}. Given a smooth manifold $M$, we define $\Omega^n(M) := \Gamma(\Lambda^n T^\vee M)$ for each $n \in \omega$, the space of \emph{smooth differential $n$-forms on $M$}. Moreover, is a sequence of mappings $\del[1]{d^n : \Omega^n(M) \to \Omega^{n + 1}(M)}_{n \in \omega}$, called \emph{exterior differentiation operators}, which roughly speaking generalize the notion of a differential of a function. They do satisfy the relation $d^n \circ d^{n - 1} = 0$ and thus we can define the \emph{$n$-th de Rham cohomology group} to be the quotient space
 \begin{equation*}
 	H^n_{\mathrm{dR}}(M) := \ker d^n/\im d^{n - 1}.
 \end{equation*}
@@ -27,9 +27,9 @@ The archetypical example of a \emph{cohomology theory} arises in differential to
 The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can actually be thought of a two-stage process: First we go from $\mathsf{Diff}$ to an intermediate category and then we apply a \emph{homology functor}, which is a purely algebraic construct, to go from this intermediate category to $_{\mathbb{R}}\mathsf{Vect}$. Aim of this section is to give the definition of this intermediate category and then to define such a functor explicitely for the case of Lie algebras.
 
 \begin{definition}[Chain Complex]
-	Let $\mathcal{A}$ be an abelian category. A \bld{$\mathbb{Z}$-graded chain complex in $\mathcal{A}$} is a tuple $\del[0]{(C_n)_{n \in \mathbb{Z}},(\partial_n)_{n \in \mathbb{Z}}}$, consisting of a sequence $(C_n)_{n \in \mathbb{Z}}$ in $\mathcal{A}$ and a sequence $(\partial_n)_{n \in \mathbb{Z}}$ in $\mathcal{A}$, such that 
+	Let $\mathcal{A}$ be an abelian category. A \bld{$\mathbb{Z}$-graded chain complex in $\mathcal{A}$} is defined to be a tuple $\del[0]{(C_n)_{n \in \mathbb{Z}},(\partial_n)_{n \in \mathbb{Z}}}$, consisting of a sequence $(C_n)_{n \in \mathbb{Z}}$ of objects in $\mathcal{A}$ and a sequence $(\partial_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathcal{A}$, such that 
 	\begin{equation*}
-		\partial_n \in \mathcal{A}(C_n,C_{n - 1}) \qquad \text{and} \qquad \partial_n \circ \partial_{n + 1} = 0
+		\partial_n \in \Hom_\mathcal{A}(C_n,C_{n - 1}) \qquad \text{and} \qquad \partial_n \circ \partial_{n + 1} = 0
 	\end{equation*}
 	\noindent for all $n \in \mathbb{Z}$.\\
 	Dually, a \bld{$\mathbb{Z}$-graded cochain complex in $\mathcal{A}$} is a $\mathbb{Z}$-graded chain complex in $\mathcal{A}^\mathrm{op}$. 
@@ -39,8 +39,12 @@ The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can
 	For notational simplicity, we will write $(C_\bullet,\partial_\bullet)$ for a chain complex in $\mathcal{A}$.
 \end{remark}
 
+\begin{remark}
+	For each abelian category $\mathcal{A}$, there is an abelian category $\Ch(\mathcal{A})$ of chain complexes in $\mathcal{A}$ (see \cite[7]{weibel:homological_algebra:1994}).
+\end{remark}
+
 \begin{definition}[Non-Negative Chain Complex]
-	Let $\mathcal{A}$ be an abelian category. A chain complex $(C_\bullet,\partial_\bullet) \in \Ch(\mathcal{A})$ is said to be \bld{non-negative}, iff $C_n = 0$ for all $n < 0$. We denote by $\Ch_{\geq 0}(\mathcal{A})$ the subcategory of $\Ch(\mathcal{A})$ of non-negative chain complexes.
+	Let $\mathcal{A}$ be an abelian category. A chain complex $(C_\bullet,\partial_\bullet) \in \Ch(\mathcal{A})$ is said to be \bld{non-negative}, iff $C_n = 0$ for all $n < 0$. We denote by $\Ch_{\geq 0}(\mathcal{A})$ the full subcategory of $\Ch(\mathcal{A})$ of non-negative chain complexes.
 \end{definition}
 
 \begin{definition}[Chevalley-Eilenberg Complex]
@@ -58,16 +62,16 @@ The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can
 	\end{align*}
 	\noindent where
 	\begin{equation*}
-		\theta_1 := \sum_{i = 0}^n (-1)^{i + 1} ux_k \otimes x_1 \wedge \dots \wedge \what{x_i} \wedge \dots \wedge x_n
+		\theta_1 := \sum_{i = 0}^n (-1)^{i + 1} ux_i \otimes x_1 \wedge \dots \wedge \what{x_i} \wedge \dots \wedge x_n,
 	\end{equation*}
 	\noindent and
 	\begin{equation*}
-		\theta_2 := \sum_{i < j} (-1)^{i + j} u \otimes [x_i,x_j] \wedge x_1 \wedge \dots \wedge \what{x_i} \wedge \dots \wedge \what{x_j} \wedge \dots \wedge x_n.
+		\theta_2 := \sum_{1 \leq i < j \leq n} (-1)^{i + j} u \otimes [x_i,x_j] \wedge x_1 \wedge \dots \wedge \what{x_i} \wedge \dots \wedge \what{x_j} \wedge \dots \wedge x_n.
 	\end{equation*}
 \end{definition}
 
 \begin{remark}
-	It is in no way obvious, that $\partial_n \circ \partial_{n + 1} = 0$ holds for the Chevalley-Eilenberg complex \ref{def:CEc}. However, it is a tedious computation, and we will only demonstrate the case $n = 1$. In this case
+	It is by no means obvious, that $\partial_n \circ \partial_{n + 1} = 0$ holds for the Chevalley-Eilenberg complex \ref{def:CEc}. However, it is a tedious computation, and we will only demonstrate the case $n = 1$. In this case
 	\begin{align*}
 		(\partial_1 \circ \partial_2)(u \otimes x \wedge y) &= \partial_1(ux \otimes y - uy \otimes x - u \otimes [x,y])\\
 		&= u(xy - yx) - u[x,y]\\
@@ -81,17 +85,17 @@ The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can
 \end{remark}
 
 \begin{remark}
-	The definition of the boundary map $\partial_n$ in the Chevalley-Eilenberg complex \ref{def:CEc} is not as arbitrary at it might seem at first sight. Given $\omega \in \Omega^n(M)$ for a smooth manifold $M$, then we have that $d\omega(X_1,\dots,X_{n + 1})$ is of the same form for any $X_1,\dots,X_{n + 1} \in \mathfrak{X}(M)$. Actually, this formula can be used to give an invariant definition of the exterior derivative $d$ in the de Rham theory (see \cite[370--372]{lee:smooth_manifolds:2013}).
+	The definition of the boundary map $\partial_n$ in the Chevalley-Eilenberg complex \ref{def:CEc} is not as arbitrary at it might seem at first sight. Given $\alpha \in \Omega^n(M)$ for a smooth manifold $M$, then we have that $d\alpha(X_1,\dots,X_{n + 1})$ is of the same form for any $X_1,\dots,X_{n + 1} \in \mathfrak{X}(M)$. Actually, this formula can be used to give an invariant definition of the exterior derivative $d$ in the de Rham theory (see \cite[370--372]{lee:smooth_manifolds:2013}).
 \end{remark}
 
 \section*{Left $\mathfrak{g}$-Modules and the Cohomology of Lie Algebras}
 
 \begin{definition}[Category of Left $\mathfrak{g}$-Modules]
-	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}\mathsf{LieAlg}}$. The \bld{category of left $\mathfrak{g}$-modules}, written $_{\mathfrak{g}}\mathsf{Mod}$, is defined to be the category with objects \bld{left $\mathfrak{g}$-modules}, i.e. modules $M \in {_{R}}\mathsf{Mod}$ equipped with a $R$-bilinear product $\mathfrak{g} \times M \to M$, $(x,m) \mapsto xm$, such that 
+	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}\mathsf{LieAlg}}$. The \bld{category of left $\mathfrak{g}$-modules}, written $_{\mathfrak{g}}\mathsf{Mod}$, is defined to be the category with objects \bld{left $\mathfrak{g}$-modules}, i.e. modules $M \in {_{R}}\mathsf{Mod}$ equipped with an $R$-bilinear product $\mathfrak{g} \times M \to M$, $(x,m) \mapsto xm$, such that 
 	\begin{equation*}
 		[x,y]m = x(ym) - y(xm)
 	\end{equation*}
-	\noindent holds for all $x,y \in \mathfrak{g}$ and $m \in M$, and \bld{left $\mathfrak{g}$-module homomorphisms} as morphisms, i.e. morphisms $f \in {_{R}}\mathsf{Mod}(M,N)$ such that 
+	\noindent holds for all $x,y \in \mathfrak{g}$ and $m \in M$, and \bld{left $\mathfrak{g}$-module homomorphisms} as morphisms, i.e. morphisms $f \in \Hom_{_{R}\mathsf{Mod}}(M,N)$ such that 
 	\begin{equation*}
 		f(xm) = xf(m)
 	\end{equation*}
@@ -121,24 +125,76 @@ We follow \cite[178]{kashiwara:categories:2006}.
 	Prove proposition \ref{lem:existence_morphism}. \emph{Hint:} Use that $\im \partial_{n + 1} \to C_n$ is monic by \cite[199]{maclane:categories:1978}.
 \end{exercise}
 
-\begin{definition}[Homology]
-	Let $\mathcal{A}$ be an abelian category and $(C_\bullet,\partial_\bullet) \in \Ch(\mathcal{A})$. For $n \in \mathbb{Z}$, we define the \bld{$n$-th homology object}, written $H_n(C_\bullet,\partial_\bullet)$, by
+\begin{definition}[Homology of a Chain Complex]
+	Let $\mathcal{A}$ be an abelian category and $(C_\bullet,\partial_\bullet) \in \Ch(\mathcal{A})$. Moreover, let $n \in \mathbb{Z}$ and $\im \partial_{n + 1} \to \ker \partial_n$ be the unique morphism assured by lemma \ref{lem:existence_morphism}. Then we define the \bld{$n$-th homology object}, written $H_n(C_\bullet,\partial_\bullet)$, by
 	\begin{equation*}
-		H_n(C_\bullet,\partial_\bullet) := \coker(\im \partial_{n + 1} \to \ker \partial_n),
-	\end{equation*}
-	\noindent where $\im \partial_{n + 1} \to \ker \partial_n$ is the unique morphism defined by lemma \ref{lem:existence_morphism}.
+		H_n(C_\bullet,\partial_\bullet) := \coker(\im \partial_{n + 1} \to \ker \partial_n) \in \ob(\mathcal{A}).
+	\end{equation*} 
 \end{definition}
 
 \begin{definition}[Cohomology of Lie Algebras]
-	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}}\mathsf{LieAlg}$ which is free as an $R$-module. Moreover, let $M \in {_{\mathfrak{g}}}\mathsf{Mod}$. For $n \in \omega$, define the \bld{$n$-th cohomology group of $\mathfrak{g}$ with coefficients in $M$}, written $H^n(\mathfrak{g},M)$, to be the $n$-th homology object of the cochain complex $\Hom_{_{\mathfrak{g}}\mathsf{Mod}}(-,M)(C_\bullet,\partial_\bullet)$, where $(C_\bullet,\partial_\bullet)$ denotes the Chevalley-Eilenberg complex \ref{def:CEc}.
+	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}}\mathsf{LieAlg}$ which is free as an $R$-module. Moreover, let $M \in {_{\mathfrak{g}}}\mathsf{Mod}$ and $(C_\bullet,\partial_\bullet)$ denote the Chevalley-Eilenberg complex \ref{def:CEc}. For $n \in \omega$, define the \bld{$n$-th cohomology group of $\mathfrak{g}$ with coefficients in $M$}, written $H^n(\mathfrak{g},M)$, to be the $n$-th homology object of the cochain complex 
+	\begin{equation*}
+		\Hom_{_{\mathfrak{g}}\mathsf{Mod}}\del[0]{(C_\bullet,\partial_\bullet),M}.
+	\end{equation*}
 \end{definition}
+
+\begin{remark}
+	Actually, we have that 
+	\begin{equation*}
+		\Hom_{_{\mathfrak{g}}\mathsf{Mod}}\del[0]{C_n,M} \cong \Hom_{_{R}\mathsf{Mod}}(\Lambda^n \mathfrak{g},M),
+	\end{equation*}
+	\noindent and thus
+	\begin{align*}
+		d^nf(x_1,\dots,x_n) =& \sum_{i = 1}^n(-1)^{i + 1}x_i f(x_1,\dots,\what{x_i},\dots,x_n)\\
+		&+ \sum_{1 \leq i < j \leq n}(-1)^{i + j} f([x_i,x_j],x_1,\dots,\what{x_i},\dots,\what{x_j},\dots,x_n),
+	\end{align*}
+	\noindent for all $n \in \omega$.
+\end{remark}
 
 \begin{remark}
 	There is a more general approach to the definition of the cohomology of Lie algebras via the notion of \emph{right derived functors} which does not use the intermediate step of the Chevalley-Eilenberg complex. 
 \end{remark}
 
-\section*{The Whitehead Lemmas}
+\begin{example}[$H^3(\mathfrak{sl}_2,k)$]
+	\label{ex:H^3_sl_2_k}
+	Let $k$ be a field with characteristic not equal to two and consider the \emph{special linear Lie algebra over $k$}, i.e. $A \in M_2(k)$ such that $\tr A = 0$. This is a three dimensional Lie algebra with ordered basis 	
+	\begin{equation*}
+		e_1 := \begin{pmatrix}
+			1 & 0\\
+			0 & -1
+		\end{pmatrix} \qquad
+		e_2 := \begin{pmatrix}
+			0 & 1\\
+			0 & 0
+		\end{pmatrix} \qquad
+		e_3 := \begin{pmatrix}
+			0 & 0\\
+			1 & 0
+		\end{pmatrix}.
+	\end{equation*}
+	Hence the crucial portion of the Eilenberg-Chevalley cochain complex is given by
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & \Hom_k(\Lambda^2,k) \arrow[r,"d"] & \Hom_k(\Lambda^3,k) \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+	We compute
+	\begin{align*}
+		df(e_1,e_2,e_3) =& e_1f(e_2,e_3) - e_2f(e_1,e_3) + e_3f(e_1,e_2)\\
+		&- f([e_1,e_2],e_3) + f([e_1,e_3],e_2) - f([e_2,e_3],e_1)\\
+		=& -2f(e_2,e_3) - 2f(e_3,e_2) - f(e_1,e_1)\\
+		=& -2f(e_2,e_3) + 2f(e_2,e_3)\\
+		=& 0,
+	\end{align*}
+	\noindent since $k$ is interpreted as a trivial $\mathfrak{sl}_2$-module and by the alternating $k$-multilinear properties of $f$. Hence
+	\begin{equation*}
+		H^3(\mathfrak{sl}_2,k) \cong \Hom_k(\Lambda^3 \mathfrak{g},k) \cong k,
+	\end{equation*}
+	\noindent since $\dim \Hom_k(\Lambda^3\mathfrak{sl}_2,k) = 1$.
+\end{example}
 
+\section*{The Whitehead Lemmas}
 
 \begin{theorem}[Whitehead's First Lemma]
 	\label{thm:Wfl}
@@ -157,10 +213,11 @@ We follow \cite[178]{kashiwara:categories:2006}.
 \end{theorem}
 
 \begin{remark}
-	There cannot be a \emph{third Whitehead lemma}, since
+	There cannot be a third Whitehead lemma, since
 	\begin{equation*}
-		H^3(\mathfrak{sl}_2,k) \cong k.
+		H^3(\mathfrak{sl}_2,k) \cong k,
 	\end{equation*}
+	\noindent by exercise \ref{ex:H^3_sl_2_k}.
 \end{remark}
 
 \printbibliography

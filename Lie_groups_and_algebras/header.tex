@@ -170,6 +170,7 @@
 \DeclareMathOperator\Ch{Ch}
 \DeclareMathOperator\Ext{Ext}
 \DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\tr{tr}
 %\usepackage{hhline}
 %\usepackage{booktabs} 
 %\usepackage{array}
@@ -206,13 +207,13 @@
   	{}	                                    		%Space below
   	{}			                     		%Body font
   	{}        	                             		%Indent
-  	{\bfseries}   	                         		%Head font
+	{\boldmath\bfseries}   	                         		%Head font
   	{.}            	                        		%Head punctuation
   	{ }           	                         		%Head space 
   	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
 \theoremstyle{nonit}
 \newtheorem{remark}{Remark}[section]
-\newtheorem{examples}{Examples}[section]
+\newtheorem{example}{Example}[section]
 \newtheoremstyle{ex} 		             	 		%Stylename
   	{}	                                     		%Space above
   	{}	                                    		%Space below
