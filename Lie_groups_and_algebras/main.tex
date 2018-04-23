@@ -233,6 +233,24 @@ Observe, that for each $n \in \omega$, we have that $C_n \in {_{\mathfrak{g}}}\m
 \end{example}
 
 \section*{The Whitehead Lemmas}
+Let $M \in {_\mathfrak{g}}\mathsf{Mod}$ and denote by $\mathrm{Der}(\mathfrak{g},M)$ the \emph{derivations from $\mathfrak{g}$ to $M$}, i.e. mappings $D \in {_R}\mathsf{Mod}$, such that $D[x,y] = x(Dy) - y(Dx)$ holds for all $x,y \in \mathfrak{g}$. If $m \in M$, define $D_m(x) := xm$ for $x \in \mathfrak{g}$. This is called an \emph{inner derivation}. The $R$-module of all inner derivations from $\mathfrak{g}$ to $M$ is denoted by $\mathrm{Der}_{\mathrm{Inn}}(\mathfrak{g},M)$. Clearly, $\mathrm{Der}_{\mathrm{Inn}}(\mathfrak{g},M)$ is an $R$-submodule of $\mathrm{Der}(\mathfrak{g},M)$. By \cite[230]{weibel:homological_algebra:1994} we have that
+\begin{equation*}
+	H^1(\mathfrak{g},M) \cong \mathrm{Der}(\mathfrak{g},M)/\mathrm{Der}_{\mathrm{Inn}}(\mathfrak{g},M).
+\end{equation*}
+Let $M \in {_R}\mathsf{LieAlg}$ be abelian. An \emph{extension of $\mathfrak{g}$ by $M$} is a short exact sequence
+\begin{equation*}
+	\begin{tikzcd}
+		0 \arrow[r] & M \arrow[r] & \mathfrak{e} \arrow[r,"\pi"] & \mathfrak{g} \arrow[r] & 0
+	\end{tikzcd}
+\end{equation*}
+\noindent in $_{R}\mathsf{LieAlg}$. There is a notion of equivalence classes of extensions of $\mathfrak{g}$ by $M$. Denote by $\mathrm{Ext}(\mathfrak{g},M)$ the set of all such equivalence classes. Then there is a one-to-one correspondence
+\begin{equation*}
+	\begin{tikzcd}
+		\mathrm{Ext}(\mathfrak{g},M) \arrow[r,leftrightarrow,"1\colon 1"] & H^2(\mathfrak{g},M)
+	\end{tikzcd}
+\end{equation*}
+\noindent if $M \in {_\mathfrak{g}}\mathsf{Mod}$ (see \cite[235]{weibel:homological_algebra:1994}).\\
+However, the situation gets much more easier if we make some assumptions.
 
 \begin{theorem}[Whitehead's First Lemma]
 	\label{thm:Wfl}
@@ -257,6 +275,19 @@ Observe, that for each $n \in \omega$, we have that $C_n \in {_{\mathfrak{g}}}\m
 	\end{equation*}
 	\noindent by exercise \ref{ex:H^3_sl_2_k}.
 \end{remark}
+
+There is a quite strong result obtained via the second Whitehead lemma, which gives rise to the \emph{structure theory of Lie algebras}.
+
+\begin{theorem}[Levi's Theorem]
+	Let $k$ be a field of characteristic zero and $\mathfrak{g} \in {_k}\mathsf{LieAlg}$ finite dimensional. Then there exists a semisimple Lie subalgebra $\mathcal{L} \subseteq \mathfrak{g}$ (called a \bld{Levi factor}), such that
+	\begin{equation*}
+		\mathfrak{g} \cong \mathcal{L} \ltimes \mathrm{rad}(\mathfrak{g}).
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	See \cite[247]{weibel:homological_algebra:1994}.
+\end{proof}
 
 \printbibliography
 \end{document}
