@@ -26,6 +26,9 @@
 	bottom = 3cm
 ]{geometry}
 
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
 %Headers and footers
 \usepackage{fancyhdr}
 	\pagestyle{fancy}
@@ -40,8 +43,8 @@
 	%Header left
 	\fancyhead[L]{
 		\footnotesize
-		MAT556: Category Theory and its Applications\\
-		Fall Semester 2017
+		MAT579:	Lie groups and Lie algebras\\
+		Spring 2018
 	}
 	%Page numbering in footer
 	\fancyfoot[C]{\thepage}
@@ -54,7 +57,8 @@
 %Title
 \usepackage[foot]{amsaddr}
 \usepackage{newtxtext}
-\usepackage[subscriptcorrection,mtpcal,mtphrb]{mtpro2}
+\usepackage[subscriptcorrection,nofontinfo,mtpcal,mtphrb]{mtpro2}
+\usepackage{mathtools}
 \usepackage{bm}
 \usepackage{xspace}
 \makeatletter
@@ -68,7 +72,7 @@
 	\renewcommand{\@secnumfont}{\bfseries}
 	\renewcommand\section{\@startsection{section}{1}%
   	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
-  	{\normalfont\bfseries\centering}}
+  	{\normalfont\boldmath\bfseries\centering}}
 	\renewcommand\subsection{\@startsection{subsection}{2}%
     	\z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
     	{\normalfont\bfseries}}%
@@ -82,7 +86,7 @@
 
 % Add bold to \section titles in ToC and remove . after numbers
 \renewcommand{\tocsection}[3]{%
-	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2\quad}}\bfseries#3}
+	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2\quad}}\boldmath\bfseries#3}
 \renewcommand{\tocappendix}[3]{%
   	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2: }}\bfseries#3}
 % Remove . after numbers in \subsection
@@ -163,6 +167,10 @@
 \DeclareMathOperator\ob{ob}
 \DeclareMathOperator\coker{coker}
 \DeclareMathOperator\im{im}
+\DeclareMathOperator\Ch{Ch}
+\DeclareMathOperator\Ext{Ext}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\tr{tr}
 %\usepackage{hhline}
 %\usepackage{booktabs} 
 %\usepackage{array}
@@ -184,7 +192,7 @@
   	{}	                                    		%Space below
   	{\itshape}			                     		%Body font
   	{}        	                             		%Indent
-  	{\bfseries}   	                         		%Head font
+  	{\boldmath\bfseries}   	                         		%Head font
   	{.}            	                        		%Head punctuation
   	{ }           	                         		%Head space 
   	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
@@ -199,13 +207,24 @@
   	{}	                                    		%Space below
   	{}			                     		%Body font
   	{}        	                             		%Indent
-  	{\bfseries}   	                         		%Head font
+	{\boldmath\bfseries}   	                         		%Head font
   	{.}            	                        		%Head punctuation
   	{ }           	                         		%Head space 
   	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
 \theoremstyle{nonit}
 \newtheorem{remark}{Remark}[section]
-\newtheorem{examples}{Examples}[section]
+\newtheorem{example}{Example}[section]
+\newtheoremstyle{ex} 		             	 		%Stylename
+  	{}	                                     		%Space above
+  	{}	                                    		%Space below
+  	{\small}			                     		%Body font
+  	{}        	                             		%Indent
+  	{\bfseries\boldmath}   	                         		%Head font
+  	{.}            	                        		%Head punctuation
+  	{ }           	                         		%Head space 
+  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
+\theoremstyle{ex}
+\newtheorem{exercise}[theorem]{Exercise}
 %German non-ASCII-Characters
 %Graphics-Tool
 %\usepackage{tikz}
@@ -229,29 +248,3 @@
   citecolor    = blue %Colour of citations
 }
 \newcommand{\bld}[1]{\boldmath\textit{\textbf{#1}}\unboldmath}
-\newcommand{\eqclass}[1]{\sbr[0]{#1}}
-\newcommand{\cat}[1]{\mathsf{#1}}
-\newcommand{\Sbb}{\mathbb{S}}
-\newcommand{\Zbb}{\mathbb{Z}}
-\newcommand{\Nbb}{\mathbb{N}}
-\newcommand{\Rbb}{\mathbb{R}}
-\newcommand{\Hbb}{\mathbb{H}}
-\newcommand{\Cbb}{\mathbb{C}}
-\newcommand{\Tcal}{\mathcal{T}}
-\newcommand{\SLrm}{\mathrm{SL}}
-\newcommand{\PSLrm}{\mathrm{PSL}}
-\newcommand{\SLrmstar}{\mathrm{S^*L}}
-\newcommand{\PSLrmstar}{\mathrm{PS^*L}}
-\newcommand{\GLrm}{\mathrm{GL}}
-\newcommand{\Mrm}{\mathrm{M}}
-\newcommand{\Isom}{\mathrm{Isom}}
-\newcommand{\Mob}{\mathrm{M\ddot{o}b}}
-\newcommand{\Ebb}{\mathbb{E}}
-\newcommand{\Cscr}{\mathscr{C}}
-\newcommand{\pwrm}{\mathrm{pw}}
-\newcommand{\clos}[1]{\overline{#1}}
-\newcommand{\Hcal}{\mathcal{H}}
-\newcommand{\Hbcal}{\bm{\mathcal{H}}}
-\newcommand{\Ucal}{\mathcal{U}}
-\newcommand{\Ubcal}{\bm{\mathcal{U}}}
-\renewcommand{\det}{\mathrm{det}}
