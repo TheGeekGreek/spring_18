@@ -1,0 +1,61 @@
+\section*{The Spectral Theorem}
+\subsection*{Projection Valued Measures}
+
+\begin{definition}[Projection Valued Measure]
+	Let $\mathcal{H}$ be a Hilbert space. A function $P : \mathcal{B}(\mathbb{R}) \to \mathcal{L}(\mathcal{H})$ is said to be a \bld{projection valued measure}, iff
+	\begin{enumerate}[label = \textup{(}\roman*\textup{)},wide=0pt]
+		\item For all $\Omega \in \mathcal{B}(\mathbb{R})$, $P(\Omega)$ is an orthogonal projection, i.e. 
+			\begin{equation*}
+				P(\Omega)^2 = P(\Omega) = P(\Omega)^*.
+			\end{equation*}
+		\item $P(\mathbb{R}) = \id_\mathcal{H}$.
+		\item If $(\Omega_n)_{n \in \omega}$ is a sequence of pairwise disjoint elements of $\mathcal{B}(\mathbb{R})$, then
+			\begin{equation*}
+				P(\Omega)\psi = \sum_{n \in \omega} P(\Omega_n)\psi,
+			\end{equation*}
+			\noindent for all $\psi \in \mathcal{H}$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Resolution of the Identity]
+	Let $\mathcal{H}$ be a Hilbert space and $P : \mathcal{B}(\mathbb{R}) \to \mathcal{L}(\mathcal{H})$ a projection valued measure. The function $p : \mathbb{R} \to \mathcal{L}(\mathcal{H})$ defined by
+	\begin{equation*}
+		p(\lambda) := P\intoc{-\infty,\lambda},
+	\end{equation*}
+	\noindent is called the \bld{resolution of the identity associated to a projection valued measure}.
+\end{definition}
+
+\subsection*{The Spectral Theorem}
+
+\begin{theorem}[Spectral Theorem]
+	Let $A$ be a self-adjoint operator. Then there exists a unique projection valued measure $P^A$ such that $D(A) = \cbr[0]{\psi \in \mathcal{H} : \int \abs{\lambda}^2 d\mu_\psi^A(\lambda)}$ and
+	\begin{equation*}
+		A = \int \lambda dp^A(\lambda).
+	\end{equation*}
+\end{theorem}
+
+\subsection*{The Schr\"odinger Equation}
+
+\begin{theorem}
+	Let $\mathcal{H}$ be a Hilbert space and $H : D(H) \to \mathcal{H}$ be self adjoint. Moreover, set $U(t) := \exp(-iHt)$ for $t \in \mathbb{R}$. Then:
+	\begin{enumerate}[label=\textup{(}\alph*\textup{)},wide=0pt]
+		\item $U(t)$ is a strongly continuous one parameter unitary group.
+		\item The limit
+			\begin{equation*}
+				\lim_{t \to 0} \frac{U(t) - 1}{t}\psi
+			\end{equation*}
+			\noindent exists if and only if $\psi \in D(H)$. Then
+			\begin{equation*}
+				\lim_{t \to 0} \frac{U(t) - 1}{t}\psi = -iH\psi.
+			\end{equation*}
+		\item $U(t)D(H) = D(H)$ and $[U(t),H] = 0$ on $D(H)$.
+		\item Let $\psi_0 \in D(H)$. Then $U(t)\psi_0$ uniquely solves the initial value problem
+			\begin{equation}
+				\ccases{
+					i\partial_t \psi(t) = H\psi(t)\\
+					\psi(0) = \psi_0,
+				}
+			\end{equation}
+			\noindent called the \bld{Schr\"odinger equation}.
+	\end{enumerate}
+\end{theorem}

@@ -1,6 +1,6 @@
 \input{header.tex}
 
-\title{}
+\title{Whitehead Product}
 \author{Yannis B\"{a}hni}
 \address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
 \email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
@@ -14,4 +14,99 @@
 
 \tableofcontents
 
+\section{Definition of the Whitehead Product}
+Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is given by
+\begin{equation*}
+	X \coprod Y = (X \times \cbr[0]{y_0}) \cup (\cbr[0]{x_0} \times Y) \subseteq X \times Y,
+\end{equation*}
+\noindent with basepoint $(x_0,y_0)$. 
+
+\begin{lemma}
+	\label{lem:attaching_cell_wedge_sum_spheres}
+	Let $n,m \in \omega$, $n,m \geq 1$. The space $\mathbb{S}^n \times \mathbb{S}^m$ can be obtained from $\mathbb{S}^n \vee \mathbb{S}^m$ by attaching an $n + m$-cell.
+\end{lemma}
+
+\begin{proof}
+	Observe, that $\mathbb{D}^{n + m} \cong \mathbb{D}^n \times \mathbb{D}^m$ and hence
+	\begin{equation*}
+		\mathbb{S}^{n + m - 1} = \partial \mathbb{D}^{n + m} \cong (\partial \mathbb{D}^n \times \mathbb{D}^m) \cup (\mathbb{D}^n \times \partial \mathbb{D}^m) = (\mathbb{S}^{n - 1} \times \mathbb{D}^m) \cup (\mathbb{D}^n \times \mathbb{S}^{m - 1}).
+	\end{equation*}
+	Let 
+	\begin{equation*}
+		f_1 : \mathbb{S}^{n - 1} \times \mathbb{D}^m \to (\mathbb{S}^{n - 1} \times \mathbb{D}^m) / (\mathbb{S}^{n - 1} \times \mathbb{S}^{m - 1}) \cong \ast \times \mathbb{S}^m
+	\end{equation*}
+	\noindent and
+	\begin{equation*}
+		f_2 : \mathbb{D}^n \times \mathbb{S}^{m - 1} \to (\mathbb{D}^n \times \mathbb{S}^{m - 1}) / (\mathbb{S}^{n - 1} \times \mathbb{S}^{m - 1}) \cong \mathbb{S}^n \times \ast
+	\end{equation*}
+	\noindent be the quotient maps. An application of the gluing lemma thus yields a map
+	\begin{equation*}
+		f : \mathbb{S}^{n + m - 1} \to \mathbb{S}^n \vee \mathbb{S}^m.
+	\end{equation*}
+	Moreover, define 
+	\begin{equation*}
+		q : \mathbb{D}^n \times \mathbb{D}^m \to \mathbb{D}^n/\mathbb{S}^{n - 1} \times \mathbb{D}^m/\mathbb{S}^{m - 1} \cong \mathbb{S}^n \times \mathbb{S}^m	
+	\end{equation*}
+	\noindent to be the product of quotient maps. Thus we get a commutative diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\\
+			\mathbb{D}^{n + m} \arrow[r,"q"'] & \mathbb{S}^n \times \mathbb{S}^m
+		\end{tikzcd}
+	\end{equation*}
+	Suppose $(X,g,h)$ is another cocone for the pushout diagram:
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\arrow[ddr,bend left,"h"]\\
+			\mathbb{D}^{n + m} \arrow[r,"q"']\arrow[drr,bend right,"g"'] & \mathbb{S}^n \times \mathbb{S}^m\\
+			& & X.
+		\end{tikzcd}
+	\end{equation*}
+	By \cite[186]{munkres:topology:2000}, $q$ is a quotient map. Moreover, for $(x,y) \in \mathbb{S}^{n - 1} \times \mathbb{S}^{m - 1}$, we have that
+	\begin{equation*}
+		g(x,y) = (h \circ f)(x,y) = h(\ast,\ast).
+	\end{equation*}
+	Thus $g$ passes to the quotient by \cite[72]{lee:topological_manifolds:2011} to yield a unique map
+	\begin{equation*}
+		\wtilde{g} : \mathbb{S}^n \times \mathbb{S}^m \to X,
+	\end{equation*}
+	\noindent such that $g = \wtilde{g} \circ q$. Finally, it is easy to check that
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\arrow[ddr,bend left,"h"]\\
+			\mathbb{D}^{n + m} \arrow[r,"q"']\arrow[drr,bend right,"g"'] & \mathbb{S}^n \times \mathbb{S}^m\arrow[dr,"\wtilde{g}"]\\
+			& & X.
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes.
+\end{proof}
+
+For $n,m \in \omega$, $n,m \geq 1$, consider the map $f$ from lemma \ref{lem:attaching_cell_wedge_sum_spheres}. Let $(X,p) \in \mathsf{Top}_*$. If $[\alpha] \in \pi_n(X,p)$ and $[\beta] \in \pi_m(X,p)$, we get two pointed maps
+\begin{equation*}
+	\alpha : \mathbb{S}^n \to X \qquad \text{and} \qquad \beta : \mathbb{S}^m \to X.
+\end{equation*}
+Forming their wedge $\alpha \vee \beta : \mathbb{S}^n \vee \mathbb{S}^m \to X$, defined by
+\begin{align*}
+	(\alpha \vee \beta) (x,y) := \ccases{
+		\alpha(x) & y = \ast,\\
+		\beta(y) & x = \ast,
+	}
+\end{align*}
+\noindent and precomposing with $f$, yields a pointed map
+\begin{equation*}
+	(\alpha \vee \beta) \circ f : \mathbb{S}^{n + m - 1} \to X.
+\end{equation*}
+Moreover, it is easy to check that above map is well behaved under pointed homotopies, hence gives raise to a class $[(\alpha \vee \beta) \circ f]$.
+
+\begin{definition}[Whitehead Product]
+	Let $n,m \in \omega$, $n,m \geq 1$, and $(X,p) \in \mathsf{Top}_\ast$. The product
+	\begin{equation*}
+		\pi_n(X,p) \times \pi_m(X,p) \to \pi_{n + m - 1}(X,p)
+	\end{equation*}
+	\noindent defined by
+	\begin{equation*}
+		([\alpha],[\beta]) \mapsto [(\alpha \vee \beta) \circ f]
+	\end{equation*}
+	\noindent is called the \bld{Whitehead product}.
+\end{definition}
 \end{document}
