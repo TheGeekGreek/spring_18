@@ -15,10 +15,25 @@
 
 \tableofcontents
 
+\section{Introduction}
+In the category of \emph{compactly generated spaces}, suppose $G$ is a $H$-group, i.e. a space satisfying the group axioms up to homotopy, then $[X,G]$ is a group for any space $X$. This group need not be abelian. Thus a natural question is, if $[X,G]$ is \emph{nilpotent}. As the notion of nilpotence is based on the behaviour of \emph{commutators}, it is natural to consider certain related products: First of all the \emph{commutator product} or \emph{Samelson product} defined as follows: If $[\alpha] \in [X,G]$ and $[\beta] \in [Y,G]$, define $\gamma : X \times Y \to G$ by
+\begin{equation*}
+	\gamma(x,y) := \alpha(x)\beta(y)\del[1]{\alpha(x)}^{-1}\del[1]{\beta(y)}^{-1}.
+\end{equation*}
+Then $\gamma\vert_{X \vee Y}$ is nullhomotopic and thus yields a map $\gamma : X \wedge Y \to G$, whose homotopy class is defined to be the product of $[\alpha]$ and $[\beta]$. When $G = \Omega X$, then $\pi_n(G) \cong \pi_{n + 1}(X)$ and the Samelson product
+\begin{equation*}
+	\pi_n(G) \otimes \pi_m(G) \to \pi_{n + m}(G)
+\end{equation*}
+\noindent translates to a pairing
+\begin{equation*}
+	\pi_{n + 1}(X) \otimes \pi_{m + 1}(X) \to \pi_{n + m + 1}(X),
+\end{equation*}
+\noindent the \emph{Whitehead product} (see \cite[456--457]{whitehead:homotopy_theory:1978}).
+
 \section{Definition of the Whitehead Product}
 Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is given by
 \begin{equation*}
-	X \coprod Y = (X \times \cbr[0]{y_0}) \cup (\cbr[0]{x_0} \times Y) \subseteq X \times Y,
+	\textstyle X \coprod Y = (X \times \cbr[0]{y_0}) \cup (\cbr[0]{x_0} \times Y) \subseteq X \times Y,
 \end{equation*}
 \noindent with basepoint $(x_0,y_0)$. 
 
@@ -55,7 +70,7 @@ Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is gi
 			\mathbb{D}^{n + m} \arrow[r,"q"'] & \mathbb{S}^n \times \mathbb{S}^m
 		\end{tikzcd}
 	\end{equation*}
-	Suppose $(X,g,h)$ is another cocone for the pushout diagram:
+	Suppose $(X,g,h)$ is another cocone in $\mathsf{Top}$ for the pushout diagram:
 	\begin{equation*}
 		\begin{tikzcd}
 			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\arrow[ddr,bend left,"h"]\\
@@ -139,7 +154,7 @@ Thus we get a well defined map $[-,-] : \pi_n(X) \times \pi_m(X) \to \pi_{n + m 
 \section{The Whitehead Product and the Conjugation Action}
 In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n(X) \to \pi_n(X)$. From figure \ref{fig:n=1} we immediately deduce that
 \begin{equation*}
-	[\alpha,\beta] = [\alpha\beta\alpha^{-1}\beta^{-1}].
+	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1}.
 \end{equation*}
 Thus $[\alpha,\beta]$ coincides with the notation of a commutator.\\
 Let $n > 1$. Then it follows from figure \ref{fig:n>1}, that
