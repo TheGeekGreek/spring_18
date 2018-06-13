@@ -152,12 +152,41 @@ Thus we get a well defined map $[-,-] : \pi_n(X) \times \pi_m(X) \to \pi_{n + m 
 \end{definition}
 
 \section{The Whitehead Product and the Conjugation Action}
-In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n(X) \to \pi_n(X)$. From figure \ref{fig:n=1} we immediately deduce that
+In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n(X) \to \pi_n(X)$. If $n = 1$, we immediately deduce from figure \ref{fig:n=1} that
 \begin{equation*}
 	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1}.
 \end{equation*}
-Thus $[\alpha,\beta]$ coincides with the notation of a commutator.\\
-Let $n > 1$. Then it follows from figure \ref{fig:n>1}, that
+Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$. Let $n > 1$. An \bld{orientation of $(\mathbb{D}^n,\mathbb{S}^{n - 1})$} is simply a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom). 
+
+\begin{lemma}
+	\label{lem:order_reversing}
+	Let $n \in \omega$, $n > 1$, $[\alpha] \in \pi_n(X)$ and $h : (\mathbb{D}^n,\mathbb{S}^{n - 1}) \to (\mathbb{D}^n,\mathbb{S}^{n - 1})$ an orientation reversing homeomorphism, i.e. $h$ is a homeomorphism and $H_n(h)\langle e \rangle = -\langle e \rangle$ for a generator $\langle e \rangle$ of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})$. Then
+	\begin{equation*}
+		[\alpha \circ h] = -[\alpha].
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+ 	Let $\rho : \pi_n(Y,A) \to H_n(Y,A)$ denote the \bld{Hurewicz homomorphism} defined by
+	\begin{equation*}
+		\rho[f] := H_n(f)\langle e \rangle,
+	\end{equation*}
+	\noindent for a generator $\langle e \rangle$ of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})$ (see \cite[166]{whitehead:homotopy_theory:1978}). Using that 
+	\begin{equation*}
+		\rho : \pi_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \to H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})
+	\end{equation*}
+	\noindent is an isomorphism for $n >1$ (see \cite[168]{whitehead:homotopy_theory:1978}), we compute
+	\begin{align*}
+		[\alpha \circ h] &= \pi_n(\alpha)[h]\\
+		&= \pi_n(\alpha)\rho^{-1}\rho[h]\\ 
+		&= \pi_n(\alpha)\rho^{-1}(H_n(h)\langle e \rangle)\\
+		&= -\pi_n(\alpha)\rho^{-1}\langle e \rangle\\
+		&= -\pi_n(\alpha)[\id_{\mathbb{D}^n}]\\
+		&= - [\alpha].
+	\end{align*}
+\end{proof}
+
+Using lemma \ref{lem:order_reversing}, it follows from figure \ref{fig:n>1}, that
 \begin{equation*}
 	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
 \end{equation*}
@@ -233,7 +262,14 @@ Then clearly $L^nL^m \subseteq L^{n + m}$ holds. It also turns out, that we have
 \end{proposition}
 
 \begin{proof}
-	
+	Consider the \bld{permutation map} $\sigma : \mathbb{S}^{m + n + 1} \to \mathbb{S}^{n + m + 1}$ defined by
+	\begin{equation*}
+		(y_1,\dots,y_{m + 1},x_1,\dots,x_{n + 1}) \mapsto (x_1, \dots,x_{n + 1},y_1,\dots,y_{m + 1}).
+	\end{equation*}
+	Then clearly $\deg \sigma = (-1)^{(n + 1)(m + 1)}$, since $\sigma$ is the composition of permutations and hence orthogonal transformations. Using lemma \ref{lem:order_reversing}, we compute
+	\begin{equation*}
+		[\beta,\alpha] = [(\beta \vee \alpha) \circ f] = [(\alpha \vee \beta) \circ f \circ \sigma] = (-1)^{(n + 1)(m + 1)}[\alpha,\beta].
+	\end{equation*}
 \end{proof}
 
 \begin{proposition}
