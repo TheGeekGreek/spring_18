@@ -156,7 +156,7 @@ In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n
 \begin{equation*}
 	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1}.
 \end{equation*}
-Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$. Let $n > 1$. An \bld{orientation of $(\mathbb{D}^n,\mathbb{S}^{n - 1})$} is simply a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom). 
+Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$. Let $n > 1$. An \bld{orientation of $\mathbb{D}^n$} is simply a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom). 
 
 \begin{lemma}
 	\label{lem:order_reversing}
@@ -190,7 +190,7 @@ Using lemma \ref{lem:order_reversing}, it follows from figure \ref{fig:n>1}, tha
 \begin{equation*}
 	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
 \end{equation*}
-\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$.
+\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$.
 
 \begin{figure}[h!tb]
 	\begin{subfigure}[b]{0.5\textwidth}
@@ -253,6 +253,8 @@ Then clearly $L^nL^m \subseteq L^{n + m}$ holds. It also turns out, that we have
 		[\alpha_1 + \alpha_2, \beta] = [\alpha_1,\beta] + [\alpha_2,\beta] \qquad \text{and} \qquad [\beta,\alpha_1 + \alpha_2] = [\beta,\alpha_1] + [\beta,\alpha_2].
 	\end{equation*}
 \end{proposition}
+
+Recall, that for $n \geq 1$ we have that $H_n(\mathbb{S}^n) \cong \mathbb{Z}$. Thus if we are given any continuous map $f : \mathbb{S}^n \to \mathbb{S}^n$, the induced map $H_n(f)$ is simply a multiplication by a unique integer. This integer is defined to be the \bld{degree of $f$}, written $\deg f$.
 
 \begin{proposition}
 	Let $n,m \in \omega$, $[\alpha] \in \pi_{n + 1}(X)$ and $[\beta] \in \pi_{m + 1}(X)$. Then
