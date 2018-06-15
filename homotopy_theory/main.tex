@@ -16,7 +16,7 @@
 \tableofcontents
 
 \section{Introduction}
-In the category of \emph{compactly generated spaces}, suppose $G$ is a $H$-group, i.e. a space satisfying the group axioms up to homotopy, then $[X,G]$ is a group for any space $X$. This group need not be abelian. Thus a natural question is, if $[X,G]$ is \emph{nilpotent}. As the notion of nilpotence is based on the behaviour of \emph{commutators}, it is natural to consider certain related products: First of all the \emph{commutator product} or \emph{Samelson product} defined as follows: If $[\alpha] \in [X,G]$ and $[\beta] \in [Y,G]$, define $\gamma : X \times Y \to G$ by
+In the category of \emph{compactly generated spaces}, suppose $G$ is an $H$-group, i.e. a space satisfying the group axioms up to homotopy, then $[X,G]$ is a group for any space $X$. This group need not be abelian. Thus a natural question is, if $[X,G]$ is \emph{nilpotent}. As the notion of nilpotence is based on the behaviour of \emph{commutators}, it is natural to consider certain related products: First of all the \emph{commutator product} or \emph{Samelson product} defined as follows: If $[\alpha] \in [X,G]$ and $[\beta] \in [Y,G]$, define $\gamma : X \times Y \to G$ by
 \begin{equation*}
 	\gamma(x,y) := \alpha(x)\beta(y)\del[1]{\alpha(x)}^{-1}\del[1]{\beta(y)}^{-1}.
 \end{equation*}
@@ -190,7 +190,21 @@ Using lemma \ref{lem:order_reversing}, it follows from figure \ref{fig:n>1}, tha
 \begin{equation*}
 	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
 \end{equation*}
-\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$.
+\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$. Indeed, this can be seen as follows: If $e^n$ and $e^m$ are orientations of $\mathbb{D}^n$ and $\mathbb{D}^m$, respectively, then their \emph{cross product} $e^n \times e^m$ is an orientation of $\mathbb{D}^n \times \mathbb{D}^m$ (see \cite[64]{whitehead:homotopy_theory:1978}). Moreover, we have that 
+\begin{equation*}
+	\partial(e^n \times e^m) = \partial e^n \times e^m + (-1)^n e^n \times \partial e^m.
+\end{equation*}
+Therefore
+\begin{equation*}
+	\partial(e^1 \times e^n) = 1 \times e^n - 0 \times e^n - e^1 \times \partial e^n.
+\end{equation*}
+And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is given by the pointed homotopy class of the composition
+\begin{equation*}
+	\begin{tikzcd}
+		\mathbb{S}^n \arrow[r,"c"] & \mathbb{S}^n \vee \mathbb{S}^n \arrow[r,"\alpha \vee \beta"] & X,
+	\end{tikzcd}
+\end{equation*}
+\noindent where $c : \mathbb{S}^n \to \mathbb{S}^n \vee \mathbb{S}^n$ denotes the mapping which collapses the equatorial $\mathbb{S}^{n - 1}$ in $\mathbb{S}^n$ to a point (see \cite[341]{hatcher:algebraic_topology:2001}).
 
 \begin{figure}[h!tb]
 	\begin{subfigure}[b]{0.5\textwidth}
@@ -234,6 +248,24 @@ Using lemma \ref{lem:order_reversing}, it follows from figure \ref{fig:n>1}, tha
 	\end{subfigure}
 	\caption{Whitehead bracket and the conjugation action.}
 	\label{fig:conjugation_action}
+\end{figure}
+
+\begin{figure}[h!tb]
+	\centering
+	\begin{tikzpicture}
+	\draw [->,thick] (0,0) -- (1,0) node[midway,above] {$c$};
+		\draw[thick] (-3,0) circle (2cm);
+		\draw[thick] (-5,0) arc (180:360:2 and 0.6);
+  		\draw[dashed,thick] (-1,0) arc (0:180:2 and 0.6);
+		\draw[thick] (3,1) circle (1cm);
+		\draw[thick] (2,1) arc (180:360:1 and 0.3);
+  		\draw[dashed,thick] (4,1) arc (0:180:1 and 0.3);
+		\draw[thick] (3,-1) circle (1cm);
+		\draw[thick] (2,-1) arc (180:360:1 and 0.3);
+  		\draw[dashed,thick] (4,-1) arc (0:180:1 and 0.3);
+	\end{tikzpicture}
+	\caption{The collapsing map $c : \mathbb{S}^n \to \mathbb{S}^n \vee \mathbb{S}^n$.}
+	\label{fig:collapsing_map}
 \end{figure}
 
 \section{Grading}
