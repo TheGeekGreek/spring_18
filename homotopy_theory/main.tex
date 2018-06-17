@@ -20,7 +20,7 @@ In the category of \emph{compactly generated spaces}, suppose $G$ is an $H$-grou
 \begin{equation*}
 	\gamma(x,y) := \alpha(x)\beta(y)\del[1]{\alpha(x)}^{-1}\del[1]{\beta(y)}^{-1}.
 \end{equation*}
-Then $\gamma\vert_{X \vee Y}$ is nullhomotopic and thus yields a map $\gamma : X \wedge Y \to G$, whose homotopy class is defined to be the product of $[\alpha]$ and $[\beta]$. When $G = \Omega X$, then $\pi_n(G) \cong \pi_{n + 1}(X)$ and the Samelson product
+Then $\gamma\vert_{X \vee Y}$ is nullhomotopic and thus yields a map $\gamma : X \wedge Y \to G$, whose homotopy class is defined to be the product of $[\alpha]$ and $[\beta]$. When $X = \mathbb{S}^n$, $Y = \mathbb{S}^m$ and $G = \Omega X$, then $[\mathbb{S}^n,G]$ is identified with $\pi_n(G)$ since the $\pi_1$ action is trivial for $H$-spaces, and the Samelson product
 \begin{equation*}
 	\pi_n(G) \otimes \pi_m(G) \to \pi_{n + m}(G)
 \end{equation*}
@@ -28,7 +28,7 @@ Then $\gamma\vert_{X \vee Y}$ is nullhomotopic and thus yields a map $\gamma : X
 \begin{equation*}
 	\pi_{n + 1}(X) \otimes \pi_{m + 1}(X) \to \pi_{n + m + 1}(X),
 \end{equation*}
-\noindent the \emph{Whitehead product} (see \cite[456--457]{whitehead:homotopy_theory:1978}).
+\noindent the \emph{Whitehead product}, since $\pi_n(G) \cong \pi_{n + 1}(X)$ (see \cite[456--457]{whitehead:homotopy_theory:1978}).
 
 \section{Definition of the Whitehead Product}
 Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is given by
@@ -63,7 +63,11 @@ Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is gi
 	\begin{equation*}
 		q : \mathbb{D}^n \times \mathbb{D}^m \to \mathbb{D}^n/\mathbb{S}^{n - 1} \times \mathbb{D}^m/\mathbb{S}^{m - 1} \cong \mathbb{S}^n \times \mathbb{S}^m	
 	\end{equation*}
-	\noindent to be the product of quotient maps. Thus we get a commutative diagram
+	\noindent to be the product of the two quotient maps
+	\begin{equation*}
+		\mathbb{D}^n \to \mathbb{D}^n/\mathbb{S}^{n - 1} \qquad \text{and} \qquad \mathbb{D}^m \to \mathbb{D}^m/\mathbb{S}^{m - 1}.
+	\end{equation*}
+	Thus we get a commutative diagram
 	\begin{equation*}
 		\begin{tikzcd}
 			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\\
@@ -117,12 +121,13 @@ Explicitely, if we consider
 	\alpha : (\mathbb{D}^n,\mathbb{S}^{n - 1}) \to (X,p) \qquad \text{and} \qquad \beta : (\mathbb{D}^m,\mathbb{S}^{m - 1}) \to (X,p),
 \end{equation*}
 \noindent we get that
-\begin{align*}
+\begin{align}
+	\label{eq:Whitehead_product}
 	\del[1]{(\alpha \vee \beta) \circ f}(x,y) = \ccases{
 		\alpha(x) & x \in \mathbb{D}^n, y \in \mathbb{S}^{m - 1},\\
 		\beta(y) & x \in \mathbb{S}^{n - 1}, y \in \mathbb{D}^m.
 	}
-\end{align*}
+\end{align}
 Hence if $F : \alpha \simeq_{\mathbb{S}^{n - 1}} \alpha'$ and $F' : \beta \simeq_{\mathbb{S}^{m - 1}} \beta'$, we get that 
 \begin{equation*}
 	H : \del[0]{(\alpha \vee \beta) \circ f} \simeq_\ast \del[0]{(\alpha' \vee \beta') \circ f},
@@ -152,11 +157,12 @@ Thus we get a well defined map $[-,-] : \pi_n(X) \times \pi_m(X) \to \pi_{n + m 
 \end{definition}
 
 \section{The Whitehead Product and the Conjugation Action}
-In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n(X) \to \pi_n(X)$. If $n = 1$, we immediately deduce from figure \ref{fig:n=1} that
+In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n(X) \to \pi_n(X)$. If $n = 1$, the definition of the Whitehead product in equation (\ref{eq:Whitehead_product}) results in figure \ref{fig:n=1} and using that $\mathbb{S}^1$ is parametrized by $\theta \mapsto e^{i\theta}$, i.e. oriented counter clockwise, we get that
 \begin{equation*}
-	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1}.
+	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1},
 \end{equation*}
-Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$. Let $n > 1$. An \bld{orientation of $\mathbb{D}^n$} is simply a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom). 
+\noindent since any reparametrization of a path is homotopic relative to $\partial I$ to the original path (a reparametrization of a path $f$ in $X$ is just a path $f \circ \varphi$, where $\varphi : I \to I$ is continuous and $\varphi\vert_{\partial I} = \id_{\partial I}$). Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$.\\
+Let $n > 1$. In the previous case we implicitely used an explicit parametrization of the unit sphere $\mathbb{S}^1$, which resulted in a geometric notion called \emph{orientation}. This can also be done in higher dimensions, however the geometric picture there is not that clear. We define an \bld{orientation of $\mathbb{D}^n$} simply to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom).  
 
 \begin{lemma}
 	\label{lem:order_reversing}
@@ -186,11 +192,11 @@ Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$.
 	\end{align*}
 \end{proof}
 
-Using lemma \ref{lem:order_reversing}, it follows from figure \ref{fig:n>1}, that
+The definition of the Whitehead product in equation (\ref{eq:Whitehead_product}) results in \ref{fig:n>1}. Thus	using lemma \ref{lem:order_reversing} yields
 \begin{equation*}
 	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
 \end{equation*}
-\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$. Indeed, this can be seen as follows: If $e^n$ and $e^m$ are orientations of $\mathbb{D}^n$ and $\mathbb{D}^m$, respectively, then their \emph{cross product} $e^n \times e^m$ is an orientation of $\mathbb{D}^n \times \mathbb{D}^m$ (see \cite[64]{whitehead:homotopy_theory:1978}). Moreover, we have that 
+\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$. Indeed, this can be seen as follows: If $e^n$ and $e^m$ are orientations of $\mathbb{D}^n$ and $\mathbb{D}^m$, respectively, then their \emph{cross product} $e^n \times e^m$ is an orientation of $\mathbb{D}^n \times \mathbb{D}^m$ (see \cite[64]{whitehead:homotopy_theory:1978} and \cite[268--278]{hatcher:algebraic_topology:2001} for a more involved treatment). Moreover, we have that 
 \begin{equation*}
 	\partial(e^n \times e^m) = \partial e^n \times e^m + (-1)^n e^n \times \partial e^m.
 \end{equation*}
@@ -204,7 +210,7 @@ And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is 
 		\mathbb{S}^n \arrow[r,"c"] & \mathbb{S}^n \vee \mathbb{S}^n \arrow[r,"\alpha \vee \beta"] & X,
 	\end{tikzcd}
 \end{equation*}
-\noindent where $c : \mathbb{S}^n \to \mathbb{S}^n \vee \mathbb{S}^n$ denotes the mapping which collapses the equatorial $\mathbb{S}^{n - 1}$ in $\mathbb{S}^n$ to a point, depictured in figure \ref{fig:collapsing_map} (see \cite[341]{hatcher:algebraic_topology:2001}).
+\noindent where $c : \mathbb{S}^n \to \mathbb{S}^n \vee \mathbb{S}^n$ denotes the mapping which collapses the equatorial $\mathbb{S}^{n - 1}$ in $\mathbb{S}^n$ to a point, depicted in figure \ref{fig:collapsing_map} (see \cite[341]{hatcher:algebraic_topology:2001}).
 
 \begin{figure}[h!tb]
 	\begin{subfigure}[b]{0.5\textwidth}
@@ -222,6 +228,7 @@ And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is 
 			\draw (1,.5) node[right] {$\beta$};
 			\draw (.5,1) node[above] {$\alpha$};
 			\draw (0,.5) node[left] {$\beta$};
+			\node at (0,0) {$\bullet$};
 		\end{tikzpicture}
 		\caption{$n = 1$.}
     	\label{fig:n=1}
@@ -242,6 +249,7 @@ And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is 
 			\draw [thick,->] (D) -- (F);
 			\path [] (A) -- (C) node [midway] {$\circlearrowleft$};
 			\path [] (B) -- (D) node [midway] {$\circlearrowleft$};
+			\node at (B) {$\bullet$};
 		\end{tikzpicture}
 		\caption{$n > 1$.}
 		\label{fig:n>1}
