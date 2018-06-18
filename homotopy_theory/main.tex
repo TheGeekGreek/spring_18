@@ -67,7 +67,7 @@ Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is gi
 	\begin{equation*}
 		\mathbb{D}^n \to \mathbb{D}^n/\mathbb{S}^{n - 1} \qquad \text{and} \qquad \mathbb{D}^m \to \mathbb{D}^m/\mathbb{S}^{m - 1}.
 	\end{equation*}
-	Thus we get a commutative diagram
+	Hence by \cite[186]{munkres:topology:2000}, $q$ itself is a quotient map, and we get a commutative diagram
 	\begin{equation*}
 		\begin{tikzcd}
 			\mathbb{S}^{n + m - 1} \arrow[r,"f"]\arrow[d,hook] & \mathbb{S}^n \vee \mathbb{S}^m \arrow[d,hook]\\
@@ -82,11 +82,11 @@ Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is gi
 			& & X.
 		\end{tikzcd}
 	\end{equation*}
-	By \cite[186]{munkres:topology:2000}, $q$ is a quotient map. Moreover, for $(x,y) \in \mathbb{S}^{n - 1} \times \mathbb{S}^{m - 1}$, we have that
+	Then $g$ is constant on the fibers of $q$. Indeed, we have that $q(x,y) = q(x',y)$ for all $x,x' \in \mathbb{S}^{n - 1}$ and $y \in \mathbb{D}^m$, as well as $q(x,y) = q(x,y')$ for all $x \in \mathbb{D}^n$ and $y,y' \in \mathbb{S}^{m - 1}$. We compute 
 	\begin{equation*}
-		g(x,y) = (h \circ f)(x,y) = h(\ast,\ast).
+		g(x,y) = (h \circ f)(x,y) = (h \circ f)(x',y) = g(x',y),
 	\end{equation*}
-	Thus $g$ passes to the quotient by \cite[72]{lee:topological_manifolds:2011} to yield a unique map
+	\noindent and similarly for the other case. Thus $g$ passes to the quotient by \cite[72]{lee:topological_manifolds:2011} to yield a unique map
 	\begin{equation*}
 		\wtilde{g} : \mathbb{S}^n \times \mathbb{S}^m \to X,
 	\end{equation*}
@@ -162,49 +162,57 @@ In this section, we want to have a closer look at $[-,-] : \pi_1(X) \times \pi_n
 	[\alpha,\beta] = [\alpha][\beta][\alpha]^{-1}[\beta]^{-1},
 \end{equation*}
 \noindent since any reparametrization of a path is homotopic relative to $\partial I$ to the original path (a reparametrization of a path $f$ in $X$ is just a path $f \circ \varphi$, where $\varphi : I \to I$ is continuous and $\varphi\vert_{\partial I} = \id_{\partial I}$). Thus $[\alpha,\beta]$ coincides with the notation of a commutator in $\pi_1(X)$.\\
-Let $n > 1$. In the previous case we implicitely used an explicit parametrization of the unit sphere $\mathbb{S}^1$, which resulted in a geometric notion called \emph{orientation}. This can also be done in higher dimensions, however the geometric picture there is not that clear. We define an \bld{orientation of $\mathbb{D}^n$} simply to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (follows from the long exact sequence axiom).  
-
+Let $n > 1$. Let us briefly introduce the notion of \emph{cellular homology}. If $X$ is a cell complex with skeleton filtration $\mathcal{F} : \varnothing =: X^{-1} \subseteq X^0 \subseteq \dots \subseteq X$, we have for all $n \in \omega$ that $H_n(X^n,X^{n - 1})$ is free abelian with a basis in one-to-one correspondence with the $n$-cells if $X$. Define a chain complex $C_\bullet(X,\mathcal{F}) \in \Ch_{\geq 0}(_{\mathbb{Z}}\mathsf{Mod})$, the \bld{cellular chain complex of $X$}, by 
+\begin{equation*}
+	C_n(X,\mathcal{F}) := H_n(X^n,X^{n - 1}),
+\end{equation*}
+\noindent for all $n \in \omega$. Moreover, for $n \geq 1$, define $\partial_n : C_n(X,\mathcal{F}) \to C_{n - 1}(X,\mathcal{F})$ to be the composition
+\begin{equation*}
+	\begin{tikzcd}
+		H_n(X^n,X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1}) \arrow[r] & H_n(X^{n - 1},X^{n - 2}).
+	\end{tikzcd}
+\end{equation*}
+Define an \bld{orientation of $\mathbb{D}^n$} to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (this isomorphism follows from the long exact sequence axiom). In what follows, we fix an orientation of $\mathbb{D}^n$.\\
+By \cite[269]{hatcher:algebraic_topology:2001}, the boundary map in the cellular chain complex $C_\bullet(X \times Y, \mathcal{F}_{X \times Y})$, for another cell complex $Y$, is determined by the boundary maps in the cellular chain complexes $C_\bullet(X,\mathcal{F}_X)$ and $C_\bullet(Y,\mathcal{F}_Y)$ via the formula
+\begin{equation}
+	\label{eq:product_formula}
+	\partial(e^n \times e^m) = \partial e^n \times e^m + (-1)^ne^n \times e^m.
+\end{equation}
+If $e^1$ denotes the single $1$-cell in $I$ and $e^n$ the single $n$-cell in $\mathbb{D}^n$, we thus obtain
+\begin{equation*}
+	\partial(e^1 \times e^n) = 1 \times e^n - 0 \times e^n - e^1 \times \partial e^n.
+\end{equation*}
+\noindent from formula (\ref{eq:product_formula}). Now the definition of the Whitehead product in equation (\ref{eq:Whitehead_product}) results in figure \ref{fig:n>1}. Thus using lemma \ref{lem:order_reversing} below yields
+\begin{equation*}
+	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
+\end{equation*}
+\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and discoherently with $0 \times \mathbb{D}^n$, as above calculation suggests.
 \begin{lemma}
 	\label{lem:order_reversing}
-	Let $n \in \omega$, $n > 1$, $[\alpha] \in \pi_n(X)$ and $h : (\mathbb{D}^n,\mathbb{S}^{n - 1}) \to (\mathbb{D}^n,\mathbb{S}^{n - 1})$ an orientation reversing homeomorphism, i.e. $h$ is a homeomorphism and $H_n(h)\langle e \rangle = -\langle e \rangle$ for a generator $\langle e \rangle$ of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})$. Then
-	\begin{equation*}
-		[\alpha \circ h] = -[\alpha].
-	\end{equation*}
+	Let $n \in \omega$, $n > 1$, $[\alpha] \in \pi_n(X)$ and $h : (\mathbb{D}^n,\mathbb{S}^{n - 1}) \to (\mathbb{D}^n,\mathbb{S}^{n - 1})$ an orientation reversing homeomorphism, i.e. $h$ is a homeomorphism and $H_n(h)e^n = - e^n$. Then $[\alpha \circ h] = -[\alpha]$.
 \end{lemma}
 
 \begin{proof}
- 	Let $\rho : \pi_n(Y,A) \to H_n(Y,A)$ denote the \bld{Hurewicz homomorphism} defined by
+ 	Following \cite[166]{whitehead:homotopy_theory:1978}, let $\rho : \pi_n(Y,A) \to H_n(Y,A)$ denote the \bld{Hurewicz homomorphism} defined by
 	\begin{equation*}
-		\rho[f] := H_n(f)\langle e \rangle,
+		\rho[f] := H_n(f)e^n,
 	\end{equation*}
-	\noindent for a generator $\langle e \rangle$ of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})$ (see \cite[166]{whitehead:homotopy_theory:1978}). Using that 
+	\noindent where $e^n$ denotes an orientation of $\mathbb{D}^n$. Using that 
 	\begin{equation*}
 		\rho : \pi_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \to H_n(\mathbb{D}^n,\mathbb{S}^{n - 1})
 	\end{equation*}
-	\noindent is an isomorphism for $n >1$ (see \cite[168]{whitehead:homotopy_theory:1978}), we compute
+	\noindent is an isomorphism for $n > 1$ (see \cite[168]{whitehead:homotopy_theory:1978}), we compute
 	\begin{align*}
 		[\alpha \circ h] &= \pi_n(\alpha)[h]\\
 		&= \pi_n(\alpha)\rho^{-1}\rho[h]\\ 
-		&= \pi_n(\alpha)\rho^{-1}(H_n(h)\langle e \rangle)\\
-		&= -\pi_n(\alpha)\rho^{-1}\langle e \rangle\\
+		&= \pi_n(\alpha)\rho^{-1}(H_n(h)e^n)\\
+		&= -\pi_n(\alpha)\rho^{-1}e^n\\
 		&= -\pi_n(\alpha)[\id_{\mathbb{D}^n}]\\
 		&= - [\alpha].
 	\end{align*}
 \end{proof}
 
-The definition of the Whitehead product in equation (\ref{eq:Whitehead_product}) results in \ref{fig:n>1}. Thus	using lemma \ref{lem:order_reversing} yields
-\begin{equation*}
-	[\alpha,\beta] = [\alpha \cdot \beta] - [\beta],
-\end{equation*}
-\noindent where $\alpha \cdot \beta$ denotes the \emph{conjugation action}, i.e. the action of $\pi_1(X)$ on $\pi_n(X)$, since the boundary of the cylinder $I \times \mathbb{D}^n$ is oriented coherently with $1 \times \mathbb{D}^n$ and therefore discoherently with $0 \times \mathbb{D}^n$. Indeed, this can be seen as follows: If $e^n$ and $e^m$ are orientations of $\mathbb{D}^n$ and $\mathbb{D}^m$, respectively, then their \emph{cross product} $e^n \times e^m$ is an orientation of $\mathbb{D}^n \times \mathbb{D}^m$ (see \cite[64]{whitehead:homotopy_theory:1978} and \cite[268--278]{hatcher:algebraic_topology:2001} for a more involved treatment). Moreover, we have that 
-\begin{equation*}
-	\partial(e^n \times e^m) = \partial e^n \times e^m + (-1)^n e^n \times \partial e^m.
-\end{equation*}
-Therefore
-\begin{equation*}
-	\partial(e^1 \times e^n) = 1 \times e^n - 0 \times e^n - e^1 \times \partial e^n.
-\end{equation*}
-And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is given by the pointed homotopy class of the composition
+In the above argument, We implicitely used the observation that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is given by the pointed homotopy class of the composition
 \begin{equation*}
 	\begin{tikzcd}
 		\mathbb{S}^n \arrow[r,"c"] & \mathbb{S}^n \vee \mathbb{S}^n \arrow[r,"\alpha \vee \beta"] & X,
@@ -265,12 +273,14 @@ And we conclude by observing that the sum $[\alpha] + [\beta]$ in $\pi_n(X)$ is 
 		\draw[thick] (-3,0) circle (2cm);
 		\draw[thick] (-5,0) arc (180:360:2 and 0.6);
   		\draw[dashed,thick] (-1,0) arc (0:180:2 and 0.6);
+		\node at (-5,0) {$\bullet$};
 		\draw[thick] (3,1) circle (1cm);
 		\draw[thick] (2,1) arc (180:360:1 and 0.3);
   		\draw[dashed,thick] (4,1) arc (0:180:1 and 0.3);
 		\draw[thick] (3,-1) circle (1cm);
 		\draw[thick] (2,-1) arc (180:360:1 and 0.3);
   		\draw[dashed,thick] (4,-1) arc (0:180:1 and 0.3);
+		\node at (3,0) {$\bullet$};
 	\end{tikzpicture}
 	\caption{The collapsing map $c : \mathbb{S}^n \to \mathbb{S}^n \vee \mathbb{S}^n$.}
 	\label{fig:collapsing_map}
