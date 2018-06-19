@@ -169,7 +169,7 @@ Let $n > 1$. Let us briefly introduce the notion of \emph{cellular homology}. If
 \noindent for all $n \in \omega$. Moreover, for $n \geq 1$, define $\partial_n : C_n(X,\mathcal{F}) \to C_{n - 1}(X,\mathcal{F})$ to be the composition
 \begin{equation*}
 	\begin{tikzcd}
-		H_n(X^n,X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1}) \arrow[r] & H_n(X^{n - 1},X^{n - 2}).
+		H_n(X^n,X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1},X^{n - 2}).
 	\end{tikzcd}
 \end{equation*}
 Define an \bld{orientation of $\mathbb{D}^n$} to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (this isomorphism follows from the long exact sequence axiom). In what follows, we fix an orientation of $\mathbb{D}^n$.\\
@@ -304,9 +304,14 @@ Then clearly $L^nL^m \subseteq L^{n + m}$ holds. It also turns out, that we have
 	\end{equation*}
 \end{proposition}
 
-Recall, that for $n \geq 1$ we have that $H_n(\mathbb{S}^n) \cong \mathbb{Z}$. Thus if we are given any continuous map $f : \mathbb{S}^n \to \mathbb{S}^n$, the induced map $H_n(f)$ is simply a multiplication by a unique integer. This integer is defined to be the \bld{degree of $f$}, written $\deg f$.
+Recall, that for $n \geq 1$ we have that $H_n(\mathbb{S}^n) \cong \mathbb{Z}$. Thus if we are given any continuous map $f : \mathbb{S}^n \to \mathbb{S}^n$, the induced map $H_n(f)$ is simply a multiplication by a unique integer. This integer is defined to be the \bld{degree of $f$}, written $\deg f$. Observe that lemma \ref{lem:order_reversing} stays true if we consider a homeomorphism $h : (\mathbb{S}^n,\ast) \to (\mathbb{S}^n,\ast)$ with $\deg h = -1$. Indeed, this basically follows from the relative homeomorphism theorem which states that
+\begin{equation*}
+	H_k(q) : H_k(\mathbb{D}^n,\mathbb{S}^{n - 1}) \to H_k(\mathbb{S}^n,\ast) \cong \wtilde{H}_k(\mathbb{S}^k)
+\end{equation*}
+\noindent is an isomorphism for all $k \in \omega$.
 
 \begin{proposition}
+	\label{prop:graded_commutative}
 	Let $n,m \in \omega$, $[\alpha] \in \pi_{n + 1}(X)$ and $[\beta] \in \pi_{m + 1}(X)$. Then
 	\begin{equation*}
 		[\beta,\alpha] = (-1)^{(n + 1)(m + 1)}[\alpha,\beta].
@@ -314,11 +319,11 @@ Recall, that for $n \geq 1$ we have that $H_n(\mathbb{S}^n) \cong \mathbb{Z}$. T
 \end{proposition}
 
 \begin{proof}
-	Consider the \bld{permutation map} $\sigma : \mathbb{S}^{m + n + 1} \to \mathbb{S}^{n + m + 1}$ defined by
+	Consider the \bld{permutation map} $\sigma : \mathbb{S}^{n + m + 1} \to \mathbb{S}^{n + m + 1}$ defined by
 	\begin{equation*}
 		(y_1,\dots,y_{m + 1},x_1,\dots,x_{n + 1}) \mapsto (x_1, \dots,x_{n + 1},y_1,\dots,y_{m + 1}).
 	\end{equation*}
-	Then clearly $\deg \sigma = (-1)^{(n + 1)(m + 1)}$, since $\sigma$ is the composition of permutations and hence orthogonal transformations. Using lemma \ref{lem:order_reversing}, we compute
+	Then clearly $\deg \sigma = (-1)^{(n + 1)(m + 1)}$, since $\sigma$ is the composition of permutations and hence orthogonal transformations. An application of lemma \ref{lem:order_reversing} yields 
 	\begin{equation*}
 		[\beta,\alpha] = [(\beta \vee \alpha) \circ f] = [(\alpha \vee \beta) \circ f \circ \sigma] = (-1)^{(n + 1)(m + 1)}[\alpha,\beta].
 	\end{equation*}
