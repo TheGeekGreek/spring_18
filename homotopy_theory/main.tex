@@ -101,11 +101,11 @@ Notice, that for any $(X,x_0),(Y,y_0) \in \mathsf{Top}_*$, their coproduct is gi
 	\noindent commutes.
 \end{proof}
 
-For $n,m \in \omega$, $n,m \geq 1$, consider the map $f$ from lemma \ref{lem:attaching_cell_wedge_sum_spheres}. Let $(X,p) \in \mathsf{Top}_*$. If $[\alpha] \in \pi_n(X,p)$ and $[\beta] \in \pi_m(X,p)$, we get two pointed maps
+For $n,m \in \omega$, $n,m \geq 1$, consider the map $f$ from lemma \ref{lem:attaching_cell_wedge_sum_spheres} and note that this is actually a pointed map. Let $(X,p) \in \mathsf{Top}_*$. If $[\alpha] \in \pi_n(X,p)$ and $[\beta] \in \pi_m(X,p)$, we get two pointed maps
 \begin{equation*}
-	\alpha : \mathbb{S}^n \to X \qquad \text{and} \qquad \beta : \mathbb{S}^m \to X.
+	\alpha : (\mathbb{S}^n,\ast) \to (X,p) \qquad \text{and} \qquad \beta : (\mathbb{S}^m,\ast) \to (X,p).
 \end{equation*}
-Forming their wedge $\alpha \vee \beta : \mathbb{S}^n \vee \mathbb{S}^m \to X$, defined by
+Forming their wedge $\alpha \vee \beta : (\mathbb{S}^n \vee \mathbb{S}^m,(\ast,\ast)) \to (X,p)$, defined by
 \begin{align*}
 	(\alpha \vee \beta) (x,y) := \ccases{
 		\alpha(x) & y = \ast,\\
@@ -114,7 +114,7 @@ Forming their wedge $\alpha \vee \beta : \mathbb{S}^n \vee \mathbb{S}^m \to X$, 
 \end{align*}
 \noindent and precomposing with $f$, yields a pointed map
 \begin{equation*}
-	(\alpha \vee \beta) \circ f : \mathbb{S}^{n + m - 1} \to X.
+	(\alpha \vee \beta) \circ f : (\mathbb{S}^{n + m - 1},\ast) \to (X,p).
 \end{equation*}
 Explicitely, if we consider
 \begin{equation*}
