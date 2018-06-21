@@ -172,7 +172,7 @@ Let $n > 1$. Let us briefly introduce the notion of \emph{cellular homology}. If
 		H_n(X^n,X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1}) \arrow[r] & H_{n - 1}(X^{n - 1},X^{n - 2}).
 	\end{tikzcd}
 \end{equation*}
-Define an \bld{orientation of $\mathbb{D}^n$} to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ (this isomorphism follows from the long exact sequence axiom). In what follows, we fix an orientation of $\mathbb{D}^n$.\\
+Following \cite[269]{hatcher:algebraic_topology:2001}, for $n \geq 1$, define an \bld{orientation of $\mathbb{D}^n$} to be a choice of a generator of $H_n(\mathbb{D}^n,\mathbb{S}^{n - 1}) \cong \mathbb{Z}$ ($\mathbb{D}^n$ can be obtained from $\mathbb{S}^{n - 1}$ by attaching a single $n$-cell). In what follows, we fix an orientation of $\mathbb{D}^n$. Moreover, we can also fix an orientation of $\mathbb{D}^0 = \{\ast\}$, since there is a rather canonical choice: Just take it to be the single $0$-cell $\ast$.\\
 By \cite[269]{hatcher:algebraic_topology:2001}, the boundary map in the cellular chain complex $C_\bullet(X \times Y, \mathcal{F}_{X \times Y})$, for another cell complex $Y$, is determined by the boundary maps in the cellular chain complexes $C_\bullet(X,\mathcal{F}_X)$ and $C_\bullet(Y,\mathcal{F}_Y)$ via the formula
 \begin{equation}
 	\label{eq:product_formula}
