@@ -26,6 +26,25 @@ The archetypal example of a \emph{cohomology theory} arises in differential topo
 \section*{The Chevalley-Eilenberg Complex}
 The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can actually be thought of a two-stage process: First we go from $\mathsf{Diff}$ to an intermediate category and then we apply a \emph{homology functor}, which is a purely algebraic construct, to go from this intermediate category to $_{\mathbb{R}}\mathsf{Vect}$. Aim of this section is to give the definition of this intermediate category and then to define such a functor explicitely for the case of Lie algebras.
 
+\begin{definition}[Chain Complex in $_{R}\mathsf{Mod}$]
+	Let $R \in \mathsf{Ring}$. A \bld{$\mathbb{Z}$-graded chain complex in $_{R}\mathsf{Mod}$} is defined to be a tuple $(C_\bullet,\partial_\bullet)$, consisting of an infinite sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & C_{n + 1} \arrow[r,"\partial_{n + 1}"] & C_n \arrow[r,"\partial_n"] & C_{n - 1} \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $_{R}\mathsf{Mod}$ such that $\partial_n\circ \partial_{n + 1} = 0$ holds for all $n \in \mathbb{Z}$.\\
+	Dually, a \bld{$\mathbb{Z}$-graded cochain complex in $_{R}\mathsf{Mod}$} is simply a $\mathbb{Z}$-graded chain complex in $_{R}\mathsf{Mod}^{\mathrm{op}}$, i.e. a tuple $(C^\bullet,d^\bullet)$ consisting of an infinite sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & C^{n - 1} \arrow[r,"d^n"] & C^n \arrow[r,"d^{n + 1}"] & C^{n + 1} \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent such that $d^{n + 1} \circ d^n = 0$ holds for all $n \in \mathbb{Z}$.
+\end{definition}
+
+In a more general setting, this translates as follows.
+
 \begin{definition}[Chain Complex]
 	Let $\mathcal{A}$ be an abelian category. A \bld{$\mathbb{Z}$-graded chain complex in $\mathcal{A}$} is defined to be a tuple $\del[0]{(C_n)_{n \in \mathbb{Z}},(\partial_n)_{n \in \mathbb{Z}}}$, consisting of a sequence $(C_n)_{n \in \mathbb{Z}}$ of objects in $\mathcal{A}$ and a sequence $(\partial_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathcal{A}$, such that 
 	\begin{equation*}
@@ -37,6 +56,10 @@ The definition of the $n$-th de Rham cohomology group $H^n_{\mathrm{dR}}(M)$ can
 
 \begin{remark}
 	For notational simplicity, we will write $(C_\bullet,\partial_\bullet)$ for a chain complex in $\mathcal{A}$.
+\end{remark}
+
+\begin{remark}
+	The notions of chain and cochain complexes are actually equivalent. Indeed, changing from one to the other amounts simply to a reversing of the $\mathbb{Z}$-grading.
 \end{remark}
 
 \begin{remark}
@@ -112,6 +135,14 @@ In what follows, suppose that all rings admit an identity element and all module
 	\noindent holds for all $x \in \mathfrak{g}$ and $m \in M$.
 \end{definition}
 
+\begin{examples}
+	~
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
+		\item A \bld{trivial $\mathfrak{g}$-module} is an $R$-module $M$ where $xm := 0$ for all $x \in \mathfrak{g}$ and $m \in M$. 
+		\item The Lie bracket makes $\mathfrak{g}$ itself into a left $\mathfrak{g}$-module by the Jacobi identity. This module is usually called the \bld{adjoint representation of $\mathfrak{g}$}.
+	\end{enumerate}
+\end{examples}
+
 \begin{proposition}
 	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}\mathsf{LieAlg}}$. Then $_{\mathfrak{g}}\mathsf{Mod}$ is an abelian category.
 \end{proposition}
@@ -142,13 +173,22 @@ We follow \cite[178]{kashiwara:categories:2006}.
 	\end{equation*} 
 \end{definition}
 
+Explicitely, in our setting this translates as follows.
+
+\begin{definition}[Homology of a Chain Complex in $_{R}\mathsf{Mod}$] Let $R \in \mathsf{Ring}$ and $n \in \mathbb{Z}$. The \bld{$n$-th homology module} of a chain complex $(C_\bullet,\partial_\bullet)$, written $H_n(C_\bullet,\partial_\bullet)$, is defined to be
+	\begin{equation*}
+		H_n(C_\bullet,\partial_\bullet) := \ker \partial_n/\im \partial_{n + 1}.
+	\end{equation*}
+	Dually, the \bld{$n$-th cohomology module} of a cochain complex $(C^\bullet,d^\bullet)$ in $_{R}\mathsf{Mod}$, written $H^n(C^\bullet,d^\bullet)$, is defined to be
+	\begin{equation*}
+		H^n(C^\bullet,d^\bullet) := \ker d^{n + 1}/\im d^n. 
+	\end{equation*}
+\end{definition}
+
 Observe, that for each $n \in \omega$, we have that $C_n \in {_{\mathfrak{g}}}\mathsf{Mod}$ via $\iota : \mathfrak{g} \hookrightarrow U\mathfrak{g}$.
 
 \begin{definition}[Cohomology of Lie Algebras]
-	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}}\mathsf{LieAlg}$ which is free as an $R$-module. Moreover, let $M \in {_{\mathfrak{g}}}\mathsf{Mod}$ and $(C_\bullet,\partial_\bullet)$ denote the Chevalley-Eilenberg complex \ref{def:CEc}. For $n \in \omega$, define the \bld{$n$-th cohomology group of $\mathfrak{g}$ with coefficients in $M$}, written $H^n(\mathfrak{g},M)$, to be the $n$-th homology object of the cochain complex 
-	\begin{equation*}
-		\Hom_\mathfrak{g}((C_\bullet,\partial_\bullet),M).
-	\end{equation*}
+	Let $R \in \mathsf{CRing}$ and $\mathfrak{g} \in {_{R}}\mathsf{LieAlg}$ which is free as an $R$-module. Moreover, let $M \in {_{\mathfrak{g}}}\mathsf{Mod}$ and $(C_\bullet,\partial_\bullet)$ denote the Chevalley-Eilenberg complex \ref{def:CEc}. For $n \in \omega$, define the \bld{$n$-th cohomology group of $\mathfrak{g}$ with coefficients in $M$}, written $H^n(\mathfrak{g},M)$, to be the $n$-th cohomology module of the cochain complex $\Hom_\mathfrak{g}((C_\bullet,\partial_\bullet),M)$.
 \end{definition}
 
 \begin{remark}
@@ -156,7 +196,7 @@ Observe, that for each $n \in \omega$, we have that $C_n \in {_{\mathfrak{g}}}\m
 	\begin{equation*}
 		\Hom_\mathfrak{g}(C_n,M) \cong \Hom_R(\Lambda^n \mathfrak{g},M),
 	\end{equation*}
-	\noindent in $_{\mathbb{R}}\mathsf{Mod}$. Indeed, if $n \geq 1$ and $\varphi \in \Hom_\mathfrak{g}(C_n,M)$, define $\wbar{\varphi} \in \Hom_R(\Lambda^n \mathfrak{g},M)$ by 
+	\noindent in $_{R}\mathsf{Mod}$. Indeed, if $n \geq 1$ and $\varphi \in \Hom_\mathfrak{g}(C_n,M)$, define $\wbar{\varphi} \in \Hom_R(\Lambda^n \mathfrak{g},M)$ by 
 	\begin{equation*}
 		\wbar{\varphi}(x_1 \wedge \dots \wedge x_n) := \varphi(1 \otimes x_1 \wedge \dots \wedge x_n),
 	\end{equation*}
@@ -258,6 +298,7 @@ However, the situation gets much more easier if we make some assumptions.
 	\begin{equation*}
 		H^1(\mathfrak{g},M) = 0.
 	\end{equation*}
+	That is, every derivation from $\mathfrak{g}$ into $M$ is an inner derivation.
 \end{theorem}
 
 \begin{theorem}[Whitehead's Second Lemma]
@@ -286,7 +327,13 @@ There is a quite strong result obtained via the second Whitehead lemma, which gi
 \end{theorem}
 
 \begin{proof}
-	See \cite[247]{weibel:homological_algebra:1994}.
+	We only provide a sketch. For full details see \cite[247]{weibel:homological_algebra:1994}. We know that $\mathfrak{g}/\mathrm{rad}(\mathfrak{g})$ is semisimple, so it suffices to show that the Lie algebra extension
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & \mathrm{rad}(\mathfrak{g}) \arrow[r] & \mathfrak{g} \arrow[r] & \mathfrak{g}/\mathrm{rad}(\mathfrak{g}) \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	\noindent splits. If $\mathrm{rad}(\mathfrak{g})$ is abelian, we are done by Whitehead's second lemma \ref{thm:Wfl}. If $\mathrm{rad}(\mathfrak{g})$ is not abelian, proceed by induction on the derived length of $\mathrm{rad}(\mathfrak{g})$.
 \end{proof}
 
 \printbibliography
