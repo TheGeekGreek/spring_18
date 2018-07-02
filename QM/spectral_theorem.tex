@@ -1,3 +1,72 @@
+\section*{Postulates of Quantum Mechanics}
+\begin{figure}[h!tb]
+	\centering
+	\begin{tabular}{c|c}
+		\bld{Quantum mechanical system} & Hilbert space $\mathcal{H}$\\
+		\hline
+		\hline
+		\bld{State} & $\psi \in \mathcal{H}$, $\norm{\psi} = 1$\\
+		\hline
+		\hline
+		\bld{Observables} & Self-adjoint operators on $\mathcal{H}$\\
+		\hline
+		\hline
+		\bld{Expected Value} of an observable $A$ in the state $\psi$ & $\langle \psi ,A \psi \rangle$\\
+		\hline
+		\hline
+		\bld{Variance} of an observable $A$ in the state $\psi$ & $\Delta A_\psi := \langle \psi, A^2 \psi\rangle - \langle \psi,A\psi\rangle^2$
+	\end{tabular}
+\end{figure}
+
+\begin{lemma}[Heisenberg Uncertainity Principle]
+	Let $A$ and $B$ two self-adjoint operators on a Hilbert space $\mathcal{H}$. Then for any state $\psi$
+	\begin{equation*}
+		\Delta A_\psi \Delta B_\psi \geq \frac{1}{4} \abs[0]{\langle \psi,[A,B]\psi\rangle}^2.
+	\end{equation*}
+\end{lemma}
+
+\section*{Unbounded Operators}
+\begin{definition}[Linear Operator]
+	Let $\mathcal{H}$ be a Hilbert space. A \bld{(linear) operator on $\mathcal{H}$} is simply a linear map $A : D(A) \to \mathcal{H}$, where $D(A)$ is a linear subspace of $\mathcal{H}$.
+\end{definition}
+
+\begin{definition}[Closed Operator]
+	An operator $A$ on $\mathcal{H}$ is said to be \bld{closed}, iff $\Gamma_A$ is closed in $\mathcal{H} \times \mathcal{H}$.
+\end{definition}
+
+\begin{definition}[Closable Operator]
+	An operator $A$ on $\mathcal{H}$ is said to be \bld{closable}, iff $\wbar{\Gamma}_A$ is a linear graph, i.e. $(0,y) \in \Gamma_A$ implies $y = 0$. The corresponding operator associated to $\wbar{\Gamma}_A$ is denoted by $\wbar{A}$ and called the \bld{closure} of $A$. Clearly $A \subseteq \wbar{A}$.
+\end{definition}
+
+\begin{definition}[Adjoint]
+	Let $A$ be a densly defined operator on $\mathcal{H}$. Set
+	\begin{equation*}
+		D(A^*) := \cbr[0]{\psi \in \mathcal{H} : \exists \eta \in \mathcal{H} \text{ s.t. } \forall \varphi \in D(A) \>\langle A \varphi,\psi \rangle = \langle \varphi,\eta \rangle},
+	\end{equation*}
+	\noindent and $A^*\psi := \eta$. The operator $A^*$ is called the \bld{adjoint} of $A$.
+\end{definition}
+
+\begin{theorem}
+	Let $A$ be a densly defined operator on $\mathcal{H}$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
+		\item $A^*$ is closed.
+		\item $A$ is closable if and only if $D(A^*)$ is dense.
+		\item If $A$ is closable, then $(\wbar{A})^* = A^*$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Symmetric Operator]
+	A densly defined operator $A$ is said to be \bld{symmetric}, iff $A \subseteq A^*$.
+\end{definition}
+
+\begin{definition}[Self-adjoint Operator]
+	A densly defined operator is said to be \bld{self-adjoint}, iff $A = A^*$.
+\end{definition}
+
+\begin{definition}[Essentially Self-adjoint Operator]
+	A A symmetric operator $A$ is said to be \bld{essentially self-adjoint}, iff $\wbar{A}$ is self-adjoint.
+\end{definition}
+
 \section*{The Spectral Theorem}
 \subsection*{Projection Valued Measures}
 
