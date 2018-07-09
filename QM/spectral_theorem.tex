@@ -92,6 +92,8 @@
 	\end{enumerate}
 \end{theorem}
 
+There is a way of defining uniquely self-adjoint extensions of symmetric non-negative operators (\bld{Friedrichs extension}).
+
 \begin{lemma}[Weyl Lemma]
 	Let $A$ be a closed densly defined operator such that there exists a sequence $(\psi_n)_{n \in \omega}$ in $D(A)$ with $\norm[0]{\psi_n} = 1$ for all $n \in \omega$ and $\norm[0]{(A - z)\psi_n} \to 0$ for some $z \in \mathbb{C}$. Then $z \in \sigma(A)$ (the sequence $(\psi_n)_{n \in \omega}$ is called a \bld{Weyl sequence}).
 \end{lemma}
@@ -101,7 +103,6 @@
 \end{theorem}
 
 \section*{The Spectral Theorem}
-\subsection*{Projection Valued Measures}
 
 \begin{definition}[Projection Valued Measure]
 	Let $\mathcal{H}$ be a Hilbert space. A function 
@@ -178,7 +179,13 @@ Moreover, for any Borel measure $\mu$ we have a decomposition
 	L^2(\mathbb{R},d\mu) = L^2(\mathbb{R},d\mu_{\mathrm{ac}}) \oplus L^2(\mathbb{R},d\mu_{\mathrm{pp}}) \oplus L^2(\mathbb{R},d\mu_{\mathrm{sc}}).
 \end{equation*} 
 
+\section*{Quantum Dynamics}
 \subsection*{The Schr\"odinger Equation}
+
+\begin{align*}
+	& i\frac{d\psi}{dt} = H\psi \qquad & \mathrm{(\textbf{Time-dependent Sch\"odinger equation})},\\
+	& H\psi = E\psi &  \mathrm{(\textbf{Stationary Sch\"odinger equation})}.
+\end{align*}
 
 \begin{theorem}
 	Let $\mathcal{H}$ be a Hilbert space and $H : D(H) \to \mathcal{H}$ be self adjoint. Moreover, set $U(t) := \exp(-iHt)$ for $t \in \mathbb{R}$. Then:
@@ -203,3 +210,78 @@ Moreover, for any Borel measure $\mu$ we have a decomposition
 			\noindent called the \bld{Schr\"odinger equation}.
 	\end{enumerate}
 \end{theorem}
+
+Hence every self-adjoint operator $H$ generates a strongly continuous one-parameter unitary group $U(t) = e^{-itH}$. A converse is given by \bld{Stone's theorem}, which states that any weakly continuous one-parameter unitary group gives rise to a self-adjoint operator $H$ such that $U(t) = e^{-itH}$.
+
+\begin{theorem}[Stone]
+	Let $U : \mathbb{R} \to \mathcal{L}(\mathcal{H})$ be a weakly continuous one-parameter unitary group. Define $H : D(H) \to \mathcal{H}$	by
+	\begin{equation*}
+		D(H) := \cbr[1]{\psi \in \mathcal{H} : \lim_{t \to 0} 1/t (U(t)\psi - \psi) \text{ exists}}
+	\end{equation*}
+	\noindent and
+	\begin{equation*}
+		H\psi := \lim_{t \to 0} \frac{i}{t} (U(t)\psi - \psi).
+	\end{equation*}
+	Then $H$ is self-adjoint and $U(t) = e^{-itH}$.
+\end{theorem}
+
+\emph{Wiener and RAGE-Theorem}.
+
+\section*{Perturbation Theory}
+
+\begin{theorem}[Kato-Rellich]
+	Let $A$ be self-adjoint and $B$ symmetric bounded with respect to $A$ with $A$-bound less than one. Then $A + B$ on $D(A + B) := D(A)$ is self-adjoint.
+\end{theorem}
+
+Next we want to investigate if other properties are preserved by perturbations. Clearly, eigenvalues are not preserved. However, we can remove them from the spectrum.
+
+\begin{corollary}
+	Let $A$ be self-adjoint and $K$ self-adjoint and (relatively) compact. Then $\sigma_{\mathrm{ess}}(A + K) = \sigma_{\mathrm{ess}}(A)$, where $\sigma_\mathrm{ess}(A) := \cbr[0]{\lambda \in \sigma(A) : \forall \varepsilon > 0 \>\mathrm{rank}P^A\intoo{\lambda-\varepsilon,\lambda + \varepsilon} = \infty}$ 
+\end{corollary}
+
+\begin{proof}
+	Use Weyl characterization of the essential spectrum via \bld{singular Weyl sequences} (Weyl sequencenses where additionally $\psi_n \rightharpoonup 0$).
+\end{proof}
+
+\section*{Time Evolution of explicit Operators}
+
+\begin{examples}
+	Let us consider some explicit self-adjoint operators $H$.
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item (\bld{Free Particles}) $\mathcal{H} := L^2(\mathbb{R}^d,dx)$ and $H := -\Delta$. Then
+			\begin{equation*}
+				\sigma(H) = \sigma_{\mathrm{ac}}(A) = \intco{0,\infty}.
+			\end{equation*}
+		\item (\bld{Harmonic Oscillator}) $\mathcal{H} := L^2(\mathbb{R}^d,dx)$ and $H := -\Delta + \omega^2x^2$, for some $\omega \in \mathbb{R}$. Then
+			\begin{equation*}
+				\sigma(H) = \sigma_{\mathrm{pp}}(H) = \omega(2 \mathbb{N} + 1).
+			\end{equation*}
+		\item (\bld{One dimensional System}) $\mathcal{H} := L^2(\mathbb{R}^d,dx)$ and $H := -\Delta + V(x)$, where
+			\begin{align*}
+				V(x) := \ccases{
+					-b & \abs{x} < a,\\
+					0 & \abs{x} \geq a.
+				}
+			\end{align*}
+			\noindent for some $a,b > 0$. Then
+			\begin{equation*}
+				\sigma_{\mathrm{ess}}(H) = \sigma_{\mathrm{ess}}(-\Delta) = \intco{0,\infty}
+			\end{equation*}
+			\noindent by Weyl's theorem and we can ask for eigenvalues.
+		\item (\bld{Hydrogen Atom}) $\mathcal{H} := L^2(\mathbb{R}^3,dx)$ and $H := -\Delta - \frac{1}{\abs{x}}$ (use the invariance of $H$ under rotations to solve the stationary Sch\"odinger equation). Then
+			\begin{equation*}
+				\sigma(H) = \cbr[0]{-1/(4n^2) : n \in \mathbb{N}} \cup \intco{0,\infty}.
+			\end{equation*}
+	\end{enumerate}
+\end{examples}
+
+\section*{Stationary States of General Schr\"odinger Operators}
+Consider $H := -\Delta + V(x)$, for $V$ locally integrable on $\mathbb{R}^n$. Moreover, consider 
+\begin{equation*}
+	\varepsilon(\psi) := \langle \psi,H\psi \rangle.
+\end{equation*}
+We are looking for \emph{existence of minimizers of $\varepsilon$}. First of all, \emph{boundedness from below} is required. Then we get a \emph{variational characterization of the smallest eigenvalue of $H$}. Then \emph{variational characterization of all the negative eigenvalues of $H$}. 
+
+\section*{Semiclassical Approximations}
+
+Obtaining informations on eigenvalues of a Schr\"odinger operator by considering the classical system. We consider here only a Dirichlet-boundary value problem for the Laplacian for bounded open $\Omega \subseteq \mathbb{R}^n$.
