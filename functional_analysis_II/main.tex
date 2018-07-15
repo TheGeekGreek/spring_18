@@ -10,12 +10,95 @@
 \begin{document}
 
 \begin{abstract}
-
+	This is a rough summary of the course \emph{Functional Analysis II} held at \emph{ETH Zurich} by \emph{Prof. Dr. Alessandro Carlotto} in spring $2018$. The main focus of this summary is to give a neat preparation for the oral exam.
 \end{abstract}
 
 \maketitle
 
 \tableofcontents
+
+\section*{Sobolev Space Theory}
+In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
+
+\begin{definition}[Distributional and Weak Derivative]
+	Let $\Omega \subseteq \mathbb{R}^n$ open and $u \in L^1_{\mathrm{loc}}(\Omega)$. For any multiindex $\alpha$, the \bld{distributional derivative of order $\alpha$ of $u$}, written $D^\alpha u$, is defined to be the mapping $D^\alpha u : C^\infty_c(\Omega) \to \mathbb{R}$ defined by
+	\begin{equation*}
+		\varphi \mapsto (-1)^{\abs{\alpha}}\int_\Omega u D^\alpha \varphi dx.
+	\end{equation*}
+	Moreover, a function $D^\alpha u \in L^p(\Omega)$ is called \bld{weak derivative of order $\alpha$ of $u$ with exponent $p$}, iff
+	\begin{equation*}
+		\forall \varphi \in C^\infty_c(\Omega): \> \int_\Omega D^\alpha u \varphi dx =  (-1)^{\abs{\alpha}} \int_\Omega u D^\alpha \varphi dx.
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Fundamental Lemma of Variational Calculus]
+	\label{thm:flvc}
+	Let $\Omega \subseteq \mathbb{R}^n$ open and $f \in L^1_{\mathrm{loc}}(\Omega)$. If
+	\begin{equation*}
+		\forall \varphi \in C^\infty_c(\Omega) : \> \int_\Omega f \varphi dx = 0,
+	\end{equation*}
+	\noindent then $f = 0$ a.e.
+\end{theorem}
+
+\begin{remark}
+	Let $\Omega \subseteq \mathbb{R}^n$ open. Then $L^p(\Omega) \subseteq L^1_{\mathrm{loc}}(\Omega)$.
+\end{remark}
+
+\begin{remark}
+	From the fundamental lemma of variational calculus \ref{thm:flvc} it follows that \emph{weak derivatives, if they exist, are unique}.
+\end{remark}
+
+\begin{examples}
+	~
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item Consider $\Omega := \intoo{-1,1}$ and $u := \abs{x}$. Then $u' = \chi_{\intco{0,1}} -\chi_{\intoo{-1,0}}$.
+		\item Consider $\Omega := \mathbb{R}$ and $u := \chi_{\intoo{0,\infty}}$. Then the weak derivative $u'$ does not exist. Indeed, the \emph{Dirac distribution} is not representable as one may see by considering the smooth family $\varphi_\varepsilon : \mathbb{R} \to \mathbb{R}$ for $\varepsilon > 0$ defined by
+			\begin{equation*}
+				\varphi_\varepsilon(x) := \begin{cases}
+					e^{\varepsilon^2/(x^2 - \varepsilon^2)} & \abs{x} < \varepsilon,\\
+					0 & \abs{x} \geq \varepsilon.
+				\end{cases}
+			\end{equation*}
+	\end{enumerate}
+\end{examples}
+
+\begin{definition}[Sobolev Space]
+	Let $\Omega \subseteq \mathbb{R}^n$ open. For any $k \in \omega$, the \bld{Sobolev space of index $(k,p)$}, written $W^{k,p}(\Omega)$, is defined to be the space
+	\begin{equation*}
+		W^{k,p}(\Omega) := \cbr[0]{f \in L^p(\Omega) : D^\alpha u \in L^p(\Omega) \text{ exists for all } \abs{\alpha} \leq k},
+	\end{equation*}
+	\noindent with norm
+	\begin{equation*}
+		\norm{-} _{W^{k,p}(\Omega)} := \sum_{\abs{\alpha} \leq k} \norm[0]{D^\alpha -}_{L^p(\Omega)}.
+	\end{equation*}
+	Moreover, define
+	\begin{equation*}
+		W^{k,p}_0(\Omega) := \overline{C^\infty_c(\Omega)}^{\norm{-}_{W^{k,p}(\Omega)}},
+	\end{equation*}
+	\noindent and $H^k(\Omega) := W^{k,2}(\Omega)$ as well as $H_0^k(\Omega) := W^{k,2}_0(\Omega)$.
+\end{definition}
+
+\begin{theorem}
+	Let $\Omega \subseteq \mathbb{R}^n$ open. Then $W^{k,p}(\Omega)$ is
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item a Banach space for all $1 \leq p \leq \infty$.
+		\item separable for all $1 \leq p < \infty$.
+		\item reflexive for all $1 < p < \infty$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	~
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item This follows from the fact that $L^p(\Omega)$ is a Banach space for all $1 \leq p \leq \infty$. Let $(f_i)_{i \in \omega}$ be a Cauchy sequence in $W^{k,p}$. By definition of the $W^{k,p}$-norm, $(D^\alpha f_i)_{i \in \omega}$ is a Cauchy sequence in $L^p$. Thus we get $D^\alpha f_i \to f_\alpha$ in $L^p$, in particular, $f_i \to f$ in $L^p$. Using H\"older's inequality we compute
+			\begin{equation*}
+				\int_\Omega f_\alpha \varphi dx = \lim_{i \to \infty} \int_\Omega D^\alpha f_i \varphi dx = (-1)^{\abs{\alpha}} \lim_{i \to \infty}\int_\Omega f_i D^\alpha \varphi dx = (-1)^{\abs{\alpha}}\int_\Omega f D^\alpha \varphi dx
+			\end{equation*}
+			\noindent for $\varphi \in C^\infty_c(\Omega)$.
+		\item For simplicity, we consider $k = 1$ only. Consider $\iota : W^{1,p} \hookrightarrow (L^p)^{n + 1}$ defined in the obvious way. Then $\iota$ is an isometry and the statement follows. 
+		\item Same argument as in part (b).
+	\end{enumerate}
+\end{proof}
 
 \section*{Elliptic Operators in Divergence Form}
 
@@ -25,7 +108,7 @@
 
 \begin{theorem}[Riesz Representation Theorem]
 	\label{thm:RRT}
-
+	Let $H$ be a real Hilbert space. Then the mapping $J : H \to H^*$ defined by $J(x) := \langle x,-\rangle$ is an isometric isomorphism.
 \end{theorem}
 
 \begin{theorem}
