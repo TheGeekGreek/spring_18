@@ -101,13 +101,27 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 	\end{enumerate}
 \end{proof}
 
-\subsection*{Sobolev Spaces on an Interval}
-
-\section*{Elliptic Operators in Divergence Form}
+\subsection*{Elliptic Operators}
 
 \begin{lemma}[Poincar\'e Inequality]
 	\label{lem:PI}
+	Let $\Omega \subseteq \mathbb{R}^n$ open and bounded. Then for any $u \in C^\infty_c(\Omega)$ we have that
+	\begin{equation*}
+		\norm{u}_{L^2} \leq C\norm[0]{\nabla u}_{L^2}.
+	\end{equation*}
 \end{lemma}
+
+\begin{proof}
+	Let $n = 1$. Since $\Omega$ is bounded, we get that $\Omega \subseteq \intcc{a,b}$ and we may extend $u$ on $\intcc{a,b} =: I$ to be zero. Hence an application of Jensen's inequality (or Cauchy-Schwarz) yields
+	\begin{equation*}
+		\abs{u(x)}^2 = \abs{u(x) - u(a)}^2 = \abs[3]{\int_a^x u'(t)dt}^2 \leq (x - a) \int_a^x \abs[0]{u'(t)}^2dt \leq (b - a) \norm[0]{u'}_{L^2(I)}^2.
+	\end{equation*}
+	Thus
+	\begin{equation*}
+		\norm[0]{u}_{L^2(\Omega)}^2 \leq \norm{u}_{L^2(I)}^2 \leq (b - a)^2 \norm[0]{u'}^2_{L^2(I)} = (b - a)^2 \norm[0]{u'}_{L^2(\Omega)}^2
+	\end{equation*}
+	\noindent where the last equality follows due to the fact that $u$ and thus $u'$ is compactly supported in $\Omega$. If $n > 1$, we have $\Omega \subseteq \intcc{a,b} \times \mathbb{R}^{n-1}$ and thus the claim follows by reduction to the previous case.
+\end{proof}
 
 \begin{theorem}[Riesz Representation Theorem]
 	\label{thm:RRT}
@@ -115,26 +129,19 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \end{theorem}
 
 \begin{theorem}
-	Let $\Omega \subseteq\subseteq \mathbb{R}^n$, $k \in \omega$ and consider the elliptic operator
+	Let $\Omega \subseteq\subseteq \mathbb{R}^n$ and consider the elliptic operator
 	\begin{equation*}
-		L := \sum_{i,j = 1}^n \frac{\partial}{\partial x^i}\del[3]{a_{ij}\frac{\partial}{\partial x^j}},
+		L := \frac{\partial}{\partial x^i}\del[3]{a^{ij}\frac{\partial}{\partial x^j}},
 	\end{equation*}
-	\noindent for $a_{ij} \in C^{k + 1}(\wbar{\Omega})$ symmetric. Then:
-	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
-		\item Given $f \in L^2(\Omega)$, the homogenous Dirichlet problem
-			\begin{align}
-				\label{eq:HDP}
-				\ccases{
-					-L(u) = f & \text{in } \Omega,\\
-					u = 0 & \text{on } \partial\Omega
-				}
-			\end{align}
-			\noindent admits a unique weak solution $u \in H^1_0(\Omega)$.
-		\item If $f \in H^k(\Omega)$ for some $k \in \omega$, then we have $u \in H^{k + 2}_{\mathrm{loc}}(\Omega)$ for the unique weak solution of part (a) and moreover, for any $\Omega' \subseteq \subseteq \Omega$ we have the estimate
-			\begin{equation*}
-				\norm{u}_{H^{k + 2}(\Omega')} \leq C\del[1]{\norm{f}_{H^k(\Omega)} + \norm{u}_{H^1(\Omega)}}.
-			\end{equation*}
-	\end{enumerate}
+	\noindent for $a^{ij} \in L^\infty(\Omega)$ symmetric. Then: Given $f \in L^2(\Omega)$, the homogenous Dirichlet problem
+	\begin{align}
+		\label{eq:HDP}
+		\ccases{
+			-Lu = f & \text{in } \Omega,\\
+			u = 0 & \text{on } \partial\Omega
+		}
+	\end{align}
+	\noindent admits a unique weak solution $u \in H^1_0(\Omega)$.
 \end{theorem}
 
 \begin{proof}
@@ -142,47 +149,229 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide=0pt]
 		\item \textit{Derivation of Weak Formulation.} Suppose $u \in C^2(\wbar{\Omega})$ is a solution of (\ref{eq:HDP}). Let $\varphi \in C^\infty_c(\Omega)$. Then integration by parts (see \cite[436]{lee:smooth_manifolds:2013}) yields
 			\begin{equation*}
-				-\int_\Omega L(u) \varphi = - \sum_{j = 1}^n \int_\Omega \mathrm{div}(X_j)\varphi = \sum_{i,j = 1}^n \int_\Omega a_{ij} \frac{\partial u}{\partial x^j}\frac{\partial \varphi}{\partial x^i} = \sum_{i,j = 1}^n \int_\Omega a_{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j},
+				-\int_\Omega L(u) \varphi = - \sum_{j = 1}^n \int_\Omega \mathrm{div}(X_j)\varphi = \int_\Omega a^{ij} \frac{\partial u}{\partial x^j}\frac{\partial \varphi}{\partial x^i} = \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j},
 			\end{equation*}
-			\noindent where $X_j := \del[2]{a_{ij}\frac{\partial}{\partial x^j}}_i$. Thus we get the weak formulation:
+			\noindent where $X_j := \del[2]{a^{ij}\frac{\partial}{\partial x^j}}_i$. Thus we get the weak formulation:
 			\begin{equation}
 				\label{eq:HDPweak}
-				\sum_{i,j = 1}^n \int_\Omega a_{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi \qquad \forall \varphi \in C^\infty_c(\Omega).
+				\forall \varphi \in C^\infty_c(\Omega):\>\int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi.
 			\end{equation}
 		\item \textit{Existence and Uniqueness of Weak Solutions.} Since $L$ is uniformly elliptic, there exists $\lambda > 0$ such that 
 			\begin{equation*}
-				\sum_{i,j = 1}^n a_{ij}(x) \xi_i \xi_j \geq \lambda \abs{\xi}^2
+				a^{ij}(x) \xi_i \xi_j \geq \lambda \abs{\xi}^2
 			\end{equation*}
-			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Moreover, since $a_{ij} \in C^0(\wbar{\Omega})$, we get that $L$ is uniformly bounded, i.e. there exists $\Lambda > 0$ such that
+			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Moreover, since $a^{ij} \in L^\infty(\Omega)$, we get that $L$ is uniformly bounded, i.e. there exists $\Lambda > 0$ such that
 			\begin{equation*}
-				\sum_{i,j = 1}^n a_{ij}(x) \xi_i \xi_j \leq \Lambda \abs{\xi}^2
+				a^{ij}(x) \xi_i \xi_j \leq \Lambda \abs{\xi}^2
 			\end{equation*}
 			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Now define a bilinear form $\langle \cdot,\cdot \rangle_a : H^1_0(\Omega) \times H^1_0(\Omega) \to \mathbb{R}$ by
 			\begin{equation}
 				\label{eq:inner_prod}
-				\langle u,v \rangle_a := \sum_{i,j = 1}^n \int_\Omega a_{ij} \frac{\partial u}{\partial x^i}\frac{\partial v}{\partial x^j}
+				\langle u,v \rangle_a := \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial v}{\partial x^j}
 			\end{equation}
 			Then it is easy to see, that $\langle \cdot,\cdot\rangle_a$ is symmetric. Also, $\langle \cdot,\cdot \rangle_a$ is positive definite since
 			\begin{equation*}
-				\langle u,u\rangle_a = \sum_{i,j = 1}^n \int_\Omega a_{ij} \frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} \geq \lambda \int_\Omega\abs{\nabla u}^2 \geq C \lambda \int_\Omega \abs{u}^2
+				\langle u,u\rangle_a = \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} \geq \lambda \int_\Omega\abs{\nabla u}^2 \geq C \lambda \int_\Omega \abs{u}^2
 			\end{equation*}
 			\noindent using ellipticity and Poincar\'e's inequality. Moreover by Poincar\'e's inequality we have that
 			\begin{equation*}
-				C \lambda \norm{u}^2_{H^1_0(\Omega)} \leq \norm{u}_a \leq \Lambda \norm{u}_{H^1_0(\Omega)}^2
+				\lambda \norm{u}^2_{H^1_0(\Omega)} \leq \norm{u}_a^2 \leq \Lambda \norm{u}_{H^1_0(\Omega)}^2
 			\end{equation*}
 			\noindent for the induced norm $\norm{\cdot}_a$. Hence the induced norm is equivalent to the standard norm on $H^1_0(\Omega)$ and thus $(H^1_0(\Omega),\norm{\cdot}_a)$ is a Hilbert space. Thus an application of Riesz representation theorem \ref{thm:RRT} yields the existence of a unique $u \in H^1_0(\Omega)$, such that
 			\begin{equation*}
 				\langle u,\varphi \rangle_a = l(\varphi) := \int_\Omega f \varphi
 			\end{equation*}
-			\noindent holds for all $\varphi \in H^1_0(\Omega)$, since $l \in (H^1_0(\Omega))^*$ This proves part (a).
-		\item \textit{$H^1$-Estimate.} The main idea in proving part (b) is an induction on $k \in \omega$. So let us assume that $k = 0$. Let $u \in H^1_0(\Omega)$ denote the unique solution of part (a).
-			\begin{lemma}
-				\label{lem:H^1_estimate}
-				\begin{equation*}
-					\norm{\nabla u}_{L^2(\Omega')}
-				\end{equation*}
-			\end{lemma}
+			\noindent holds for all $\varphi \in H^1_0(\Omega)$, since $l \in (H^1_0(\Omega))^*$.
 	\end{enumerate}
+\end{proof}
+
+\subsection*{Sobolev Spaces on an Interval}
+In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
+
+\begin{lemma}[Du Bois-Reymond]
+	\label{lem:BoisReymond}
+	Let $f \in L^1_{\mathrm{loc}}(I)$ such that
+	\begin{equation*}
+		\forall \varphi \in C^\infty_c(I): \> \int_I f\varphi' dx = 0.
+	\end{equation*}
+	Then $f$ is almost everywehere constant.
+\end{lemma}
+
+\begin{proof}
+	Let $v := w - c_0 \psi$ for $w,\psi \in C^\infty_c(I)$ such that $\int_I \psi = 1$ and $\int_I v = 0$. This implies $c_0 = \int_I w$. By the fundamental theorem of calculus, the function $\varphi : I \to \mathbb{R}$ defined by
+	\begin{equation*}
+		\varphi(x) := \int_I v(t) dt
+	\end{equation*}
+	\noindent belongs to $C^\infty_c(I)$ with $\varphi' = v$. Thus we compute
+	\begin{align*}
+		0 = \int_I f \varphi' = \int_I f v = \int_I fw - c_0 \int_I f \psi = \int_I fw - \int_I w \int_I f \psi = \int_I (f - c)w,
+	\end{align*}
+	\noindent where $c := \int_I f \psi$. Since $w$ was arbitrary, we conclude by the fundamental lemma of variational calculus \ref{thm:flvc}.
+\end{proof}
+
+\begin{lemma}
+	\label{lem:abscontint}
+	Let $f \in L^1_{\mathrm{loc}}(I)$ and $x_0 \in I$. Then $u : I \to \mathbb{R}$ defined by
+	\begin{equation*}
+		u(x) := \int_{x_0}^x f(t)dt
+	\end{equation*}
+	\noindent is absolutely continuous and belongs to $W^{1,1}_{\mathrm{loc}}(I)$ with $u' = f$ a.e.
+\end{lemma}
+
+\begin{proof}
+	Absolute continuity follows from real analysis. Let $\varphi \in C^\infty_c(I)$. Then Fubini yields
+	\begin{align*}
+		\int_I u\varphi' &= \int_a^{x_0}\int_{x_0}^x f(t)\varphi'(x)dtdx + \int_{x_0}^b \int_{x_0}^x f(t)\varphi'(x)dtdx\\
+		&= -\int_a^{x_0}\int_x^{x_0} f(t)\varphi'(x)dtdx + \int_{x_0}^b \int_{x_0}^x f(t)\varphi'(x)dtdx\\
+		&= -\int_a^{x_0}\int_a^t f(t)\varphi'(x)dxdt + \int_{x_0}^b \int_t^b f(t)\varphi'(x)dxdt\\
+		&= -\int_a^{x_0} f(t)\varphi(t)dt - \int_{x_0}^b f(t)\varphi(t)dt\\
+		&= -\int_I f \varphi.
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	\label{thm:W1p}
+	Let $u \in W^{1,p}(I)$. Then there exists an absolutely continuous representant $\wtilde{u}$ of $u$ on $\wbar{I}$, such that
+	\begin{equation*}
+		\wtilde{u}(x) = \wtilde{u}(x_0) + \int_{x_0}^x u'(t)dt
+	\end{equation*}
+	\noindent holds for all $x,x_0 \in I$.
+\end{theorem}
+
+\begin{proof}
+	By lemma \ref{lem:abscontint}, the function $v(x) := \int_{x_0}^x u'(t)dt$ is in $W^{1,1}_{\mathrm{loc}}(I)$ with weak derivative $u'$. Moreover, for any $\varphi \in C^\infty_c(I)$ we compute
+	\begin{equation*}
+		\int_I (u - v)\varphi' = \int_I u\varphi' - \int_I v\varphi' = -\int_I u'\varphi + \int_I u'\varphi = 0.
+	\end{equation*}
+	Thus lemma \ref{lem:BoisReymond} yields $u = c + v$, for some $c \in \mathbb{R}$. But $c = u(x_0)$ and we conclude by setting
+	\begin{equation*}
+		\wtilde{u}(x) := u(x_0) + \int_{x_0}^x u'(t) dt.
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}[Characterization of $W^{1,p}(I)$]
+	Let $1 < p \leq \infty$ and $u \in L^p(I)$. Then the following statements are equivalent:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item $u \in W^{1,p}(I)$.
+		\item There exists $C \geq 0$ such that
+			\begin{equation*}
+				\forall \varphi \in C^\infty_c(I): \> \abs[3]{\int_I u\varphi'} \leq C\norm{\varphi}_{L^q}.
+			\end{equation*}
+		\item There exists $C \geq 0$ such that for all $I' \subseteq \subseteq I$ and $\abs{h} < \dist(I',\partial I)$ holds
+			\begin{equation*}
+				\norm{\tau_hu - u}_{L^p(I')} \leq C\abs{h},
+			\end{equation*}
+			\noindent where $\tau_hu(x) := u(x + h)$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	The implication $(a)\Rightarrow(b)$ follows immediately from H\"older's inequality. To prove $(b)\Rightarrow(a)$, we observe that $l : C^\infty_c(I) \to \mathbb{R}$ defined by
+	\begin{equation*}
+		L(\varphi) := \int_I u \varphi'
+	\end{equation*}
+	\noindent is continuous. Since $C^\infty_c(I)$ is dense in $L^q(I)$, we get that $l \in (L^q(I))^*$. Hence we find $g \in L^p$, such that $\int_I g\varphi = l(\varphi)$ and so $u' = -g$.\\
+	Next we show $(a)\Rightarrow(c)$. By theorem \ref{thm:W1p}, we find an absolutely continuous representant $\wtilde{u}$ of $u$. Thus
+	\begin{equation*}
+		\wtilde{u}(x + h) - \wtilde{u}(x) = h\int_0^1 u'(x + th) dt
+	\end{equation*}
+	Hence Jensen's inequality yields
+	\begin{equation*}
+		\norm[0]{\tau_hu - u}_{L^p(I')} \leq \abs{h} \int_0^1 \norm[0]{u'(\cdot + th)}_{L^p(I')}dt \leq \abs{h} \norm[0]{u'}_{L^p(I)}.
+	\end{equation*}
+	Lastly, we prove $(c)\Rightarrow(b)$. Let $\varphi \in C^\infty_c(I)$. Then we may find $I' \subseteq \subseteq I$ such that $\supp \varphi\subseteq I'$. Hence we compute
+	\begin{align*}
+		\abs[3]{\int_I u\varphi'} &= \lim_{h \to 0}\frac{1}{\abs{h}} \abs[3]{\int_I u(x) \del[1]{\varphi(x + h) - \varphi(x)} dx}\\
+		&= \lim_{h \to 0}\frac{1}{\abs{h}} \abs[3]{\int_I \del[1]{u(x - h) - u(x)} \varphi(x)dx}\\
+		&= \lim_{h \to 0}\frac{1}{\abs{h}} \abs[3]{\int_I \del[0]{\tau_{-h}u - u}\varphi}\\
+		&\leq \lim_{h \to 0}\frac{1}{\abs{h}}\norm[0]{\tau_{-h}u - u}_{L^p(I')}\norm{\varphi}_{L^q(I)}\\
+		&\leq C\norm{\varphi}_{L^q(I)}.
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Extension Theorem]
+	\label{thm:extension}
+	There exists a continuous linear operator 
+	\begin{equation*}
+		E : W^{1,p}(I) \to W^{1,p}(\mathbb{R})
+	\end{equation*}
+	\noindent such that:
+	\begin{enumerate}[label = \textup{(}\roman*\textup{)},wide = 0pt]
+		\item $Eu\vert_I = u$.
+		\item $\norm{Eu}_{L^p(\mathbb{R})} \leq C \norm{u}_{L^p(I)}$.
+		\item $\norm[0]{(Eu)'}_{L^p(\mathbb{R})} \leq C\norm{u}_{W^{1,p}(I)}$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	First we consider the case $I = \intoo{0,\infty}$. We extend $u$ by continuity to $0$ and then we extend $u$ by means of even symmetry. If $I$ is bounded we can without loss of generality assume that $I = \intoo{0,1}$. Now use a cut-off function.
+\end{proof}
+
+\begin{theorem}[Approximation Theorem]
+	Let $1 \leq p < \infty$ and $u \in W^{1,p}(I)$. Then there exists a sequence $(u_i)_{i \in \omega}$ in $C^\infty_c(\mathbb{R})$ such that
+	\begin{equation*}
+		\norm[0]{u_i\vert_I - u}_{W^{1,p}(I)} \to 0.
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	The main idea of the proof is to use convolutions. Moreover, it is enough to consider the case $I = \mathbb{R}$ only, due to the extension theorem \ref{thm:extension}. 	
+\end{proof}
+
+\begin{theorem}[Sobolev Embedding]
+	\label{thm:Sobolev_embedding}
+	There is a continuous embedding 
+	\begin{equation*}
+			W^{1,p}(I) \hookrightarrow L^\infty(I).
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Without loss of generality, consider $\abs{I} \leq 1$. By theorem \ref{thm:W1p} we get that
+	\begin{equation*}
+		\norm{u}_{L^\infty} = \sup_{x \in I} \abs[0]{u(x)} \leq \abs{u(y)} + \sup_{x \in I} \abs[3]{\int_y^x u'(t) dt} \leq \abs{u(y)} + \norm[0]{u'}_{L^1}, 
+	\end{equation*}
+	\noindent for any $y \in I$. Hence
+	\begin{equation*}
+		\norm{u}_{L^\infty} \leq \inf_{y \in I} \abs{u(y)} + \norm[0]{u'}_{L^1} \leq \frac{1}{\abs{I}}\int_I \abs{u(y)} + \norm[0]{u'}_{L^1} \leq C \norm{u}_{W^{1,1}} \leq C \norm{u}_{W^{1,p}}.
+	\end{equation*}
+\end{proof}
+
+\begin{corollary}
+	Let $I$ be unbounded and $u \in W^{1,p}(I)$ for $1 \leq p < \infty$. Then $u \to 0$ as $\abs{x} \to \infty$.
+\end{corollary}
+
+\subsection*{Dirichlet and Neumann Boundary Problems on $I$}
+In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b}$.
+
+\begin{proposition}
+	Let $f \in C^0(\wbar{I})$. Then the weak solution $u$ of the homogenous Dirichlet problem
+	\begin{align*}
+		\ccases{
+			-u'' = f & \text{in }I,\\
+			u(a) = 0 = u(b).
+		}
+	\end{align*}
+	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{proposition}
+	Let $f \in C^0(\wbar{I})$. Then the weak solution $u$ of the homogenous Neumann problem
+	\begin{align*}
+		\ccases{
+			-u'' + u = f & \text{in }I,\\
+			u'(a) = 0 = u'(b).
+		}
+	\end{align*}
+	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
+\end{proposition}
+
+\begin{proof}
+	
 \end{proof}
 
 \printbibliography
