@@ -1,0 +1,103 @@
+\section*{Regularity Theory}
+
+Goal of this section is to prove the following regularity result.
+
+\begin{theorem}[Global $H^2$-Estimate]
+	\label{thm:regularity}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^{k + 2}$ and $f \in H^k(\Omega)$ for some $k \in \omega$. Moreover, let $u \in H^1_0(\Omega)$ be the unique solution of the homogenous Dirichlet boundary value problem
+	\begin{align*}
+		\ccases{
+			-\Delta u = f & \text{in } \Omega,\\
+			u = 0 & \text{on } \partial \Omega.
+		}
+	\end{align*}
+	Then $u \in H^{k + 2}(\Omega)$ and 
+	\begin{equation*}
+		\norm{u}_{H^{k + 2}(\Omega)} \leq C\norm{f}_{H^k(\Omega)}.
+	\end{equation*}
+\end{theorem}
+
+\subsection*{Interior Regularity}
+
+\begin{theorem}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $L$ an elliptic operator in divergence form satisfying $a^{ij} \in C^{k + 1}(\wbar{\Omega})$. If $f \in H^k(\Omega)$, the unique weak solution $u \in H^1_0(\Omega)$ of the homogenous Dirichlet boundary value problem
+	\begin{align*}
+		\ccases{
+			-Lu = f & \text{in } \Omega,\\
+			u = 0 & \text{on } \partial\Omega
+		}
+	\end{align*}
+	\noindent belongs to $H^{k + 2}_{\mathrm{loc}}(\Omega)$ and for all $\Omega' \subseteq \subseteq \Omega$ we have the estimate
+	\begin{equation*}
+		\norm{u}_{H^{k + 2}(\Omega')} \leq C(\norm{f}_{H^k(\Omega)} + \norm{u}_{H^1(\Omega)}).
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}[label = \emph{Step \arabic*:}, wide = 0pt]
+		\item $k = 0$. 
+			\begin{enumerate}[label = \textup{(}\roman*\textup{)},wide = 0pt]
+				\item \emph{$H^1$-Estimate.} Choose a bump function $\varphi \in C^\infty_c(\Omega)$ supported in $\Omega'$. Thus the weak formulation yields by plugging in the test function $\varphi^2 u$
+					\begin{equation}
+						\label{eq:weak_explicit}
+						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} + 2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi^2 u.
+					\end{equation}
+					Rearanging formula (\ref{eq:weak_explicit}) we compute
+					\begin{align*}
+						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} &= \int_\Omega f \varphi^2 u -  2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j}\\
+						&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + 2 \Lambda \int_\Omega (-u)\varphi \abs[0]{\nabla u}\abs[0]{\nabla \varphi}\\
+						&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \Lambda \varepsilon \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
+					\end{align*}
+					Noticing that
+					\begin{equation*}
+						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} \geq \lambda \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2
+					\end{equation*}
+					\noindent yields
+					\begin{equation*}
+						(\lambda - \Lambda \varepsilon) \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
+					\end{equation*}
+					Picking $\varepsilon > 0$ appropriately, yields
+					\begin{equation*}
+						\norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2)
+					\end{equation*}
+					\noindent and thus
+					\begin{equation*}
+						\norm[0]{\nabla u}_{L^2(\Omega')}^2 \leq C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2).
+					\end{equation*}
+				\item \emph{$H^2$-Estimate.}
+				\item \emph{Nirenberg-Trick.} 
+			\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\subsection*{Boundary Regularity}
+
+\subsection*{Eigenfunctions of $-\Delta$}
+
+\begin{theorem}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^2$. Then there exists a Hilbert-space basis $(\varphi_i)_{i \in \omega}$ of $L^2(\Omega)$ consisting of eigenfunctions of the Laplace opertator, i.e. 
+	\begin{align*}
+		\ccases{
+			-\Delta \varphi_i = \lambda_i \varphi_i & \text{in } \Omega,\\
+			\varphi_i = 0 & \text{on } \partial \Omega.
+		}
+	\end{align*}
+	Moreover $0 < \lambda_i \to \infty$.
+\end{theorem}
+
+\begin{proof}
+	Define $K : L^2(\Omega) \to L^2(\Omega)$ by setting $Kf$ to be the unique weak solution of the homogenous Dirichlet boundary value problem
+	\begin{align*}
+		\ccases{
+			-\Delta u = f & \text{in } \Omega,\\
+			u = 0 & \text{on } \partial \Omega.
+		}
+	\end{align*}
+	By the global regularity theorem, $u \in H^2(\Omega)$ and thus we can write $K$ as the composition
+	\begin{equation*}
+		\begin{tikzcd}
+			L^2(\Omega) \arrow[r] & H^2(\Omega) \arrow[r,hook] & L^2(\Omega).
+		\end{tikzcd}
+	\end{equation*}
+	Thus $K$ is continuous as a composition of continuous mappings an moreover, since the embedding is compact by the Sobolev theorem, so is $K$.
+\end{proof}

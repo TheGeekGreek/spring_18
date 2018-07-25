@@ -1,0 +1,72 @@
+\section*{Schauder Theory}
+\subsection*{Schauder Estimates}
+
+\begin{theorem}[Global $C^{2,\alpha}$-Estimate]
+	\label{thm:gSe}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^{2,\alpha}$, $0 < \alpha < 1$. Moreover, let $a^{ij} \in C^{1,\alpha}(\Omega)$ symmetric, uniformly elliptic and uniformly bounded, $c \in C^\alpha(\Omega)$, $u_0 \in C^{2,\alpha}(\wbar{\Omega})$, $f = (f^1,\dots,f^n) \in C^{1,\alpha}(\Omega)$ and $h \in C^{\alpha}(\Omega)$. Then any solution $u \in C^{2,\alpha}(\Omega)$ of the Dirichlet boundary value problem
+	\begin{align*}
+		\ccases{
+			A_0u + cu = -\frac{\partial}{\partial x^i} f^i + h & \text{in } \Omega,\\
+			u = u_0 & \text{on } \Omega
+		}
+	\end{align*}
+	\noindent satisfies
+	\begin{equation*}
+		\norm{u}_{C^{2,\alpha}} \leq C(\norm{u}_{H^1} + \norm{f}_{C^{1,\alpha}} + \norm{h}_{C^\alpha} + \norm{u_0}_{C^{2,\alpha}})
+	\end{equation*}
+	\noindent where $C$ does not depend on $u$.
+\end{theorem}
+
+\subsection*{Existence Theorems}
+
+\begin{proposition}[Method of Continuity]
+	\label{pro:moc}
+	Let $(X,\norm{\cdot}_X)$ and $(Y,\norm{\cdot}_Y)$ be Banach spaces. Given $A_0,A_1 \in \mathcal{L}(X,Y)$ define $A_t := (1 - t)A_0 + tA_1$, $t \in \intcc{0,1}$. Suppose that
+	\begin{equation*}
+		\exists C > 0\forall t \in \intcc{0,1}\forall x \in X:\> \norm{x}_X \leq \norm{A_t x}_Y.
+	\end{equation*}
+	\noindent Then $A_0$ is surjective if and only if $A_1$ is surjective.
+\end{proposition}
+
+Using the method of continuity \ref{pro:moc}, one can show existence results of solutions of Dircihlet boundary value problems. Define
+\begin{equation*}
+	A_0 := - \frac{\partial}{\partial x^i}\del[3]{a^{ij}\frac{\partial}{\partial x^j}}
+\end{equation*}
+\noindent for $a^{ij} \in C^{1,\alpha}$ symmetric, uniformly elliptic and uniformly bounded. Consider the problem
+\begin{align*}
+	\ccases{
+		A_0u + cu = -\frac{\partial}{\partial x^j}f^i + h & \text{in } \Omega,\\
+		u = u_0 & \text{on } \partial \Omega
+	}
+\end{align*}
+\noindent for $c \in C^\alpha$, $f = (f^1,\dots,f^n) \in C^{1,\alpha}$ and $h \in C^\alpha$. If $c \geq 0$, one can show existence and uniqueness of $C^{2,\alpha}$ solutions. First of all, suppose that solutions of 
+\begin{align*}
+	\ccases{
+		A_0u = h & \text{in } \Omega,\\
+		u = 0 & \text{on } \partial \Omega
+	}
+\end{align*}
+\noindent do exist. Let us define
+\begin{equation*}
+	X := \cbr[0]{u \in C^{2,\alpha} : u\vert_{\partial \Omega} = 0} \qquad \text{and} \qquad Y := C^\alpha.
+\end{equation*}
+Then $X$ and $Y$ are Banach spaces, since $X$ is a closed subset of a Banach space. Define now $A_1 := A_0 + c$. Then it is easy to show that $A_0$ and $A_1$ are continuous. Thus to apply the continuity method, we have to show the existence of a constant $C > 0$, such that for all $t \in \intcc{0,1}$ and $u \in X$
+\begin{equation*}
+	\norm{x}_{C^{2,\alpha}} \leq \norm{A_t x}_{C^\alpha}
+\end{equation*}
+\noindent holds. But this looks like the $C^{2,\alpha}$-estimate \ref{thm:gSe}. Indeed, since $u \in C^{2,\alpha}$ solves $A_t u = A_tu$, we get
+\begin{equation*}
+	\norm{u}_{C^{2,\alpha}} \leq C(\norm{u}_{H^1} + \norm[0]{A_tu}_{C^\alpha}).
+\end{equation*}
+Using ellipticity, integration by parts (justified since any fucntion in $X$ vanishes on the boundary $\partial \Omega$) and $c \geq 0$, we compute
+\begin{align*}
+	\lambda\norm{u}_{H^1}^2 &= \lambda\int_{\Omega}\abs[0]{\nabla u}^2\\
+	&\leq \int_{\Omega} a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j}\\
+	&= \int_\Omega (A_0u)u\\
+	&= \int_\Omega (A_0u)u + ctu^2 - ctu^2\\
+	&= \int_\Omega (A_tu)u - ctu^2\\
+	&\leq \int_\Omega (A_tu)u\\
+	&\leq \norm{A_tu}_{L^2}\norm{u}_{L^2}\\
+	&\leq C\norm{A_tu}_{C^\alpha}\norm{u}_{H^1}.
+\end{align*}
+

@@ -19,6 +19,13 @@
 
 \section*{Introduction}
 
+\begin{theorem}[Transformation Formula]
+	Let $n \in \omega$, $n > 0$, $U,V \subseteq \mathbb{R}^n$ open and $\varphi : U \to V$ a $C^1$-diffeomorphism. A function $f : V \to \wbar{\mathbb{R}}$ is in $\mathcal{L}^1(V)$ if and only if $(f \circ \varphi) \abs[0]{\det (D\varphi)}$ is in $\mathcal{L}^1(U)$. Then
+	\begin{equation*}
+		\int_V f = \int_U (f \circ \varphi) \abs[0]{\det (D\varphi)}.
+	\end{equation*}
+\end{theorem}
+
 \begin{theorem}
 	Let $\Omega \subseteq \mathbb{R}^n$ be open and $1 \leq p < \infty$. Then $C^\infty_c(\Omega)$ is dense in $L^p(\Omega)$.
 \end{theorem}
@@ -138,7 +145,7 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 	\end{enumerate}
 \end{proof}
 
-\subsection*{Elliptic Operators}
+\subsection*{Elliptic Operators in Divergence Form}
 
 \begin{lemma}[Poincar\'e Inequality]
 	\label{lem:PI}
@@ -199,9 +206,13 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 			\end{equation*}
 			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Moreover, since $a^{ij} \in L^\infty(\Omega)$, we get that $L$ is uniformly bounded, i.e. there exists $\Lambda > 0$ such that
 			\begin{equation*}
-				a^{ij}(x) \xi_i \xi_j \leq \Lambda \abs{\xi}^2
+				a^{ij}(x) \xi_i \eta_j \leq \Lambda \abs{\xi}\abs{\eta}
 			\end{equation*}
-			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Now define a bilinear form $\langle \cdot,\cdot \rangle_a : H^1_0(\Omega) \times H^1_0(\Omega) \to \mathbb{R}$ by
+			\noindent for
+			\begin{equation*}
+				\Lambda = \sum_{i,j = 1}^n \norm[0]{a^{ij}}_{L^\infty(\Omega)}
+			\end{equation*}
+			\noindent holds for almost all $x \in \Omega$ and $\xi,\eta \in \mathbb{R}^n$. Now define a bilinear form $\langle \cdot,\cdot \rangle_a : H^1_0(\Omega) \times H^1_0(\Omega) \to \mathbb{R}$ by
 			\begin{equation}
 				\label{eq:inner_prod}
 				\langle u,v \rangle_a := \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial v}{\partial x^j}
@@ -562,10 +573,6 @@ The proof uses the notion of so-called \emph{Morrey-Campanato spaces}.
 	\end{equation*}
 \end{theorem}
 
-\begin{proof}
-	
-\end{proof}<++>
-
 Now the proof of the Sobolev embedding theorem for $p > n$ is immediaty by considering
 \begin{equation*}
 	\begin{tikzcd}
@@ -574,5 +581,23 @@ Now the proof of the Sobolev embedding theorem for $p > n$ is immediaty by consi
 \end{equation*}
 \noindent and observing that $\mathbb{R}^n$ is of type $\frac{\pi^{n/2}}{\Gamma(n/2 + 1)} > 0$.
 
+\begin{theorem}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ connected and of class $C^1$ and $1 \leq p < \infty$. Then 
+	\begin{equation*}
+		\norm[0]{u - \wbar{u}}_{L^p(\Omega)}^p \leq C \norm[0]{\nabla u}_{L^p(\Omega)}^p.
+	\end{equation*}
+\end{theorem}
+
+\subsubsection*{$p = n$}
+
+\begin{theorem}
+	It holds that $W^{1,n}(\mathbb{R}^n) \hookrightarrow L^p(\mathbb{R}^n)$ for $n \leq p < \infty$.
+\end{theorem}
+
+\input{regularity_theory.tex}
+\input{Schauder_theory.tex}
+\input{maximum_principle.tex}
+
 \printbibliography
+
 \end{document}

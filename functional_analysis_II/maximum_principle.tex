@@ -1,0 +1,61 @@
+\section*{Maximum Principle}
+\subsection*{Weak Maximum Principle}
+
+Let $\Omega \subseteq \subseteq \mathbb{R}^n$. In what follows, we consider the second order homogenous differential operator in non-divergence form
+\begin{equation*}
+	Lu := a^{ij}\frac{\partial^2u}{\partial x^i \partial x^j} + b^i \frac{\partial u}{\partial x^i} + c u
+\end{equation*}
+\noindent where $a^{ij},b^i,c \in C^0(\wbar{\Omega})$ and $L$ is uniformly elliptic, i.e. there exists $\lambda > 0$ such that
+\begin{equation*}
+	a^{ij}(x)\xi_i\xi_j \geq \lambda \abs{\xi}^2
+\end{equation*}
+\noindent holds for all $\xi \in \mathbb{R}^n$ and $x \in \Omega$.
+
+\begin{theorem}[Weak Maximum Principle]
+	\label{thm:WMP}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ and $u \in C^2(\Omega) \cap C^0(\wbar{\Omega})$ such that $Lu \geq 0$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item If $c \leq 0$ in $\Omega$, then $\max_{\wbar{\Omega}} u \leq \max_{\partial \Omega} u_+$.
+		\item If $c = 0$ in $\Omega$, then $\max_{\wbar{\Omega}} u = \max_{\partial \Omega} u$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Consider the perturbation $v_\varepsilon := u + \varepsilon e^{\gamma x_1}$ for $\varepsilon,\gamma > 0$ and use the first and second derivative test.
+\end{proof}
+
+\subsection*{Strong Maximum Principle}
+
+\begin{lemma}[Boundary Point Lemma, E. Hopf]
+	Let $B := B_\rho(y) \subseteq \mathbb{R}^n$ and $u \in C^2(B) \cap C^0(\wbar{B})$ such that $Lu \geq 0$ in $B$ with $c \leq 0$. Assume for some $x_0 \in \partial B$ that $u(x_0) \geq 0$ and $u(x) < u(x_0)$ for every $x \in B$. Then
+	\begin{equation*}
+		\limsup_{h \to 0} \frac{u(x_0 + h\eta) - u(x_0)}{h} < 0
+	\end{equation*}
+	\noindent for $\eta$ the invard pointing unit normal at $x_0$.
+\end{lemma}
+
+\begin{proof}
+	Without loss of generality one can assume $\rho = 1$ and $y = 0$. Then define $w : \wbar{B} \to \mathbb{R}$ by
+	\begin{equation*}
+		w(x) := e^{-\alpha \abs{x}^2} - e^{-\alpha}
+	\end{equation*}
+	\noindent for some $\alpha > 0$ to be determined. We compute
+	\begin{equation*}
+		Lw \geq e^{-\alpha\abs{x}^2}(4\mu \abs{x}^2\alpha^2 -2 \alpha (\tr A + b^i x_i) + c).
+	\end{equation*}
+	Thus for some $\alpha$ large enough, we get that $Lw > 0$. Set 
+	\begin{equation*}
+		v := u - u(x_0) + \varepsilon w
+	\end{equation*}
+	\noindent for some $\varepsilon > 0$ on the anulus $A := \wbar{B}_1(0) \setminus B_{1/2}(0)$. For $\varepsilon > 0$ sufficiently small, we get that $v \leq 0$ on $\partial A$. Since moreover
+	\begin{equation*}
+		Lv = Lu - cu(x_0) + \varepsilon Lw > 0
+	\end{equation*}
+	\noindent the weak maximum principle implies $v \leq 0$ on $A$. Hence $D^+_\eta v \leq 0$, but 
+	\begin{equation*}
+		D^+_\eta v = D^+_\eta u + \varepsilon D^+_\eta w
+	\end{equation*}
+	\noindent which yields the statement by observing that $D^+_\eta w > 0$.
+\end{proof}
+
+
