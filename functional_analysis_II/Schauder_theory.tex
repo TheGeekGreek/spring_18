@@ -1,7 +1,16 @@
 \section*{Schauder Theory}
+\subsection*{Campanato-Estimates and Morrey-Spaces}
+
+\begin{lemma}[Minimality of Mean-Value]
+	Let $\Omega \subseteq \mathbb{R}^n$ open, $f \in L^2(\Omega)$, $x_0 \in \Omega$ and $r > 0$. Then
+	\begin{equation*}
+		\norm[1]{f - \wbar{f}_{r,x_0}}_{L^2(\Omega_r(x_0))}^2 = \min_{a \in \mathbb{R}} \norm{f - a}^2_{L^2(\Omega_r(x_0))}.
+	\end{equation*}
+\end{lemma}
+
 \subsection*{Schauder Estimates}
 
-\begin{theorem}[Global $C^{2,\alpha}$-Estimate]
+\begin{theorem}[Global Schauder-Estimate]
 	\label{thm:gSe}
 	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^{2,\alpha}$, $0 < \alpha < 1$. Moreover, let $a^{ij} \in C^{1,\alpha}(\Omega)$ symmetric, uniformly elliptic and uniformly bounded, $c \in C^\alpha(\Omega)$, $u_0 \in C^{2,\alpha}(\wbar{\Omega})$, $f = (f^1,\dots,f^n) \in C^{1,\alpha}(\Omega)$ and $h \in C^{\alpha}(\Omega)$. Then any solution $u \in C^{2,\alpha}(\Omega)$ of the Dirichlet boundary value problem
 	\begin{align*}
@@ -54,7 +63,7 @@ Then $X$ and $Y$ are Banach spaces, since $X$ is a closed subset of a Banach spa
 \begin{equation*}
 	\norm{x}_{C^{2,\alpha}} \leq \norm{A_t x}_{C^\alpha}
 \end{equation*}
-\noindent holds. But this looks like the $C^{2,\alpha}$-estimate \ref{thm:gSe}. Indeed, since $u \in C^{2,\alpha}$ solves $A_t u = A_tu$, we get
+\noindent holds. But this looks like the Schauder-estimate \ref{thm:gSe}. Indeed, since $u \in C^{2,\alpha}$ solves $A_t u = A_tu$, we get
 \begin{equation*}
 	\norm{u}_{C^{2,\alpha}} \leq C(\norm{u}_{H^1} + \norm[0]{A_tu}_{C^\alpha}).
 \end{equation*}

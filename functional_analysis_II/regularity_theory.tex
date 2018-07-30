@@ -2,20 +2,34 @@
 
 Goal of this section is to prove the following regularity result.
 
-\begin{theorem}[Global $H^2$-Estimate]
+\begin{theorem}[Global Regularity]
 	\label{thm:regularity}
 	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^{k + 2}$ and $f \in H^k(\Omega)$ for some $k \in \omega$. Moreover, let $u \in H^1_0(\Omega)$ be the unique solution of the homogenous Dirichlet boundary value problem
 	\begin{align*}
 		\ccases{
-			-\Delta u = f & \text{in } \Omega,\\
+			A_0 u = f & \text{in } \Omega,\\
 			u = 0 & \text{on } \partial \Omega.
 		}
 	\end{align*}
-	Then $u \in H^{k + 2}(\Omega)$ and 
+	\noindent where $a^{ij} \in C^{k + 1}(\wbar{\Omega})$. Then $u \in H^{k + 2}(\Omega)$ and 
 	\begin{equation*}
 		\norm{u}_{H^{k + 2}(\Omega)} \leq C\norm{f}_{H^k(\Omega)}.
 	\end{equation*}
 \end{theorem}
+
+\begin{theorem}[Higher Sobolev Estimates]
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $k \in \omega$, $k \geq 1$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item If $kp < n$, then $W^{k,p}(\Omega) \hookrightarrow L^q(\Omega)$ for all $1 \leq q \leq p^* := \frac{np}{n - pk}$ and the embedding is compact for $q < p^*$.
+		\item If $kp = n$, then $W^{k,p}(\Omega) \hookrightarrow L^q(\Omega)$ for all $1 \leq q < \infty$ and those embeddings are compact.
+		\item If $kp > n$ and $k - \frac{n}{p} \notin \omega$, then $W^{k,p}(\Omega) \hookrightarrow C^{l,\alpha}(\Omega)$ for $l := \sbr[1]{k - \frac{n}{p}}$ and $0 \leq \alpha \leq \alpha^* := k - l - \frac{n}{p}$ and those embeddings are compact for $\alpha < \alpha^*$.
+		\item If $kp > n$ and $k - \frac{n}{p} = l + 1 \in \omega$, then $W^{k,p}(\Omega) \hookrightarrow C^{l,\alpha}(\Omega)$ for $0 \leq \alpha < 1$ and those embeddings are compact.
+	\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $u \in H^1(\Omega)$. Moreover, assume that $u \in H^k(\Omega)$ for some $k > \frac{n}{2} + 2$. Then $u \in C^2(\Omega)$.
+\end{corollary}
 
 \subsection*{Interior Regularity}
 
@@ -23,7 +37,7 @@ Goal of this section is to prove the following regularity result.
 	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $L$ an elliptic operator in divergence form satisfying $a^{ij} \in C^{k + 1}(\wbar{\Omega})$. If $f \in H^k(\Omega)$, the unique weak solution $u \in H^1_0(\Omega)$ of the homogenous Dirichlet boundary value problem
 	\begin{align*}
 		\ccases{
-			-Lu = f & \text{in } \Omega,\\
+			A_0 u = f & \text{in } \Omega,\\
 			u = 0 & \text{on } \partial\Omega
 		}
 	\end{align*}
@@ -35,42 +49,78 @@ Goal of this section is to prove the following regularity result.
 
 \begin{proof}
 	\begin{enumerate}[label = \emph{Step \arabic*:}, wide = 0pt]
-		\item $k = 0$. 
-			\begin{enumerate}[label = \textup{(}\roman*\textup{)},wide = 0pt]
-				\item \emph{$H^1$-Estimate.} Choose a bump function $\varphi \in C^\infty_c(\Omega)$ supported in $\Omega'$. Thus the weak formulation yields by plugging in the test function $\varphi^2 u$
-					\begin{equation}
-						\label{eq:weak_explicit}
-						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} + 2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi^2 u.
-					\end{equation}
-					Rearanging formula (\ref{eq:weak_explicit}) we compute
-					\begin{align*}
-						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} &= \int_\Omega f \varphi^2 u -  2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j}\\
-						&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + 2 \Lambda \int_\Omega (-u)\varphi \abs[0]{\nabla u}\abs[0]{\nabla \varphi}\\
-						&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \Lambda \varepsilon \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
-					\end{align*}
-					Noticing that
-					\begin{equation*}
-						\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} \geq \lambda \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2
-					\end{equation*}
-					\noindent yields
-					\begin{equation*}
-						(\lambda - \Lambda \varepsilon) \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
-					\end{equation*}
-					Picking $\varepsilon > 0$ appropriately, yields
-					\begin{equation*}
-						\norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2)
-					\end{equation*}
-					\noindent and thus
-					\begin{equation*}
-						\norm[0]{\nabla u}_{L^2(\Omega')}^2 \leq C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2).
-					\end{equation*}
-				\item \emph{$H^2$-Estimate.}
-				\item \emph{Nirenberg-Trick.} 
+		\item
+			~
+			$k = 0$. 
+			\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+				\item \emph{A-priori Estimates.} First of all, we are assuming that $u \in H^2_{\text{loc}}(\Omega)$. 
+				\begin{enumerate}[label = \textup{(}\roman*\textup{)}]
+					\item \emph{$H^1$-Estimate.} Choose a bump function $\varphi \in C^\infty_c(\Omega)$ supported in $\Omega'$. Thus the weak formulation yields by plugging in the test function $\varphi^2 u$
+						\begin{equation}
+							\label{eq:weak_explicit}
+							\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} + 2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi^2 u.
+						\end{equation}
+						Rearanging formula (\ref{eq:weak_explicit}) we compute
+						\begin{align*}
+							\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} &= \int_\Omega f \varphi^2 u -  2\int_{\Omega} u\varphi a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j}\\
+							&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + 2 \Lambda \int_\Omega (-u)\varphi \abs[0]{\nabla u}\abs[0]{\nabla \varphi}\\
+							&\leq \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \Lambda \varepsilon \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
+						\end{align*}
+						Noticing that
+						\begin{equation*}
+							\int_\Omega \varphi^2 a^{ij}\frac{\partial u}{\partial x^i}\frac{\partial u}{\partial x^j} \geq \lambda \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2
+						\end{equation*}
+						\noindent yields
+						\begin{equation*}
+							(\lambda - \Lambda \varepsilon) \norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  \norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2 + \frac{\Lambda}{\varepsilon}\norm[0]{u \nabla \varphi}_{L^2(\Omega)}^2
+						\end{equation*}
+						Picking $\varepsilon > 0$ appropriately, yields
+						\begin{equation*}
+							\norm[0]{\varphi\nabla u}_{L^2(\Omega)}^2 \leq  C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2)
+						\end{equation*}
+						\noindent and thus
+						\begin{equation*}
+							\norm[0]{\nabla u}_{L^2(\Omega')}^2 \leq C(\norm{f}_{L^2(\Omega)}^2 + \norm{u}_{L^2(\Omega)}^2).
+						\end{equation*}
+					\item \emph{$H^2$-Estimate.} Let $1 \leq \mu \leq n$. Then $\partial_\mu u$ solves
+						\begin{equation*}
+							\int_\Omega a^{ij}\partial_i\partial_\mu u\partial_j\varphi = - \int_\Omega f\partial_\mu \varphi - \int_\Omega \partial_\mu a^{ij}\partial_i u\partial_j \varphi
+						\end{equation*}
+						\noindent for all $\varphi \in C^\infty_c(\Omega)$. Now perform the $H^1$-estimate on $\partial_\mu u$. 
+				\end{enumerate}
+			\item \emph{Existence: The Nirenberg-Trick.} The trick is to use difference quotients
+				\begin{equation*}
+					D_hu := \frac{\tau_hu - u}{\abs{h}}
+				\end{equation*}
+				\noindent for $h \in \mathbb{R}^n$ such that $\abs{h} < \dist(\Omega',\partial \Omega)$. The idea now is to find a PDE solved by $D_h u$ in the weak sense and to to use the characterization of the Sobolev space.
 			\end{enumerate}
+		\item \emph{Induction Step.}
 	\end{enumerate}
 \end{proof}
 
 \subsection*{Boundary Regularity}
+
+\begin{proposition}[Minimality Property]
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$. Then $u \in H^1_0(\Omega)$ solves (\ref{eq:HDP}) if and only if the \bld{energy functional} satisfies
+	\begin{equation*}
+		E(u) := \frac{1}{2}\norm{u}^2_a - \int_\Omega fu = \inf_{v \in H^1_0(\Omega)} E(v).
+	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	Suppose $u \in H^1_0(\Omega)$ solves (\ref{eq:HDP}) and let $v \in H^1_0(\Omega)$. Then $v = u + \varphi$ for some $\varphi \in H^1_0(\Omega)$ and we compute
+	\begin{equation*}
+		E(v) = E(u + \varphi) = \frac{1}{2}\norm{u}^2_a + \langle u,\varphi \rangle_a + \frac{1}{2}\norm{\varphi}^2_a - \int_\Omega f(u + \varphi) = E(u) + \frac{1}{2}\norm{\varphi}^2_a \geq E(u).
+	\end{equation*}
+	Conversly, suppose $u_0 \in H^1_0(\Omega)$ is a minimizer of the energy functional. Thus by elementary calculus
+	\begin{equation*}
+		\frac{d}{dt}\bigg\vert_{t = 0} E(u_0 + tv) = 0
+	\end{equation*}
+	\noindent for all $v \in H^1_0(\Omega)$. But
+	\begin{equation*}
+		\frac{d}{dt}\bigg\vert_{t = 0} E(u_0 + tv) = \langle u_0, v \rangle_a - \int_\Omega f v.
+	\end{equation*}
+\end{proof}
 
 \subsection*{Eigenfunctions of $-\Delta$}
 
@@ -82,7 +132,7 @@ Goal of this section is to prove the following regularity result.
 			\varphi_i = 0 & \text{on } \partial \Omega.
 		}
 	\end{align*}
-	Moreover $0 < \lambda_i \to \infty$.
+	Moreover $0 < \lambda_i \to \infty$ are called \bld{Dirichlet eigenvalues}.
 \end{theorem}
 
 \begin{proof}

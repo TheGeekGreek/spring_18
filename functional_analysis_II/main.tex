@@ -18,7 +18,7 @@
 \tableofcontents
 
 \section*{Introduction}
-
+This serves as a summary of useful facts from \emph{measure theory} which are used throughout the text.
 \begin{theorem}[Transformation Formula]
 	Let $n \in \omega$, $n > 0$, $U,V \subseteq \mathbb{R}^n$ open and $\varphi : U \to V$ a $C^1$-diffeomorphism. A function $f : V \to \wbar{\mathbb{R}}$ is in $\mathcal{L}^1(V)$ if and only if $(f \circ \varphi) \abs[0]{\det (D\varphi)}$ is in $\mathcal{L}^1(U)$. Then
 	\begin{equation*}
@@ -31,10 +31,12 @@
 \end{theorem}
 
 \begin{proposition}
-	If $\mu(X) < \infty$ and $0 < p < q \leq \infty$. Then $L^q(\mu) \subseteq L^p(\mu)$.
+	\label{prop:inclusion}
+	If $\abs[0]{\Omega} < \infty$ and $0 < p < q \leq \infty$. Then $L^q(\Omega) \subseteq L^p(\Omega)$.
 \end{proposition}
 
 \begin{proposition}[Integration by Parts]
+	\label{prop:IP}
 	Let $(M,g)$ be a compact Riemannian manifold with boundary. Then
 	\begin{equation*}
 		\int_M \langle \grad f,X \rangle_g dV_g = \int_{\partial M}f \langle X,N \rangle dV_{\wtilde{g}} - \int_M (f \div X) dV_g
@@ -49,17 +51,6 @@
 	\end{equation*}
 	\noindent for $u,v \in C^\infty(M)$.
 \end{proposition}
-
-Suppose $u \in \mathcal{A}$ is a minimizer of $E_p$ and $\varphi \in C^2(\wbar{\Omega})$ with $\varphi\vert_{\partial\Omega} = 0$. We compute
-\begin{align*}
-	\frac{d}{dt}E_p(u + t\varphi) &= \frac{d}{dt}\int_\Omega \abs[0]{\nabla u + t \nabla \varphi}^p\\
-	&= \frac{d}{dt} \int_\Omega \langle \nabla u + t\nabla \varphi,\nabla u + t\nabla \varphi\rangle^{p/2}\\
-	&= p\int_\Omega \abs[0]{\nabla u + t \nabla \varphi}^{p - 2}\langle \nabla \varphi,\nabla u + t\nabla \varphi\rangle.
-\end{align*}
-In particular
-\begin{equation*}
-	\frac{d}{dt}\bigg\vert_{t = 0} E_p(u + t\varphi) = p\int_\Omega \abs[0]{\nabla u}^{p - 2} \langle \nabla \varphi,\nabla u\rangle = - \int_\Omega \div(\abs[0]{\nabla u}^{p - 2}\nabla u)\varphi.
-\end{equation*}
 
 \section*{Sobolev Space Theory}
 \subsection*{The Spaces $W^{k,p}(\Omega)$}
@@ -93,9 +84,10 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 	From the fundamental lemma of variational calculus \ref{thm:flvc} it follows that \emph{weak derivatives, if they exist, are unique}.
 \end{remark}
 
-\begin{examples}
+\begin{examples}[Weak Derivatives]
 	~
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item Suppose $u$ is classically differentiable. Then $u$ is weakly differentiable using integration by parts \ref{prop:IP}.
 		\item Consider $\Omega := \intoo{-1,1}$ and $u := \abs{x}$. Then $u' = \chi_{\intco{0,1}} -\chi_{\intoo{-1,0}}$.
 		\item Consider $\Omega := \mathbb{R}$ and $u := \chi_{\intoo{0,\infty}}$. Then the weak derivative $u'$ does not exist. Indeed, the \emph{Dirac distribution} is not representable as one may see by considering the smooth family $\varphi_\varepsilon : \mathbb{R} \to \mathbb{R}$ for $\varepsilon > 0$ defined by
 			\begin{equation*}
@@ -104,6 +96,12 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 					0 & \abs{x} \geq \varepsilon.
 				\end{cases}
 			\end{equation*}
+		\item Let $\Omega := \intoo{0,1}$ and consider the \emph{Cantor function} $u : \Omega \to \Omega$. Then $u' = 0$ classically a.e. but the distributional derivative of $u$ does not vanish.
+		\item Let $f \in L^p(\Omega)$. Then the computation performed in the proof of lemma \ref{lem:abscontint} shows, that the function $u : I \to \mathbb{R}$ defined by
+			\begin{equation*}
+				u(x) := \int_{x_0}^x f(t)dt
+			\end{equation*}
+			\noindent for $x_0 \in I$, admits the weak derivative $f$.
 	\end{enumerate}
 \end{examples}
 
@@ -123,6 +121,24 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 	\noindent and $H^k(\Omega) := W^{k,2}(\Omega)$ as well as $H_0^k(\Omega) := W^{k,2}_0(\Omega)$.
 \end{definition}
 
+\begin{examples}[Sobolev Functions]
+	A main tool in constructing Sobolev functions for $n \geq 2$ is using that the origin in $\mathbb{R}^n$ has vanishing $W^{1,p}$-capacity.
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
+		\item Let $\Omega := \mathbb{R}$, $A$ Lebesgue-measurable and $u := \chi_A$. Then $u \notin W^{1,p}(\Omega)$, since by theorem \ref{thm:W1p} $u$ must admit a continuous representant, which it obviously does not.
+		\item Let $\Omega := B_1(0) \subseteq \mathbb{R}^n$ for $n \geq 2$. Then $u : \Omega \to \wbar{\mathbb{R}}$ defined by $u(x) := \log\abs{x}$ belongs to $L^p(\Omega)$ for any $1 \leq p < \infty$ and moreover, $u \in W^{1,p}(\Omega)$ for any $p < n$.
+		\item Let $\Omega := B_{1/e}(0) \subseteq \mathbb{R}^n$ for $n \geq 2$. Then $u : \Omega \to \wbar{\mathbb{R}}$ defined by $u(x) := \log\log\frac{1}{\abs{x}}$ belongs to $W^{1,n}(\Omega)$.
+		\item Let $\Omega := B_{1/2}(0) \subseteq \mathbb{R}^n$. For $\alpha \in \mathbb{R}$ define $u_\alpha : \Omega \to \wbar{\mathbb{R}}$ by $u_\alpha(x) := \abs[0]{\log\abs{x}}^\alpha$. Then $u_\alpha \in H^1(\Omega)$ for $n = 1$ if and only if $\alpha = 0$, for $n = 2$ if and only if $\alpha \in \intoo[0]{-\infty,1/2}$ and for $n \geq 3$ if and only if $\alpha \in \mathbb{R}$.
+	\end{enumerate}
+\end{examples}
+
+\begin{remark}
+	Using proposition \ref{prop:inclusion}, we immediately get
+	\begin{equation*}
+		W^{1,q}(\Omega) \hookrightarrow W^{1,p}(\Omega)
+	\end{equation*}
+	\noindent for all $1 \leq p \leq q \leq \infty$ whenever $\Omega \subseteq \subseteq \mathbb{R}^n$.
+\end{remark}
+
 \begin{theorem}
 	Let $\Omega \subseteq \mathbb{R}^n$ open. Then $W^{k,p}(\Omega)$ is
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
@@ -133,7 +149,7 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \end{theorem}
 
 \begin{proof}
-	~
+	The proof basically boils down to using the correponding properties of the Lebesgue spaces $L^p(\Omega)$.
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
 		\item This follows from the fact that $L^p(\Omega)$ is a Banach space for all $1 \leq p \leq \infty$. Let $(f_i)_{i \in \omega}$ be a Cauchy sequence in $W^{k,p}$. By definition of the $W^{k,p}$-norm, $(D^\alpha f_i)_{i \in \omega}$ is a Cauchy sequence in $L^p$. Thus we get $D^\alpha f_i \to f_\alpha$ in $L^p$, in particular, $f_i \to f$ in $L^p$. Using H\"older's inequality we compute
 			\begin{equation*}
@@ -175,13 +191,13 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \begin{theorem}
 	Let $\Omega \subseteq\subseteq \mathbb{R}^n$ and consider the elliptic operator
 	\begin{equation*}
-		L := \frac{\partial}{\partial x^i}\del[3]{a^{ij}\frac{\partial}{\partial x^j}},
+		A_0 := -\frac{\partial}{\partial x^i}\del[3]{a^{ij}\frac{\partial}{\partial x^j}},
 	\end{equation*}
 	\noindent for $a^{ij} \in L^\infty(\Omega)$ symmetric. Then: Given $f \in L^2(\Omega)$, the homogenous Dirichlet problem
 	\begin{align}
 		\label{eq:HDP}
 		\ccases{
-			-Lu = f & \text{in } \Omega,\\
+			A_0u = f & \text{in } \Omega,\\
 			u = 0 & \text{on } \partial\Omega
 		}
 	\end{align}
@@ -189,22 +205,22 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \end{theorem}
 
 \begin{proof}
-	~
+	The proof is divided into two steps.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide=0pt]
 		\item \textit{Derivation of Weak Formulation.} Suppose $u \in C^2(\wbar{\Omega})$ is a solution of (\ref{eq:HDP}). Let $\varphi \in C^\infty_c(\Omega)$. Then integration by parts (see \cite[436]{lee:smooth_manifolds:2013}) yields
 			\begin{equation*}
-				-\int_\Omega L(u) \varphi = - \sum_{j = 1}^n \int_\Omega \mathrm{div}(X_j)\varphi = \int_\Omega a^{ij} \frac{\partial u}{\partial x^j}\frac{\partial \varphi}{\partial x^i} = \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j},
+				-\int_\Omega A_0u \varphi = - \sum_{j = 1}^n \int_\Omega \mathrm{div}(X_j)\varphi = \int_\Omega a^{ij} \frac{\partial u}{\partial x^j}\frac{\partial \varphi}{\partial x^i} = \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j},
 			\end{equation*}
 			\noindent where $X_j := \del[2]{a^{ij}\frac{\partial}{\partial x^j}}_i$. Thus we get the weak formulation:
 			\begin{equation}
 				\label{eq:HDPweak}
 				\forall \varphi \in C^\infty_c(\Omega):\>\int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial \varphi}{\partial x^j} = \int_\Omega f \varphi.
 			\end{equation}
-		\item \textit{Existence and Uniqueness of Weak Solutions.} Since $L$ is uniformly elliptic, there exists $\lambda > 0$ such that 
+		\item \textit{Existence and Uniqueness of Weak Solutions.} Since $A_0$ is uniformly elliptic, there exists $\lambda > 0$ such that 
 			\begin{equation*}
-				a^{ij}(x) \xi_i \xi_j \geq \lambda \abs{\xi}^2
+				\xi^t(a^{ij}(x))\xi = a^{ij}(x) \xi_i \xi_j \geq \lambda \abs{\xi}^2
 			\end{equation*}
-			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Moreover, since $a^{ij} \in L^\infty(\Omega)$, we get that $L$ is uniformly bounded, i.e. there exists $\Lambda > 0$ such that
+			\noindent holds for any $x \in \Omega$ and $\xi \in \mathbb{R}^n$. Moreover, since $a^{ij} \in L^\infty(\Omega)$, we get that $A_0$ is uniformly bounded, i.e. there exists $\Lambda > 0$ such that
 			\begin{equation*}
 				a^{ij}(x) \xi_i \eta_j \leq \Lambda \abs{\xi}\abs{\eta}
 			\end{equation*}
@@ -212,7 +228,11 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 			\begin{equation*}
 				\Lambda = \sum_{i,j = 1}^n \norm[0]{a^{ij}}_{L^\infty(\Omega)}
 			\end{equation*}
-			\noindent holds for almost all $x \in \Omega$ and $\xi,\eta \in \mathbb{R}^n$. Now define a bilinear form $\langle \cdot,\cdot \rangle_a : H^1_0(\Omega) \times H^1_0(\Omega) \to \mathbb{R}$ by
+			\noindent holds for almost all $x \in \Omega$ and $\xi,\eta \in \mathbb{R}^n$. Now define a bilinear form 
+			\begin{equation*}
+				\langle \cdot,\cdot \rangle_a : H^1_0(\Omega) \times H^1_0(\Omega) \to \mathbb{R}
+			\end{equation*}
+			\noindent by
 			\begin{equation}
 				\label{eq:inner_prod}
 				\langle u,v \rangle_a := \int_\Omega a^{ij} \frac{\partial u}{\partial x^i}\frac{\partial v}{\partial x^j}
@@ -229,9 +249,44 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 			\begin{equation*}
 				\langle u,\varphi \rangle_a = l(\varphi) := \int_\Omega f \varphi
 			\end{equation*}
-			\noindent holds for all $\varphi \in H^1_0(\Omega)$, since $l \in (H^1_0(\Omega))^*$.
+			\noindent holds for all $\varphi \in H^1_0(\Omega)$, since $l \in (H^1_0(\Omega))^*$ by
+			\begin{equation*}
+				\abs{l(\varphi)} \leq \norm{f}_{L^2}\norm{\varphi}_{L^2} \leq \norm{f}_{L^2}\norm{\varphi}_{H^1}.
+			\end{equation*}
 	\end{enumerate}
 \end{proof}
+
+\begin{examples}[Elliptic Operators in Divergence Form]
+	~
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item Set $a^{ij}(x) := \delta^{ij}$ for all $x \in \Omega$. Then $A_0 = - \Delta$. Moroever $A_0$ is uniformly elliptic, since $\delta^{ij}\xi_i\xi_j = \abs{\xi}^2$ for all $\xi \in \mathbb{R}^n$.
+		\item For $\Omega \subseteq \mathbb{R}^2$ consider
+			\begin{equation*}
+				(a^{ij}(x,y)) := \begin{pmatrix}
+					2 & xy/\abs{xy}\\
+					xy/\abs{xy} & 2
+				\end{pmatrix}.
+			\end{equation*}
+			Then $A_0$ is elliptic. Indeed, $a^{ij}$ admits the eigenvalues $1$ and $3$, thus by the \emph{Min-Max theorem} we get that
+			\begin{equation*}
+				1 \leq R_{A(x,y)}(z) \leq 3
+			\end{equation*}
+			\noindent for all $(x,y) \in \Omega$ and where $R_A(z)$ denotes the \emph{Rayleigh-Ritz quotient} defined by
+			\begin{equation*}
+				R_A(z) := \frac{\langle Az,z\rangle}{\norm{z}^2}
+			\end{equation*}
+			\noindent for $z \in \mathbb{C}^2$.
+		\item A non-example would be $a^{ij}(x) := 0$.
+		\item Another non-example is given by
+			\begin{equation*}
+				(a^{ij}(x,y)) := \begin{pmatrix}
+					x^2 + y^2 & x + y\\
+					x + y & 1
+				\end{pmatrix}
+			\end{equation*}
+			\noindent for any $\Omega \subseteq \mathbb{R}^2$ containing the origin. Indeed, we get $\det(a^{ij}(0,0)) = 0$.
+	\end{enumerate}
+\end{examples}
 
 \subsection*{Sobolev Spaces on an Interval}
 In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
@@ -242,7 +297,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 	\begin{equation*}
 		\forall \varphi \in C^\infty_c(I): \> \int_I f\varphi' dx = 0.
 	\end{equation*}
-	Then $f$ is almost everywehere constant.
+	Then $f$ is almost everywhere constant.
 \end{lemma}
 
 \begin{proof}
@@ -283,7 +338,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 	\begin{equation*}
 		\wtilde{u}(x) = \wtilde{u}(x_0) + \int_{x_0}^x u'(t)dt
 	\end{equation*}
-	\noindent holds for all $x,x_0 \in I$.
+	\noindent holds for all $x,x_0 \in I$. In particular, $\wtilde{u}$ is classically differentiable a.e. and $\wtilde{u}' = u'$.
 \end{theorem}
 
 \begin{proof}
@@ -291,10 +346,11 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 	\begin{equation*}
 		\int_I (u - v)\varphi' = \int_I u\varphi' - \int_I v\varphi' = -\int_I u'\varphi + \int_I u'\varphi = 0.
 	\end{equation*}
-	Thus lemma \ref{lem:BoisReymond} yields $u = c + v$, for some $c \in \mathbb{R}$. But $c = u(x_0)$ and we conclude by setting
+	Thus lemma \ref{lem:BoisReymond} yields $u = c + v$, for some $c \in \mathbb{R}$. Set
 	\begin{equation*}
-		\wtilde{u}(x) := u(x_0) + \int_{x_0}^x u'(t) dt.
+		\wtilde{u}(x) := c + \int_{x_0}^x u'(t) dt.
 	\end{equation*}
+	Then $\wtilde{u}(x_0) = c$ and thus the statement follows.
 \end{proof}
 
 \begin{theorem}[Characterization of $W^{1,p}(I)$]
@@ -352,7 +408,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 \end{theorem}
 
 \begin{proof}
-	First we consider the case $I = \intoo{0,\infty}$. We extend $u$ by continuity to $0$ and then we extend $u$ by means of even symmetry. If $I$ is bounded we can without loss of generality assume that $I = \intoo{0,1}$. Now use a cut-off function.
+	First we consider the case $I = \intoo{0,\infty}$. We extend $u$ by continuity to $0$ and then we extend $u$ by means of \emph{even symmetry}. If $I$ is bounded we can without loss of generality assume that $I = \intoo{0,1}$. Now use a cut-off function.
 \end{proof}
 
 \begin{theorem}[Approximation Theorem]
@@ -375,7 +431,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 \end{theorem}
 
 \begin{proof}
-	Without loss of generality, consider $\abs{I} \leq 1$. By theorem \ref{thm:W1p} we get that
+	First consider $I$ bounded. By theorem \ref{thm:W1p} we get that
 	\begin{equation*}
 		\norm{u}_{L^\infty} = \sup_{x \in I} \abs[0]{u(x)} \leq \abs{u(y)} + \sup_{x \in I} \abs[3]{\int_y^x u'(t) dt} \leq \abs{u(y)} + \norm[0]{u'}_{L^1}, 
 	\end{equation*}
@@ -383,6 +439,27 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 	\begin{equation*}
 		\norm{u}_{L^\infty} \leq \inf_{y \in I} \abs{u(y)} + \norm[0]{u'}_{L^1} \leq \frac{1}{\abs{I}}\int_I \abs{u(y)} + \norm[0]{u'}_{L^1} \leq C \norm{u}_{W^{1,1}} \leq C \norm{u}_{W^{1,p}}.
 	\end{equation*}
+	Assume now that $I$ is unbounded. Then we find $I' \subseteq \subseteq I$ such that 
+	\begin{equation*}
+		\norm{u}_{L^\infty(I')} \geq \frac{1}{2}\norm{u}_{L^\infty(I)}
+	\end{equation*}
+	\noindent and thus the claim follows by the previous computation. Indeed, note that by theorem \ref{thm:W1p}, we have that 
+	\begin{equation*}
+		\abs{u(x)} \leq \abs{u(y)} + \norm[0]{u'}_{L^1(I)}
+	\end{equation*}
+	\noindent for all $x \in I$ and fixed $y \in I$, and thus $u \in L^\infty(I)$. Moreover, there exists $x_0 \in I$ such that $\abs{u(x_0)} > \frac{1}{2}\norm{u}_{L^\infty(I)}$, if not, this would contradict the definition of the supremum norm. Since $u$ is continuous by theorem \ref{thm:W1p}, we find $\delta > 0$ such that
+	\begin{equation*}
+		\abs[0]{u(x) - u(x_0)} \leq \abs{u(x_0)} - \frac{1}{2}\norm{u}_{L^\infty(I)}
+	\end{equation*}
+	\noindent for all $x \in I$ such that $\abs{x - x_0} < \delta$. Hence the reversed triangle inequality yields
+	\begin{equation*}
+		\frac{1}{2}\norm{u}_{L^\infty(I)} - \abs{u(x_0)} \leq \abs[0]{u(x)} - \abs{u(x_0)} \leq \abs{u(x_0)} - \frac{1}{2}\norm{u}_{L^\infty(I)}
+	\end{equation*}
+	\noindent and so
+	\begin{equation*}
+		\frac{1}{2}\norm{u}_{L^\infty(I)} \leq \abs[0]{u(x)}
+	\end{equation*}
+	\noindent for all $x \in I \cap \intoo{x_0 - \delta,x_0 + \delta} =: I'$.
 \end{proof}
 
 \begin{corollary}
@@ -403,10 +480,6 @@ In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b
 	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
 \end{proposition}
 
-\begin{proof}
-	
-\end{proof}
-
 \begin{proposition}
 	Let $f \in C^0(\wbar{I})$. Then the weak solution $u$ of the homogenous Neumann problem
 	\begin{align*}
@@ -418,22 +491,40 @@ In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b
 	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
 \end{proposition}
 
-\begin{proof}
-	
-\end{proof}
-
 \subsection*{Sobolev Spaces on a Domain}
 
-\begin{example}[Vanishing $W^{1,p}$-Capacity]
-	For $n \in \omega$, $n > 1$, and $1 \leq p \leq n$, the set $\cbr{0}$ has vanishing $W^{1,p}$-capacity.
-\end{example}
-
 \begin{theorem}[Meyers-Serrin]
+	\label{thm:Meyers-Serrin}
 	Let $\Omega \subseteq \mathbb{R}^n$ be open. Then $C^\infty(\Omega) \cap W^{1,p}(\Omega)$ is dense in $W^{1,p}(\Omega)$ for every $1 \leq p < \infty$.
 \end{theorem}
 
 \begin{proof}
 	Convolutions and a partition of unity argument.
+\end{proof}
+
+\begin{proposition}[Product Rule]
+	Let $u,v \in W^{1,p}(\Omega) \cap L^\infty(\Omega)$. Then $uv \in W^{1,p}(\Omega) \cap L^\infty(\Omega)$ and
+	\begin{equation*}
+		\partial_\alpha(uv) = (\partial_\alpha u) v + u (\partial_\alpha v).
+	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	First consider the case \underline{$p < \infty$.} Then 
+	\begin{equation*}
+		\norm{uv}_{L^p} \leq \norm{u}_{L^\infty}\norm{v}_{L^p}
+	\end{equation*} 
+	\noindent and
+	\begin{equation*}
+		\norm[0]{(\partial_\alpha u) v + u (\partial_\alpha)v}_{L^p} \leq \norm[0]{\partial_\alpha u}_{L^p} \norm{v}_{L^\infty} + \norm{u}_{L^\infty}\norm[0]{\partial_\alpha v}_{L^p}.
+	\end{equation*}
+	Meyers-Serrin \ref{thm:Meyers-Serrin} yields the existence of sequences $u_k$ and $v_k$ in $C^\infty(\Omega) \cap W^{1,p}(\Omega)$ such that $u_k \to u$ and $v_k \to v$ in $W^{1,p}(\Omega)$. For any $\varphi \in C^\infty_c(\Omega)$, we compute
+	\begin{align*}
+		\int_\Omega uv \partial_\alpha\varphi &= \lim_{k \to \infty} \int_\Omega u_kv_k \partial_\alpha \varphi\\
+		&= - \lim_{k \to \infty} \int_\Omega ((\partial_\alpha u_k)v_k + u_k(\partial_\alpha v_k))\varphi\\
+		&= - \int_\Omega ((\partial_\alpha u)v + u(\partial_\alpha v))\varphi.
+	\end{align*}
+	Now consider the case \underline{$p = \infty$}. We have $uv \in L^\infty(\Omega)$ as well as $(\partial_\alpha u_k)v_k + u_k(\partial_\alpha v_k)\in L^\infty(\Omega)$. Let $\varphi \in C^\infty_c(\Omega)$. Hence we find $\Omega' \subseteq \subseteq \Omega$ with $\supp \varphi \subseteq \Omega'$. But then the above calculation holds on $\Omega'$.
 \end{proof}
 
 \begin{theorem}[Characterization of $W^{1,p}(\Omega)$]
@@ -553,7 +644,7 @@ Again, we tackle first the \emph{local theory}.
 	For $p = \infty$, the statement is trivially true, since any function in $W^{1,\infty}(\mathbb{R}^n)$ is Lipschitz continuous since $\mathbb{R}^n$ is convex, and thus belongs to $C^{0,1}(\mathbb{R}^n)$.
 \end{remark}
 
-The proof uses the notion of so-called \emph{Morrey-Campanato spaces}. 
+The proof uses the notion of so-called \emph{Campanato spaces}. 
 
 \begin{theorem}
 	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of type $A$ for some $A > 0$ and $1 \leq p < \infty$, $\lambda > n$, $\alpha := \frac{\lambda - n}{p}$. Then
