@@ -618,6 +618,22 @@ Again, we tackle first the \emph{local theory}.
 \end{corollary}
 
 \subsection*{Sobolev Embeddings}
+
+\begin{theorem}[Sobolev Embedding Theorem]
+	\label{thm:Sobolev_embedding_theorem}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $k \in \omega$, $k \geq 1$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item If $kp < n$, then $W^{k,p}(\Omega) \hookrightarrow L^q(\Omega)$ for all $1 \leq q \leq p^* := \frac{np}{n - pk}$ and the embedding is compact for $q < p^*$.
+		\item If $kp = n$, then $W^{k,p}(\Omega) \hookrightarrow L^q(\Omega)$ for all $1 \leq q < \infty$ and those embeddings are compact.
+		\item If $kp > n$ and $k - \frac{n}{p} \notin \omega$, then $W^{k,p}(\Omega) \hookrightarrow C^{l,\alpha}(\Omega)$ for $l := \sbr[1]{k - \frac{n}{p}}$ and $0 \leq \alpha \leq \alpha^* := k - l - \frac{n}{p}$ and those embeddings are compact for $\alpha < \alpha^*$.
+		\item If $kp > n$ and $k - \frac{n}{p} = l + 1 \in \omega$, then $W^{k,p}(\Omega) \hookrightarrow C^{l,\alpha}(\Omega)$ for $0 \leq \alpha < 1$ and those embeddings are compact.
+	\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $u \in H^1(\Omega)$. Moreover, assume that $u \in H^k(\Omega)$ for some $k > \frac{n}{2} + 2$. Then $u \in C^2(\Omega)$.
+\end{corollary}
+
 \subsubsection*{$p < n$}
 
 \begin{theorem}[Sobolev-Gagliardo-Nirenberg]
@@ -657,12 +673,16 @@ The proof uses the notion of so-called \emph{Campanato spaces}.
 	The inclusion $\mathcal{L}^{p,\lambda}(\Omega) \cong C^{0,\alpha}(\wbar{\Omega})$ follows from the Campanato-theorem and does also hold for general $\Omega \subseteq \mathbb{R}^n$ open.
 \end{proof}
 
-\begin{theorem}[Poincar\'e-Wirtinger Inequality]
+\begin{lemma}
 	Let $u \in W^{1,p}(\mathbb{R}^n)$, $1 \leq p < \infty$. Then for all $x_0 \in \mathbb{R}^n$ and $r > 0$ we have that
 	\begin{equation*}
 		\norm[0]{u - u_{x_0,r}}_{L^p(B_r(x_0))}^p \leq Cr^p \norm[0]{\nabla u}^p_{L^p(B_r(x_0))}.
 	\end{equation*}
-\end{theorem}
+\end{lemma}
+
+\begin{proof}
+	This is an application of the Poincar\'e-Wirtinger inequality \ref{thm:PW} since without loss of generality, we may assume $x_0 = 0$ and $r = 1$.
+\end{proof}
 
 Now the proof of the Sobolev embedding theorem for $p > n$ is immediaty by considering
 \begin{equation*}
@@ -672,12 +692,45 @@ Now the proof of the Sobolev embedding theorem for $p > n$ is immediaty by consi
 \end{equation*}
 \noindent and observing that $\mathbb{R}^n$ is of type $\frac{\pi^{n/2}}{\Gamma(n/2 + 1)} > 0$.
 
-\begin{theorem}
-	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ connected and of class $C^1$ and $1 \leq p < \infty$. Then 
+\begin{theorem}[Poincar\'e-Wirtinger Inequality]
+	\label{thm:PW}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ connected and of class $C^1$ and $1 \leq p < \infty$. Then there exists $C \geq 0$ such that 
 	\begin{equation*}
-		\norm[0]{u - \wbar{u}}_{L^p(\Omega)}^p \leq C \norm[0]{\nabla u}_{L^p(\Omega)}^p.
+		\norm[0]{u - \wbar{u}}_{L^p(\Omega)} \leq C \norm[0]{\nabla u}_{L^p(\Omega)}
 	\end{equation*}
+	\noindent holds for all $u \in W^{1,p}(\Omega)$.
 \end{theorem}
+
+\begin{proof}
+	Towards a contradiction, assume that for any $C \geq 0$ there exists $u \in W^{1,p}(\Omega)$ such that 
+	\begin{equation*}
+		\norm[0]{u - \wbar{u}}_{L^p(\Omega)} > C \norm[0]{\nabla u}_{L^p(\Omega)}.
+	\end{equation*}
+	In particular, there exists a sequence $u_k$ in $W^{1,p}(\Omega)$, such that 
+	\begin{equation*}
+		\norm[0]{u_k - \wbar{u_k}}_{L^p(\Omega)} > k \norm[0]{\nabla u_k}_{L^p(\Omega)}
+	\end{equation*}
+	\noindent holds for each $k \in \omega$, $k \geq 1$. Defining $v_k := u_k - \wbar{u_k}$ and normalizing, i.e. setting $w_k := v_k/\norm{v_k}_{L^p(\Omega)}$ (this is valid since $\norm{v_k}_{L^p(\Omega)} > 0$), yields a sequence $w_k$ in $W^{1,p}(\Omega)$ such that 
+	\begin{equation*}
+		\wbar{w_k} = 0, \qquad \norm{w_k}_{L^p(\Omega)} = 1 \qquad \text{and} \qquad \norm[0]{\nabla w_k}_{L^p(\Omega)} \to 0
+	\end{equation*}
+	\noindent for any $k \in \omega$, $k \geq 1$. Using the Sobolev embedding theorem \ref{thm:Sobolev_embedding_theorem}, we get
+	\begin{equation*}
+		W^{1,p}(\Omega) \hookrightarrow W^{1,n}(\Omega) \hookrightarrow L^p(\Omega) \qquad \text{and} \qquad W^{1,p}(\Omega) \hookrightarrow L^p(\Omega)
+	\end{equation*}
+	\noindent if $p \geq n$ and $p < n$, respectively. Moreover, those are compact embeddings. Thus since $w_k$ is bounded in $W^{1,p}(\Omega)$, we have that $w_{k_i} \to w$ in $L^p(\Omega)$ for a subsequence $w_{k_i}$ of $w_k$. Moreover, $\nabla w = 0$. Indeed, for any $\varphi \in C^\infty_c(\Omega)$ we compute
+	\begin{equation*}
+		\int_\Omega w\nabla \varphi = \lim_{i \to \infty}\int_\Omega w_{k_i}\nabla\varphi = -\lim_{i \to \infty}\int_\Omega \nabla w_{k_i}\varphi = 0.
+	\end{equation*}
+	By the constancy lemma we therefore conclude that $w = c \in \mathbb{R}$ a.e. But
+	\begin{equation*}
+		\wbar{w} = \frac{1}{\abs{\Omega}} \int_\Omega w = \frac{1}{\abs{\Omega}} \lim_{i \to \infty} \int_\Omega w_{k_i} = 0
+	\end{equation*}
+	\noindent implies $w = 0$ a.e. contradicting
+	\begin{equation*}
+		\norm{w}_{L^p(\Omega)} = \lim_{i \to \infty} \norm[0]{w_{k_i}}_{L^p(\Omega)} = 1.
+	\end{equation*}
+\end{proof}
 
 \subsubsection*{$p = n$}
 
