@@ -35,6 +35,23 @@ This serves as a summary of useful facts from \emph{measure theory} which are us
 	If $\abs[0]{\Omega} < \infty$ and $0 < p < q \leq \infty$. Then $L^q(\Omega) \subseteq L^p(\Omega)$.
 \end{proposition}
 
+\begin{proposition}[Jensen's Inequality]
+	\label{prop:Jensen}
+	Let $\Omega \subseteq \mathbb{R}^n$ bounded and $\varphi : \mathbb{R} \to \mathbb{R}$ convex. Then
+	\begin{equation*}
+		\varphi\del[3]{\frac{1}{\abs{\Omega}}\int_\Omega f} \leq \frac{1}{\abs{\Omega}} \int_\Omega \varphi \circ f
+	\end{equation*}
+	\noindent for any $f \in L^1(\Omega)$.
+\end{proposition}
+
+\begin{proposition}[Dual of $L^p(\Omega)$]
+	Let $\Omega \subseteq \mathbb{R}^n$ and $1 \leq p < \infty$. Then the mapping $T : L^q(\Omega) \to (L^p(\Omega))^*$ defined by
+	\begin{equation*}
+		T(f)(g) := \int_\Omega fg
+	\end{equation*}
+	\noindent is an isometric isomorphism.
+\end{proposition}
+
 \begin{proposition}[Integration by Parts]
 	\label{prop:IP}
 	Let $(M,g)$ be a compact Riemannian manifold with boundary. Then
@@ -165,22 +182,32 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 
 \begin{lemma}[Poincar\'e Inequality]
 	\label{lem:PI}
-	Let $\Omega \subseteq \mathbb{R}^n$ open and bounded. Then for any $u \in C^\infty_c(\Omega)$ we have that
+	Let $\Omega \subseteq\subseteq \mathbb{R}^n$ and $1 \leq p < \infty$. Then for any $u \in C^\infty_c(\Omega)$ we have that
 	\begin{equation*}
-		\norm{u}_{L^2} \leq C\norm[0]{\nabla u}_{L^2}.
+		\norm{u}_{L^p} \leq C\norm[0]{\nabla u}_{L^p}.
 	\end{equation*}
 \end{lemma}
 
 \begin{proof}
-	Let $n = 1$. Since $\Omega$ is bounded, we get that $\Omega \subseteq \intcc{a,b}$ and we may extend $u$ on $\intcc{a,b} =: I$ to be zero. Hence an application of Jensen's inequality (or Cauchy-Schwarz) yields
+	Let $n = 1$. Since $\Omega$ is bounded, we get that $\Omega \subseteq \intoo{a,b}$ and we may extend $u$ on $\intcc{a,b} =: I$ to be zero. Hence an application of Jensen's inequality \ref{prop:Jensen} yields
 	\begin{equation*}
-		\abs{u(x)}^2 = \abs{u(x) - u(a)}^2 = \abs[3]{\int_a^x u'(t)dt}^2 \leq (x - a) \int_a^x \abs[0]{u'(t)}^2dt \leq (b - a) \norm[0]{u'}_{L^2(I)}^2.
+		\abs{u(x)}^p = \abs[3]{\int_a^x u'(t)dt}^p \leq (x - a) \int_a^x \abs[0]{u'(t)}^pdt \leq (b - a)^{p-1} \norm[0]{u'}_{L^p(I)}^p.
 	\end{equation*}
 	Thus
 	\begin{equation*}
-		\norm[0]{u}_{L^2(\Omega)}^2 \leq \norm{u}_{L^2(I)}^2 \leq (b - a)^2 \norm[0]{u'}^2_{L^2(I)} = (b - a)^2 \norm[0]{u'}_{L^2(\Omega)}^2
+		\norm[0]{u}_{L^p(\Omega)}^p = \norm{u}_{L^p(I)}^p \leq (b - a)^p \norm[0]{u'}^p_{L^p(I)} = (b - a)^p \norm[0]{u'}_{L^p(\Omega)}^p
 	\end{equation*}
-	\noindent where the last equality follows due to the fact that $u$ and thus $u'$ is compactly supported in $\Omega$. If $n > 1$, we have $\Omega \subseteq \intcc{a,b} \times \mathbb{R}^{n-1}$ and thus the claim follows by reduction to the previous case.
+	\noindent where the last equality follows due to the fact that $u$ and thus $u'$ is compactly supported in $\Omega$. If $n > 1$, we have $\Omega \subseteq \intoo{a,b} \times \mathbb{R}^{n-1}$. Hence for fixed $y \in \mathbb{R}^{n - 1}$, above computation yields
+	\begin{equation*}
+		\abs[0]{u(x,y)}^p \leq (b - a)^{p - 1}\norm[0]{\partial_xu(-,y)}^p_{L^p(I)}
+	\end{equation*}
+	\noindent for any $x \in I$. Hence
+	\begin{align*}
+		\norm{u}_{L^p(\Omega)}^p &= \norm{u}_{L^p(\intoo{a,b} \times \mathbb{R}^{n - 1})}\\
+		&\leq (b - a)^p \int_{\mathbb{R}^{n - 1}} \norm[0]{\partial_xu(-,y)}^p_{L^p(I)}dy\\
+		&\leq (b - a)^p \norm[0]{\nabla u}^p_{L^p(\intoo{a,b} \times \mathbb{R}^{n - 1})}\\
+		&= (b - a)^p \norm[0]{\nabla u}_{L^p(\Omega)}^p.
+	\end{align*}
 \end{proof}
 
 \begin{theorem}[Riesz Representation Theorem]
@@ -604,14 +631,38 @@ Again, we tackle first the \emph{local theory}.
 \end{proof}
 
 \begin{theorem}[Characterization of $H^1(\Omega)$]
-	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$. Then
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$. Then
 	\begin{equation*}
 		H^1(\Omega) = H^1_0(\Omega) \oplus \cbr[0]{u \in H^1(\Omega) : \Delta u = 0}.
 	\end{equation*}
 \end{theorem}
 
+\begin{proof}
+	Let $u \in H^1(\Omega)$ and let $u_0 \in H^1_0(\Omega)$ denote the unique solution of
+	\begin{equation*}
+		\forall \varphi \in C^\infty_c(\Omega): \> \int_\Omega \nabla u_0 \nabla \varphi = \int_\Omega \nabla u \nabla \varphi.
+	\end{equation*}
+	Set $u_1 := u - u_0$. Then for any $\varphi \in C^\infty_c(\Omega)$ we compute
+	\begin{equation*}
+		-\int_\Omega u_1 \Delta \varphi = \int_\Omega \nabla u_1 \nabla \varphi = \int_\Omega \nabla u \nabla \varphi - \int_\Omega \nabla u_0 \nabla \varphi = 0.
+	\end{equation*}
+	Thus $u = u_0 + u_1$ is of the desired form. Moreover, we have
+	\begin{equation*}
+		\norm[0]{\nabla u}_{L^2(\Omega)}^2 = \norm[0]{\nabla u_0}^2_{L^2(\Omega)} + \norm[0]{\nabla u_1}^2_{L^2(\Omega)} + 2 \int_\Omega \nabla u_0 \nabla u_1.
+	\end{equation*}
+	Since $u_0 \in H^1_0(\Omega)$, we find a sequence $\varphi_k$ in $C^\infty_c(\Omega)$ such that $\varphi_k \to u$ in $H^1(\Omega)$. But then
+	\begin{equation*}
+		\int_\Omega \nabla u_0 \nabla u_1 = \lim_{k \to \infty} \int_\Omega \nabla \varphi_k \nabla u_1 = 0.
+	\end{equation*}
+	Hence
+	\begin{equation*}
+		\norm[0]{\nabla u}_{L^2(\Omega)}^2 = \norm[0]{\nabla u_0}^2_{L^2(\Omega)} + \norm[0]{\nabla u_1}^2_{L^2(\Omega)}
+	\end{equation*}
+	\noindent which implies that the decomposition is direct. Indeed, suppose $u \in H^1_0(\Omega)$ such that $\Delta u = 0$. Then $u = u/2 + u/2$ which yields $u = 0$ by the above computation.
+\end{proof}
+
 \begin{corollary}[Characterization of $H^1_0(\Omega)$]
-	Let $\subseteq \subseteq \mathbb{R}^n$. Then
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$. Then
 	\begin{equation*}
 		H^1_0(\Omega) = \cbr[0]{u \in H^1(\Omega) : u\vert_{\partial \Omega} = 0}.
 	\end{equation*}
