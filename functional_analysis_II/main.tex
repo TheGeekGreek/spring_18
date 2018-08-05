@@ -191,7 +191,7 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \begin{proof}
 	Let $n = 1$. Since $\Omega$ is bounded, we get that $\Omega \subseteq \intoo{a,b}$ and we may extend $u$ on $\intcc{a,b} =: I$ to be zero. Hence an application of Jensen's inequality \ref{prop:Jensen} yields
 	\begin{equation*}
-		\abs{u(x)}^p = \abs[3]{\int_a^x u'(t)dt}^p \leq (x - a) \int_a^x \abs[0]{u'(t)}^pdt \leq (b - a)^{p-1} \norm[0]{u'}_{L^p(I)}^p.
+		\abs{u(x)}^p = \abs[3]{\int_a^x u'(t)dt}^p \leq (x - a)^{p - 1} \int_a^x \abs[0]{u'(t)}^pdt \leq (b - a)^{p-1} \norm[0]{u'}_{L^p(I)}^p.
 	\end{equation*}
 	Thus
 	\begin{equation*}
@@ -493,7 +493,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 	Let $I$ be unbounded and $u \in W^{1,p}(I)$ for $1 \leq p < \infty$. Then $u \to 0$ as $\abs{x} \to \infty$.
 \end{corollary}
 
-\subsection*{Dirichlet and Neumann Boundary Problems on $I$}
+\subsection*{Dirichlet and Neumann Boundary Problems on an Interval}
 In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b}$.
 
 \begin{proposition}
@@ -501,7 +501,7 @@ In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b
 	\begin{align*}
 		\ccases{
 			-u'' = f & \text{in }I,\\
-			u(a) = 0 = u(b).
+			u(a) = 0 = u(b),
 		}
 	\end{align*}
 	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
@@ -512,7 +512,7 @@ In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b
 	\begin{align*}
 		\ccases{
 			-u'' + u = f & \text{in }I,\\
-			u'(a) = 0 = u'(b).
+			u'(a) = 0 = u'(b),
 		}
 	\end{align*}
 	\noindent is a classical solution, i.e. $u \in C^2(\wbar{I})$.
@@ -631,6 +631,7 @@ Again, we tackle first the \emph{local theory}.
 \end{proof}
 
 \begin{theorem}[Characterization of $H^1(\Omega)$]
+	\label{thm:characterization_H^1}
 	Let $\Omega \subseteq \subseteq \mathbb{R}^n$. Then
 	\begin{equation*}
 		H^1(\Omega) = H^1_0(\Omega) \oplus \cbr[0]{u \in H^1(\Omega) : \Delta u = 0}.
@@ -667,6 +668,20 @@ Again, we tackle first the \emph{local theory}.
 		H^1_0(\Omega) = \cbr[0]{u \in H^1(\Omega) : u\vert_{\partial \Omega} = 0}.
 	\end{equation*}
 \end{corollary}
+
+\begin{proof}
+	Suppose $u \in H^1_0(\Omega)$. Then $\varphi_k \to u$ in $H^1(\Omega)$ for some sequence $\varphi_k$ in $C^\infty_c(\Omega)$. Hence
+	\begin{equation*}
+		u\vert_{\partial \Omega} = \lim_{k \to \infty} \varphi_k\vert_{\partial\Omega} = 0
+	\end{equation*}
+	\noindent by continuity of the trace operator. Conversly, suppose $u \in H^1(\Omega)$ with $u\vert_{\partial \Omega} = 0$. Using the characterization of $H^1(\Omega)$ \ref{thm:characterization_H^1}, we get a unique decomposition $u = u_0 + u_1$ for $u_0 \in H^1_0(\Omega)$ and $u_1 \in H^1(\Omega)$ with $\Delta u_1 = 0$. Moreover, observe that
+	\begin{equation*}
+		0 = u\vert_{\partial \Omega} = u_0\vert_{\partial\Omega} + u_1\vert_{\partial \Omega} = u_1\vert_{\partial \Omega}.
+	\end{equation*}
+	Since harmonic extensions are unique, we conclude $u_1 = 0$.
+\end{proof}
+
+
 
 \subsection*{Sobolev Embeddings}
 
