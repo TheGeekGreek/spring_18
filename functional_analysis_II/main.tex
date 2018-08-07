@@ -139,7 +139,7 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \end{definition}
 
 \begin{examples}[Sobolev Functions]
-	A main tool in constructing Sobolev functions for $n \geq 2$ is using that the origin in $\mathbb{R}^n$ has vanishing $W^{1,p}$-capacity.
+	A main tool in constructing Sobolev functions for $n \geq 2$ is using that the origin in $\mathbb{R}^n$ has vanishing $W^{1,p}$-capacity for $1 \leq p \leq n$.
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
 		\item Let $\Omega := \mathbb{R}$, $A$ Lebesgue-measurable and $u := \chi_A$. Then $u \notin W^{1,p}(\Omega)$, since by theorem \ref{thm:W1p} $u$ must admit a continuous representant, which it obviously does not.
 		\item Let $\Omega := B_1(0) \subseteq \mathbb{R}^n$ for $n \geq 2$. Then $u : \Omega \to \wbar{\mathbb{R}}$ defined by $u(x) := \log\abs{x}$ belongs to $L^p(\Omega)$ for any $1 \leq p < \infty$ and moreover, $u \in W^{1,p}(\Omega)$ for any $p < n$.
@@ -681,8 +681,6 @@ Again, we tackle first the \emph{local theory}.
 	Since harmonic extensions are unique, we conclude $u_1 = 0$.
 \end{proof}
 
-
-
 \subsection*{Sobolev Embeddings}
 
 \begin{theorem}[Sobolev Embedding Theorem]
@@ -710,7 +708,13 @@ Again, we tackle first the \emph{local theory}.
 \end{theorem}
 
 \begin{theorem}[Sobolev-Gagliardo-Nirenberg Compactness]
-	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ and $1 \leq p < n$. Then $W^{1,p}(\Omega) \hookrightarrow L^q(\Omega)$ for $1 \leq q \leq p^*$ and the embedding is compact if $q < p^*$.
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ of class $C^1$ and $1 \leq p < n$. Then $W^{1,p}(\Omega) \hookrightarrow L^q(\Omega)$ for $1 \leq q \leq p^*$ and the embedding is compact if $q < p^*$.
+\end{theorem}
+
+\subsubsection*{$p = n$}
+
+\begin{theorem}
+	It holds that $W^{1,n}(\mathbb{R}^n) \hookrightarrow L^p(\mathbb{R}^n)$ for $n \leq p < \infty$. Moreover, if $\Omega \subseteq \subseteq \mathbb{R}^n$ is of class $C^1$, then $W^{1,n}(\Omega) \hookrightarrow L^p(\Omega)$ compactly for any $1 \leq p < \infty$.
 \end{theorem}
 
 \subsubsection*{$p > n$}
@@ -797,12 +801,6 @@ Now the proof of the Sobolev embedding theorem for $p > n$ is immediaty by consi
 		\norm{w}_{L^p(\Omega)} = \lim_{i \to \infty} \norm[0]{w_{k_i}}_{L^p(\Omega)} = 1.
 	\end{equation*}
 \end{proof}
-
-\subsubsection*{$p = n$}
-
-\begin{theorem}
-	It holds that $W^{1,n}(\mathbb{R}^n) \hookrightarrow L^p(\mathbb{R}^n)$ for $n \leq p < \infty$.
-\end{theorem}
 
 \input{regularity_theory.tex}
 \input{Schauder_theory.tex}

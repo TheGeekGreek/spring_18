@@ -21,17 +21,36 @@ Let $\Omega \subseteq \subseteq \mathbb{R}^n$. In what follows, we consider the 
 \end{theorem}
 
 \begin{proof}
-	Consider the perturbation $v_\varepsilon := u + \varepsilon e^{\gamma x_1}$ for $\varepsilon,\gamma > 0$ and use the first and second derivative test.
+	Consider the perturbation $u_\varepsilon := u + \varepsilon e^{\gamma x_1}$ for $\varepsilon,\gamma > 0$ and use the first and second derivative test.
 \end{proof}
 
 \subsection*{Strong Maximum Principle}
 
+\begin{theorem}[Strong Maximum Principle, E. Hopf]
+	\label{thm:SMP}
+	Let $\Omega \subseteq \subseteq \mathbb{R}^n$ connected and $u \in C^2(\Omega)$ such that $Lu \geq 0$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide=0pt]
+		\item If $c \leq 0$ in $\Omega$, then 
+			\begin{equation*}
+				\del[0]{\exists x_0 \in \Omega:\> \sup_\Omega u = u(x_0) \geq 0} \rightarrow u = u(x_0).
+			\end{equation*}
+		\item If $c = 0$ in $\Omega$, then
+			\begin{equation*}
+				\del[1]{\exists x_0 \in \Omega:\> \sup_\Omega u = u(x_0)} \rightarrow u = u(x_0).
+			\end{equation*}
+		\item 
+			\begin{equation*}
+				\del[1]{\exists x_0 \in \Omega:\> \sup_\Omega u = u(x_0) = 0} \rightarrow u = 0.
+			\end{equation*}
+	\end{enumerate}
+\end{theorem}
+
 \begin{lemma}[Boundary Point Lemma, E. Hopf]
 	Let $B := B_\rho(y) \subseteq \mathbb{R}^n$ and $u \in C^2(B) \cap C^0(\wbar{B})$ such that $Lu \geq 0$ in $B$ with $c \leq 0$. Assume for some $x_0 \in \partial B$ that $u(x_0) \geq 0$ and $u(x) < u(x_0)$ for every $x \in B$. Then
 	\begin{equation*}
-		\limsup_{h \to 0} \frac{u(x_0 + h\eta) - u(x_0)}{h} < 0
+		D_\eta^+(x_0) := \limsup_{h \to 0} \frac{u(x_0 + h\eta) - u(x_0)}{h} < 0
 	\end{equation*}
-	\noindent for $\eta$ the invard pointing unit normal at $x_0$.
+	\noindent for $\eta$ the invard pointing unit normal at $x_0$. Moreover, if $c = 0$, then we do not require $u(x_0) \geq 0$ and if $u(x_0) = 0$ we can neglect the sign of $c$.
 \end{lemma}
 
 \begin{proof}
