@@ -286,7 +286,7 @@ In what follows, let $n \in \omega$, $n \geq 1$, and $1 \leq p \leq \infty$.
 \begin{examples}[Elliptic Operators in Divergence Form]
 	~
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
-		\item Set $a^{ij}(x) := \delta^{ij}$ for all $x \in \Omega$. Then $A_0 = - \Delta$. Moroever $A_0$ is uniformly elliptic, since $\delta^{ij}\xi_i\xi_j = \abs{\xi}^2$ for all $\xi \in \mathbb{R}^n$.
+		\item Set $a^{ij}(x) := \delta^{ij}$ for all $x \in \Omega$. Then $A_0 = - \Delta$. Moreover $A_0$ is uniformly elliptic, since $\delta^{ij}\xi_i\xi_j = \abs{\xi}^2$ for all $\xi \in \mathbb{R}^n$.
 		\item For $\Omega \subseteq \mathbb{R}^2$ consider
 			\begin{equation*}
 				(a^{ij}(x,y)) := \begin{pmatrix}
@@ -399,7 +399,7 @@ In what follows, let $-\infty \leq a < b \leq \infty$ and $I := \intoo{a,b}$.
 \begin{proof}
 	The implication $(a)\Rightarrow(b)$ follows immediately from H\"older's inequality. To prove $(b)\Rightarrow(a)$, we observe that $l : C^\infty_c(I) \to \mathbb{R}$ defined by
 	\begin{equation*}
-		L(\varphi) := \int_I u \varphi'
+		l(\varphi) := \int_I u \varphi'
 	\end{equation*}
 	\noindent is continuous. Since $C^\infty_c(I)$ is dense in $L^q(I)$, we get that $l \in (L^q(I))^*$. Hence we find $g \in L^p$, such that $\int_I g\varphi = l(\varphi)$ and so $u' = -g$.\\
 	Next we show $(a)\Rightarrow(c)$. By theorem \ref{thm:W1p}, we find an absolutely continuous representant $\wtilde{u}$ of $u$. Thus
@@ -571,7 +571,7 @@ In what follows, let us consider $-\infty < a < b < \infty$ and $I := \intoo{a,b
 \end{theorem}
 
 \begin{proof}
-	The proof $(c)\Rightarrow(b)\Rightarrow(a)$ is almost the same as the one given in the characterization theorem for $\Omega$ an interval. For proving $(a)\Rightarrow(c)$, use Meyers-Serrin.
+	The proof $(c)\Rightarrow(b)\Leftrightarrow(a)$ is almost the same as the one given in the characterization theorem for $\Omega$ an interval. For proving $(a)\Rightarrow(c)$, use Meyers-Serrin.
 \end{proof}
 
 \begin{corollary}
