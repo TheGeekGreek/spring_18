@@ -1,0 +1,477 @@
+\input{header.tex}
+
+\setcounter{section}{1}
+
+\title{Algebraic Topology II Summary}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\begin{abstract}
+	This is a rough summary of the course \emph{Algebraic Topology II} held at \emph{ETH Zurich} by \emph{Prof. Dr. William J. Merry} in spring $2018$. The main focus of this summary is to give a neat preparation for the oral exam.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section*{Homology of Product Spaces}
+\subsection*{The Universal Coefficient and the K\"unneth Theorem}
+
+\begin{proposition}
+	Let $A \in \mathsf{Ab}$. Then $(-) \otimes A : \mathsf{Ab} \to \mathsf{Ab}$ and $A \otimes (-) : \mathsf{Ab} \to \mathsf{Ab}$ are both right exact.
+\end{proposition}
+
+\begin{example}
+	$\mathbb{Z}_m \otimes_{\mathbb{Z}} \mathbb{Z}_n = \mathbb{Z}_{\gcd(m,n)}$.
+\end{example}
+
+\begin{definition}[Tor]
+	Let $A \in \mathsf{Ab}$ and
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & K \arrow[r,"f"] & F \arrow[r] & A \arrow[r] & 0
+		\end{tikzcd} 
+	\end{equation*}
+	\noindent a short free resolution of $A$. Given any $B \in \mathsf{Ab}$, set
+	\begin{equation*}
+		\Tor(A,B) := \ker(f \otimes \id_B).
+	\end{equation*}
+\end{definition}
+
+\begin{example}
+	If either $A$ or $B$ are torsion free, then $\Tor(A,B) = 0$.
+\end{example}
+
+\begin{example}
+	$\Tor(\mathbb{Z}_m,\mathbb{Z}_n) = \mathbb{Z}_{\gcd(m,n)}$.
+\end{example}
+
+\begin{theorem}[Universal Coefficient Theorem]
+	\label{thm:UCT}
+	Let $(C_\bullet,\partial_\bullet)$ be a free chain complex and $A \in \mathsf{Ab}$. Then for any $n \in \omega$ there is a split exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & H_n(C_\bullet) \otimes A \arrow[r] & H_n(C_\bullet \otimes A) \arrow[r] & \Tor(H_{n - 1}(C_\bullet),A) \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[K\"unneth Theorem]
+	\label{thm:Kunneth_theorem}
+	Let $(C_\bullet,\partial_\bullet)$ and $(C'_\bullet,\partial'_\bullet)$ be two non-negative free chain complexes. Then there exists a split exact sequence
+	\begin{equation*}
+		\begin{tikzcd}[column sep=tiny]
+			0 \arrow[r] & \bigoplus\limits_{i + j = n} H_i(C_\bullet) \otimes H_j(C'_\bullet) \arrow[r] & H_n(C_\bullet \otimes C'_\bullet) \arrow[r] & \bigoplus\limits_{k + l = n - 1} \Tor\del[1]{H_k(C_\bullet),H_l(C'_\bullet)} \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+\end{theorem}
+
+\subsection*{The Eilenberg-Zilber Theorem and the K\"unneth Formula}
+
+\begin{theorem}[The Augmented Acyclic Models Theorem]
+	A\label{thm:AAMT}
+	Let $\mathcal{C}$ be a category with family of models $\mathcal{M}$. Consider
+	\begin{equation*}
+		S,T : \mathcal{C} \to \AugCh(\mathsf{Ab})
+	\end{equation*}
+	\noindent such that:
+	\begin{itemize}
+		\item $S_n$ is free with basis contained in $\mathcal{M}$ for any $n \in \omega$.
+		\item Any $M \in \mathcal{M}$ is totally $T$-acyclic, i.e. $H_n(S(M)) = 0$ for all $n \geq 1$ and $H_0(S(M)) = \mathbb{Z}$.
+	\end{itemize}
+	Then there exists a natural augmentation preserving chain map
+	\begin{equation*}
+		\theta : S \Rightarrow T
+	\end{equation*}
+	Moreover, any two such natural augmenation preserving chain maps are naturally chain homotopic.\\
+	If additionally $T_n$ is free with basis contained in $\mathcal{M}$ and each model $M \in \mathcal{M}$ is totally $S$-acyclic, then every such natural augmentation preserving chain map is a natural chain equivalence.
+\end{theorem}
+
+\begin{theorem}[Eilenberg-Zilber]
+	Let $X,Y \in \mathsf{Top}$. Then there exists a chain equivalence
+	\begin{equation*}
+		\Omega : C_\bullet(X \times Y) \to C_\bullet(X) \otimes C_\bullet(Y)
+	\end{equation*}
+	\noindent unique up to chain homotopy. Any such map $\Omega$ is called an \bld{Eilenberg-Zilber morphism}.
+\end{theorem}
+
+\begin{proof}
+	We make use of the augmented acyclic models theorem \ref{thm:AAMT}. In $\mathsf{Top} \times \mathsf{Top}$ define a family of models $\mathcal{M}$ by
+	\begin{equation*}
+		\mathcal{M} := \cbr[0]{(\Delta^i,\Delta^j) : i,j \in \omega}.
+	\end{equation*}
+	Moreover, define $S,T : \mathsf{Top} \times \mathsf{Top} \to \AugCh(\mathsf{Ab})$ by
+	\begin{equation*}
+		S(X,Y) := C_\bullet(X \times Y) \qquad \text{and} \qquad T(X,Y) := C_\bullet(X) \otimes C_\bullet(Y).
+	\end{equation*}
+	Since $\Delta^i \times \Delta^j$ is convex, we get that each model $M := (\Delta^i,\Delta^j)$ is totally $S$-acyclic. Moreover, the K\"unneth theorem \ref{thm:Kunneth_theorem} implies that each model $M$ is totally $T$-acyclic.\\
+	That $S_n$ is free with basis contained in $\mathcal{M}$ can be seen by choosing the diagonal map $d_n : \Delta^n \to \Delta^n \times \Delta^n$ for any $n \in \omega$. Finally, $T_n$ is also free with basis contained in $\mathcal{M}$, since we can choose the model basis 
+	\begin{equation*}
+		\cbr[0]{(\Delta^i,\Delta^j) : i + j = n}
+	\end{equation*}
+	\noindent for fixed $n \in \omega$ and $\iota_i \otimes \iota_j \in (C_\bullet(\Delta^i) \otimes C_\bullet(\Delta^j))_n$, where $\iota_k : \Delta^k \to \Delta^k$ denotes the identity map.
+\end{proof}
+
+\begin{corollary}[K\"unneth Formula]
+	\label{thm:KF}
+	Let $X,Y \in \mathsf{Top}$. Then there is a split exact sequence
+	\begin{equation*}
+		\begin{tikzcd}[column sep=small]
+			0 \arrow[r] & \bigoplus\limits_{i + j = n} H_i(X) \otimes H_j(Y) \arrow[r] & H_n(X \times Y) \arrow[r] & \bigoplus\limits_{k + l = n - 1} \Tor\del[1]{H_k(X),H_l(Y)} \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+\end{corollary}
+
+\begin{example}
+	\label{ex:ntorus}
+	Let $n \in \omega$, $n \geq 1$. Define the \bld{$n$-torus $\mathbb{T}^n$} by
+	\begin{equation*}
+		\mathbb{T}^n := \underbrace{\mathbb{S}^1 \times \dots \times \mathbb{S}^1}_{n}.
+	\end{equation*}
+	Using induction and the Künneth theorem \ref{thm:KF}, one can show that
+	\begin{equation*}
+		H_k(\mathbb{T}^n) = \mathbb{Z}^{n \choose k}.
+	\end{equation*}
+\end{example}
+
+\section*{Cohomology}
+
+\begin{proposition}
+	Let $A \in \mathsf{Ab}$. Then $\Hom(-,A) : \mathsf{Ab} \to \mathsf{Ab}$ and $\Hom(A,-) : \mathsf{Ab} \to \mathsf{Ab}$ are both left exact.
+\end{proposition}
+
+\begin{corollary}
+	\label{cor:finite_type}
+	Let $X \in \mathsf{Top}$ be of finite type, i.e. $H_n(X)$ is finitely generated for any $n \in \mathbb{Z}$. Then
+	\begin{equation*}
+		H^n(X) \cong H_n(X)/T_n(X) \oplus T_{n - 1}(X)
+	\end{equation*}
+	\noindent where $T_n(X)$ denotes the torsion subgroup of $H_n(X)$, i.e. the subgroup consisting of all elements of finite order.
+\end{corollary}
+
+\begin{theorem}[Universal Coefficient Theorem for Cohomology]
+	Let $X \in \mathsf{Top}$ of finite type and $A \in \mathsf{Ab}$. Then there is a split exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & H^n(X) \otimes A \arrow[r] & H^n(X;A) \arrow[r] & \Tor(H^{n + 1}(X),A) \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+\end{theorem}
+
+\subsection*{The Cohomology Ring}
+
+\begin{proposition}
+	Let $X \in \mathsf{Top}$ and $R \in \mathsf{Ring}$. Then there exists a contravariant functor
+	\begin{equation*}
+		C(-;R) : \mathsf{Top} \to \mathsf{GRing}.
+	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	We proceed in two (uncomplete) steps.
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{Definition on objects.} Let $X \in \mathsf{Top}$. For $\alpha \in C^n(X;R)$
+			and $\beta \in C^m(X;R)$ define
+			\begin{equation*}
+				(\alpha \cupprod \beta)(\sigma) := \alpha(\sigma \circ A(e_0,\dots,e_n)) \beta(\sigma \circ A(e_n,\dots,e_{n + m})),
+			\end{equation*}
+			\noindent for all singular $n + m$-simplices $\sigma$ in $X$. Hence extending by linearity yields a map
+			\begin{equation*}
+				\cupprod : C^n(X;R) \times C^m(X;R) \to C^{n + m}(X;R).
+			\end{equation*}
+			Moreover, if 
+			\begin{equation*}
+				C(X;R) := \bigoplus_{n \in \omega } C^n(X;R),
+			\end{equation*}
+			\noindent we define $\cupprod : C(X;R) \times C(X;R) \to C(X;R)$ by
+			\begin{equation*}
+				\sum_i \alpha_i \cupprod \sum_j \beta_j := \sum_{i,j} \alpha_i \cupprod \beta_j.
+			\end{equation*}
+			This is called the \bld{cup product on $C(X;R)$}. It is easily verified that $(C(X;R),\cupprod) \in \mathsf{GRing}$.
+		\item \textit{Definition on morphisms.} Let $n \in \omega$ and $f \in \mathsf{Top}(X,Y)$. For $\alpha \in C^n(Y;R)$ define
+			\begin{equation*}
+				C(f;R)(\alpha) := C^n(f;R)(\alpha) \in C^n(X;R),
+			\end{equation*}
+			\noindent and extend by linearity.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+	\label{lem:graded_quotient}
+	Let $R \in \mathsf{GRing}$ and $I$ be a two-sided homogeneous ideal in $R$. Then also $R/I \in \mathsf{GRing}$ with
+	\begin{equation*}
+		R/I = \bigoplus_{n \in \omega} R^n/(R^n \cap I).
+	\end{equation*}
+\end{lemma}
+
+\begin{theorem}
+	Let $R \in \mathsf{Ring}$. Then there is a contravariant functor
+	\begin{equation*}
+		H(-;R) : \mathsf{hTop} \to \mathsf{GRing}.
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Set
+	\begin{equation*}
+		Z := \bigoplus_{n \in \omega} Z^n(X;R) \qquad \text{and} \qquad B := \bigoplus_{n \in \omega} B^n(X;R).
+	\end{equation*}
+	Then $Z$ is a homogeneous subring of $C(X;R)$ by using the fact that
+	\begin{equation*}
+		d(\alpha \cupprod \beta) = d\alpha \cupprod \beta + (-1)^n \alpha \cupprod d\beta
+	\end{equation*}
+	\noindent for any $\alpha \in C^n(X;R)$ and $\beta \in C^m(X;R)$ holds. Moreover, $B$ is a homogeneous two-sided ideal in $Z$. Therefore by lemma \ref{lem:graded_quotient}, we have 
+	\begin{equation*}
+		H(X;R) = \bigoplus_{n \in \omega} Z^n(X;R)/B^n(X;R) = \bigoplus_{n \in \omega} H^n(X;R).
+	\end{equation*}
+\end{proof}
+
+\begin{example}
+	\label{ex:cohomology_ring_sphere}
+	Let $n \in \omega$, $n \geq 1$. Then using the fact that $\wtilde{H}_k(\mathbb{S}^n) = \mathbb{Z}$ if $k = n$ and zero otherwise, corollary \ref{cor:finite_type} implies that
+	\begin{equation*}
+		H^0(\mathbb{S}^n) = \mathbb{Z} \qquad \text{and} \qquad H^n(\mathbb{S}^n) = \mathbb{Z}
+	\end{equation*}
+	\noindent and zero otherwise. Thus
+	\begin{equation*}
+		H(\mathbb{S}^n;\mathbb{Z}) = \mathbb{Z} \oplus \mathbb{Z}.
+	\end{equation*}
+	Denote the generator of the first summand by $1$ and the second by $X$, we get that $X \cupprod X \in H^{2n}(\mathbb{S}^n) = 0$ and thus 
+	\begin{equation*}
+		H(\mathbb{S}^n;\mathbb{Z}) \cong \mathbb{Z}[X]/(X^2).
+	\end{equation*}
+\end{example}
+
+Actually, if $R \in \mathsf{CRing}$, then $H(-;R)$ attains values in $\mathsf{CGRing}$.
+
+\begin{definition}[Diagonal Approximation]
+	A \bld{diagonal approximation} is defined to be a natural chain map
+	\begin{equation*}
+		C_\bullet(-) \to C_\bullet(-) \otimes C_\bullet(-)
+	\end{equation*}
+	\noindent such that $D_0(x) = x \otimes x$ holds for any $x \in X$, $X \in \mathsf{Top}$.
+\end{definition}
+
+\begin{theorem}[Alexander-Whitney Formula]
+	\label{thm:AWF}
+	An Eilenberg Zilber morphism 
+	\begin{equation*}
+		\Omega : C_\bullet(X \times Y) \to C_\bullet(X) \otimes C_\bullet(Y)
+	\end{equation*}
+	\noindent is given by the \bld{Alexander-Whitney formula}
+	\begin{equation}
+		\Omega(\sigma) := \sum_{i = 0}^n (\pi_1 \circ \sigma \circ A(e_0,\dots,e_i)) \otimes (\pi_2 \circ \sigma \circ A(e_i,\dots,e_n)) 
+	\end{equation}
+	\noindent for any $\sigma : \Delta^n \to X \times Y$.
+\end{theorem}
+
+\begin{proposition}
+	For the Alexander-Whitney choice of an Eilenberg-Zilber morphism $\Omega$, the composition
+	\begin{equation*}
+		C^\bullet \delta \circ \Hom(\Omega,R) \circ \mu
+	\end{equation*}
+	\noindent where $\mu : C^\bullet(X;R) \otimes C^\bullet(X;R) \to \Hom(C_\bullet(X) \otimes C_\bullet(X),R)$ is defined by
+	\begin{equation*}
+		\mu(\alpha \otimes \beta)\del[4]{\sum_{k = 0}^{n + m} \sigma_k \otimes \sigma'_{n + m - k}} := \alpha(\sigma_n)\beta(\sigma'_m)
+	\end{equation*}
+	\noindent coincides with the cup product.
+\end{proposition}
+
+\begin{proof}
+	Let $\alpha \in C^n(X;R)$, $\beta \in C^m(X;R)$ and $\sigma \in C^{n + m}(X)$. We compute
+	\begin{align*}
+		(C^\bullet \delta \circ \Hom(\Omega,R) \circ \mu)(\alpha \otimes \beta)(\sigma) &= \Hom(\Omega \circ \delta,R)(\mu(\alpha \otimes \beta))(\sigma)\\
+		&= \mu(\alpha \otimes \beta)\circ \Omega \circ C_\bullet\delta(\sigma)\\
+		&= \mu(\alpha \otimes \beta)(\Omega(\delta \circ \sigma))\\
+		&= (\alpha \cupprod \beta)(\sigma).
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $R \in \mathsf{CRing}$ and $X \in \mathsf{Top}$. Then
+	\begin{equation*}
+		\langle \alpha \rangle \cupprod \langle \beta \rangle = (-1)^{nm} \langle \beta \rangle \cupprod \langle \alpha \rangle
+	\end{equation*}
+	\noindent for any $\langle \alpha \rangle \in H^n(X;R)$ and $\langle \beta \rangle \in H^m(X;R)$.
+\end{theorem}
+
+\begin{proof}
+	Since $\Omega \circ C_\bullet \delta$ and $\twist \circ \Omega \circ C_\bullet\delta$ are both diagonal approximations, hence naturally chain homotopic. Now just evaluate both compositions.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:cross_product}
+	Let $X,Y \in \mathsf{Top}$ of finite type and suppose that $H_n(Y)$ is free abelian for any $n \in \mathbb{Z}$. Then the cross product
+	\begin{equation*}
+		H(X) \otimes H(Y) \overset{\times}{\to} H(X \times Y)
+	\end{equation*}
+	\noindent is an isomorphism of graded rings.
+\end{corollary}
+
+\begin{example}
+	Suppose $\mathbb{T}^n$ is the $n$-torus from example \ref{ex:ntorus}. We claim that
+	\begin{equation*}
+		H(\mathbb{T}^n;\mathbb{Z}) \cong \mathbb{Z}[X_1,\dots,X_n]/(X^2_k).
+	\end{equation*}
+	Indeed, example \ref{ex:cohomology_ring_sphere}, implies the base case for an induction over $n$. Suppose the claim holds for some $n \in \omega$, $n \geq 1$. Then using corollary \ref{cor:cross_product} implies that
+	\begin{align*}
+		H(\mathbb{T}^{n + 1}) &= H(\mathbb{T}^n \times \mathbb{S}^1)\\
+		&= H(\mathbb{T}^n) \otimes H(\mathbb{S}^1)\\
+		&= \mathbb{Z}[X_1,\dots,X_n]/(X^2_k) \otimes \mathbb{Z}[X_{n + 1}]/(X^2_{n + 1})\\
+		&= \mathbb{Z}[X_1,\dots,X_{n + 1}]/(X^2_k).
+	\end{align*}
+\end{example}
+
+\section*{Fibre Bundles}
+
+\begin{definition}[Fibre Bundle]
+	Let $p \in \mathsf{Top}(E,X)$ surjective and $F \in \mathsf{Top}$ non-empty. We say that \bld{$p$ is a fibre bundle over $X$ with fibre $F$} iff for any $x \in X$ there exists a neighbourhood $U$ of $x$ in $X$ and a homeomorphism $h : p^{-1}(U) \to U \times F$ such that
+	\begin{equation*}
+		\begin{tikzcd}
+			p^{-1}(U) \arrow[dr,"p"']\arrow[r,"h"] & U \times F\arrow[d,"\pi"]\\
+			& U
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes.
+\end{definition}
+
+\begin{theorem}[Leray-Hirsch]	
+	\label{thm:LH}
+	Let $F \to E \overset{p}{\to} X$ be a fibre bundle and $R \in \mathsf{CRing}$ such that $H^n(F;R)$ is a finitely generated free $R$-module for any $n \in \mathbb{Z}$ and that a cohomology extension $\xi$ of the fibre $F$ exists. Then the mapping
+	\begin{equation*}
+		L : H(X;R) \otimes_R H(F;R) \to H(E;R)
+	\end{equation*}
+	\noindent defined by
+	\begin{equation*}
+		L(\langle \alpha \rangle \otimes \langle \beta \rangle) := H(p)\langle \alpha \rangle \cupprod \xi\langle \beta \rangle
+	\end{equation*}
+	\noindent is an isomorphism.
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{$X$ paracompact and pointed contractible.} Then the fibre bundle is trivial, i.e. $E \cong X \times F$ and there exists $x_0 \in X$, such that $\iota_{x_0} : E_{x_0} \hookrightarrow E$ is a homotopy equivalence. Thus $H^\bullet(\iota_{x_0})$ is an isomorphism and hence is $\xi$. Using $H(X;R) \cong R$, we get
+			\begin{equation*}
+				H(X;R) \otimes_R H(F;R) \cong H(F;R) \cong H(E;R).
+			\end{equation*}
+		\item \textit{$X$ finite dimensional cell complex.} We perform an induction over $\dim X$. The base case follows immediately from step $1$. Suppose $ \dim X = n$. Define $U$ to be the union of $n$-cells, where we remove from each $n$-cell a single point. Moreover, let $V$ be the union of all $n$-cells. Then $X^n = U \cup V$ and the dual version of Mayer-Vietoris yields
+			\begin{equation*}
+				\begin{tikzcd}
+					H(X^n;R) \otimes_R M \arrow[r,"L_{X^n}"]\arrow[d] & H(E_{X^n};R)\arrow[d]\\
+					(H(U;R) \otimes_R M) \oplus (H(V;R) \otimes_R M) \arrow[r,"{(L_U,L_V)}"]\arrow[d] & H(E_U;R) \oplus H(E_V;R)\arrow[d]\\
+					H(U \cap V;R) \otimes_R M \arrow[r,"L_{U \cap V}"] & H(E_{U \cap V};R)
+				\end{tikzcd}
+			\end{equation*}
+			\noindent where $M := H(F;R)$. Since $M$ is free, the left hand side is exact.
+		\item \textit{$L_U$, $L_V$ and $L_{U \cap V}$ are isomorphisms.} First of all $X^{n - 1}$ is a strong deformation retract of $U$ and thus $L_U$ is an isomorphism by induction hypothesis (since $L_{X^{n - 1}}$ is an isomorphism).
+	\end{enumerate}
+\end{proof}
+
+The Leray-Hirsch theorem \ref{thm:LH} is useless unless a cohomology extension of the fibre exists. This is the content of the so-called \emph{Thom-isomorphism theorem}.
+
+\begin{theorem}[Thom Isomorphism Theorem]
+	\label{thm:TIT}
+	
+\end{theorem}
+
+\section*{The Duality Theorem}
+\subsection*{Topological Manifolds}
+
+\begin{definition}[$\mathsf{Op}(X)$]
+	Let $X \in \mathsf{Top}$. Define $\mathsf{Op}(X)$ to be the category with objects all the open sets of $X$ and $\Hom(U,V)$ to be the singleton $\iota_U^V : U \hookrightarrow V$ if $U \subseteq V$ and empty otherwise.
+\end{definition}
+
+\begin{definition}[Cap Product]
+	Let $R \in \mathsf{CRing}$ and $X \in \mathsf{Top}$. The pairing
+	\begin{equation*}
+		\capprod : C^n(X;R) \otimes C_{n + m}(X;R) \to C_m(X;R)
+	\end{equation*}
+	\noindent defined by
+	\begin{equation*}
+		\alpha \capprod (\sigma \otimes r) := r\alpha(\sigma \circ A(e_0,\dots,e_n)) \otimes (\sigma \circ A(e_n,\dots,e_{n + m}))
+	\end{equation*}
+	\noindent is called \bld{cap product}.
+\end{definition}
+
+\subsection*{Cech Cohomology}
+
+\begin{definition}
+	Let $\mathcal{K} \subseteq \mathsf{Top}^2$ be the full subcategory with objects all pairs $(L,K)$ with $K \subseteq L \subseteq X$ compact for some Euclidean neighbourhood retract $X$.
+\end{definition}
+
+\begin{definition}[Cech Cohomology]
+	Let $K \subseteq L \subseteq X$ be compact subspaces of an Euclidean neighbourhood retract and let $A \in \mathsf{Ab}$. We define the \bld{Cech cohomology of $(L,K)$ with coefficients in $A$} to be the abelian group
+	\begin{equation*}
+		\wcheck{H}^k(L,K;A) := \colim H^k(V,U;A). 
+	\end{equation*}
+\end{definition}
+
+Let $M$ be an $n$-dimensional manifold. Then for any $R \in \mathsf{CRing}$ we can define
+\begin{equation*}
+	\mathcal{O}(M;R) := \coprod_{x \in M}H_n(M,M\setminus \{x\};R).
+\end{equation*}
+Observe that $H_n(M,M\setminus \{x\};R) \cong \mathbb{R}$ as $R$-modules by excision. Hence it makes sense to define an \bld{orientation of $M$} to be a section $\sigma : M \to \mathcal{O}(M;A)$ of the projection
+\begin{equation*}
+	\pi : \mathcal{O}(M;A) \to M
+\end{equation*}
+\noindent in $\mathsf{Top}$, i.e. $\pi \circ \sigma = \id_M$ such that $\sigma(x)$ is a generator for $H_n(M,M\setminus \{x\});R$ for any $x \in M$.
+
+\begin{theorem}[Duality Theorem]
+	Let $M$ be an $n$-dimensional oriented topological manifold. Then for any pair $K \subseteq L \subseteq M$ compact, the duality morphism
+	\begin{equation*}
+		D_{KL} : \wcheck{H}^k(L,K) \to H_{n - k}(M \setminus K,M \setminus L)
+	\end{equation*}
+	\noindent is an isomorphism.
+\end{theorem}
+
+\begin{corollary}[Poincar\'e Duality]
+	Let $M$ be an $n$-dimensional oriented closed topological manifold with fundamental class $\langle o_M \rangle \in H_n(M)$ (i.e. $\langle o_M \rangle$ is a generator of $H_n(M)$). Then
+	\begin{equation*}
+		H^k(M) \to H_{n - k}(M) \qquad \langle c \rangle \mapsto \langle c \rangle \capprod \langle o_M \rangle
+	\end{equation*}
+	\noindent is an isomorphism.
+\end{corollary}
+
+\section*{Homotopy Theory}
+
+\begin{theorem}[Homotopy Sequence]
+	\label{thm:LES}
+	Let $(X,X')$ be a pointed pair. Then there is a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & \pi_n(X') \arrow[r] & \pi_n(X) \arrow[r] & \pi_n(X,X') \arrow[r,"\delta"] & \pi_{n - 1}(X') \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+\end{theorem}
+
+\begin{lemma}
+	Any trivial fibre bundle is a weak fibration.
+\end{lemma}
+
+\begin{theorem}[Homotopy Sequence of a Fibration]
+	Let $p : E \to X$ be a fibration with fibre $F$. Then there exists a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & \pi_n(F) \arrow[r] & \pi_n(E) \arrow[r] & \pi_n(X) \arrow[r] & \pi_{n - 1}(F) \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	Let $F \to E \overset{p}{\to} X$ be a fibre bundle. Then $p$ is a weak fibration.
+\end{corollary}
+
+\begin{corollary}[Homotopy Sequence of a Weak Fibration]
+	Let $p : E \to X$ be a weak fibration. Choose basepoints $y_0 \in E$ and $x_0 := p(y_0) \in X$. Let $F := p^{-1}(x_0)$. Then there is a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & \pi_n(F) \arrow[r] & \pi_n(E) \arrow[r] & \pi_n(X) \arrow[r] & \pi_{n - 1}(F) \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+\end{corollary}
+
+\printbibliography
+\end{document}
